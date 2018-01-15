@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.print.PageRange;
 
+import com.example.cslab.lefei.UserDbSchema.UserTable;
+
 import java.security.PublicKey;
 
 /**
@@ -22,7 +24,9 @@ public class UserBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase Userdb)  {
-
+        Userdb.execSQL("create table"+ UserTable.NAME+"(" +"_id integer primary key autoincrement," +
+                UserTable.Cols.UserID+", "+UserTable.Cols.UserName+", "+ UserTable.Cols.UserPassword+", "+
+        UserTable.Cols.UserTicket+")");
     }
 
     @Override
