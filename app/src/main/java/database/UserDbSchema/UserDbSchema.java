@@ -1,4 +1,4 @@
-package com.example.cslab.lefei;
+package database.UserDbSchema;
 
 /**
  * Created by CSLab on 2018/1/15.

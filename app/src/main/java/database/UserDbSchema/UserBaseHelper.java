@@ -1,13 +1,10 @@
-package com.example.cslab.lefei;
+package database.UserDbSchema;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.print.PageRange;
 
-import com.example.cslab.lefei.UserDbSchema.UserTable;
-
-import java.security.PublicKey;
+import database.UserDbSchema.UserDbSchema.UserTable;
 
 /**
  * Created by CSLab on 2018/1/15.

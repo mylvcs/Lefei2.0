@@ -1,4 +1,4 @@
-package com.example.cslab.lefei;
+package database.UserDbSchema;
 
 import java.util.UUID;
 
@@ -13,6 +13,9 @@ public class User {
 
     public User(){
         UserId= UUID.randomUUID();
+    }
+    public User(UUID id){
+        UserId= id;
     }
 
     public String getUserPassword() {
