@@ -1,5 +1,6 @@
-package com.sourcey.materiallogindemo;
+package com.wangmengyun.lefei2;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +12,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import butterknife.ButterKnife;
 import butterknife.Bind;
+
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
