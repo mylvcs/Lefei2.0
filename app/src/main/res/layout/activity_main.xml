@@ -7,6 +7,91 @@
     android:orientation="vertical"
     tools:context="com.wangmengyun.lefei2.MainActivity">
 
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:id="@+id/rl_title_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" >
+
+            <Button
+                android:id="@+id/btn_left"
+                android:layout_width="140dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:background="@drawable/left_button_click_shape"
+                android:text="单程" />
+
+            <Button
+                android:id="@+id/btn_right"
+                android:layout_width="140dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:textColor=""
+                android:layout_toRightOf="@+id/btn_left"
+                android:background="@drawable/right_button_null_click_shape"
+                android:text="往返" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:paddingTop="56dp">
+
+
+            <EditText
+                android:id="@+id/departure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="出发城市"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/arrive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="到达城市"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/flight_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="日期"
+                android:inputType="textEmailAddress" />
+
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:layout_marginTop="24dp"
+                android:padding="12dp"
+                android:text="搜索" />
+
+        </LinearLayout>
+    </ScrollView>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -16,8 +101,7 @@
         <FrameLayout
             android:id="@+id/main_body"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"></FrameLayout><!--限定main_body大小，令其在main_title_bar下方，于是用LinearLayout包裹-->
+            android:layout_height="match_parent"></FrameLayout><!--限定main_body大小，令其在main_title_bar下方，于是用LinearLayout包裹-->
 
     </LinearLayout>
 
