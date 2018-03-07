@@ -20,13 +20,14 @@ import com.wangmengyun.R;
 import com.wangmengyun.view.FlightView;
 import com.wangmengyun.view.ExercisesView;
 import com.wangmengyun.view.MyInfoView;
+import com.wangmengyun.view.TicketView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     /**
      * 视图
      */
     private FlightView mFlightView;
-    private ExercisesView mExercisesView;
+    private TicketView mTicketView;
     private MyInfoView mMyInfoView;
     /**
      * 中间内容栏
@@ -40,13 +41,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 底部按钮
      */
     private View FlightBtn;
-    private View mExercisesBtn;
+    private View mTicketBtn;
     private View mMyInfoBtn;
-    private TextView tv_course;
-    private TextView tv_exercises;
+    private TextView tv_flight;
+    private TextView tv_ticket;
     private TextView tv_myInfo;
-    private ImageView iv_course;
-    private ImageView iv_exercises;
+    private ImageView iv_flight;
+    private ImageView iv_ticket;
     private ImageView iv_myInfo;
     private TextView tv_back;
     private TextView tv_main_title;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void init() {
         tv_back = (TextView) findViewById(R.id.tv_back);
         tv_main_title = (TextView) findViewById(R.id.tv_main_title);
-        tv_main_title.setText("博学谷课程");
+        tv_main_title.setText("机票");
         rl_title_bar = (RelativeLayout) findViewById(R.id.title_bar);
         rl_title_bar.setBackgroundColor(Color.parseColor("#30B4FF"));
         tv_back.setVisibility(View.GONE);
@@ -81,13 +82,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initBottomBar() {
         mBottomLayout = (LinearLayout) findViewById(R.id.main_bottom_bar);
         FlightBtn = findViewById(R.id.bottom_bar_Flight_btn);
-        mExercisesBtn = findViewById(R.id.bottom_bar_exercises_btn);
+        mTicketBtn = findViewById(R.id.bottom_bar_exercises_btn);
         mMyInfoBtn = findViewById(R.id.bottom_bar_myinfo_btn);
-        tv_course = (TextView) findViewById(R.id.bottom_bar_text_Flight);
-        tv_exercises = (TextView) findViewById(R.id.bottom_bar_text_exercises);
+        tv_flight = (TextView) findViewById(R.id.bottom_bar_text_Flight);
+        tv_ticket = (TextView) findViewById(R.id.bottom_bar_text_exercises);
         tv_myInfo = (TextView) findViewById(R.id.bottom_bar_text_myinfo);
-        iv_course = (ImageView) findViewById(R.id.bottom_bar_favor_btn);
-        iv_exercises = (ImageView) findViewById(R.id.bottom_bar_image_exercises);
+        iv_flight = (ImageView) findViewById(R.id.bottom_bar_image_Flight);
+        iv_ticket = (ImageView) findViewById(R.id.bottom_bar_image_exercises);
         iv_myInfo = (ImageView) findViewById(R.id.bottom_bar_image_myinfo);
     }
     private void initBodyLayout() {
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             //课程的点击事件
-            case R.id.bottom_bar_flightmng_btn:
+            case R.id.bottom_bar_Flight_btn:
                 clearBottomImageState();
                 selectDisplayView(0);
                 break;
@@ -133,11 +134,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 清除底部按钮的选中状态
      */
     private void clearBottomImageState() {
-        tv_course.setTextColor(Color.parseColor("#666666"));
-        tv_exercises.setTextColor(Color.parseColor("#666666"));
+        tv_flight.setTextColor(Color.parseColor("#666666"));
+        tv_ticket.setTextColor(Color.parseColor("#666666"));
         tv_myInfo.setTextColor(Color.parseColor("#666666"));
-        iv_course.setImageResource(R.drawable.main_course_icon_selected);
-        iv_exercises.setImageResource(R.drawable.main_exercises_icon);
+        iv_flight.setImageResource(R.drawable.main_flight_icon_selected);
+        iv_ticket.setImageResource(R.drawable.main_exercises_icon);
         iv_myInfo.setImageResource(R.drawable.main_my_icon);
         for (int i = 0; i < mBottomLayout.getChildCount(); i++) {
             mBottomLayout.getChildAt(i).setSelected(false);
@@ -150,18 +151,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (index) {
             case 0:
                 FlightBtn.setSelected(true);
-                iv_course.setImageResource(R.drawable.main_course_icon_selected);
-                tv_course.setTextColor(Color.parseColor("#0097F7"));
+                iv_ticket.setImageResource(R.drawable.main_flight_icon_selected);
+                tv_ticket.setTextColor(Color.parseColor("#0097F7"));
                 rl_title_bar.setVisibility(View.VISIBLE);
-                tv_main_title.setText("博学谷课程");
+                tv_main_title.setText("机票");
                 break;
             case 1:
-                mExercisesBtn.setSelected(true);
-                iv_exercises
-                        .setImageResource(R.drawable.main_exercises_icon_selected);
-                tv_exercises.setTextColor(Color.parseColor("#0097F7"));
+                mTicketBtn.setSelected(true);
+                iv_ticket.setImageResource(R.drawable.main_exercises_icon_selected);
+                tv_ticket.setTextColor(Color.parseColor("#0097F7"));
                 rl_title_bar.setVisibility(View.VISIBLE);
-                tv_main_title.setText("博学谷习题");
+                tv_main_title.setText("航班管理");
                 break;
             case 2:
                 mMyInfoBtn.setSelected(true);
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 设置界面view的初始化状态
      */
     private void setInitStatus() {
-//        clearBottomImageState();
+        clearBottomImageState();
         setSelectedStatus(0);
         createView(0);
     }
@@ -212,13 +212,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case 1:
                 //习题界面
-                if (mExercisesView == null) {
-                    mExercisesView = new ExercisesView(this);
-                    mBodyLayout.addView(mExercisesView.getView());
+                if (mTicketView == null) {
+                    mTicketView= new TicketView(this);
+                    mBodyLayout.addView(mTicketView.getView());
                 } else {
-                    mExercisesView.getView();
+                    mTicketView.getView();
                 }
-                mExercisesView.showView();
+                mTicketView.showView();
                 break;
             case 2:
                 //我的界面
@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && event.getAction() == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
-                Toast.makeText(MainActivity.this, "再按一次退出博学谷",
+                Toast.makeText(MainActivity.this, "再按一次退出",
                         Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {

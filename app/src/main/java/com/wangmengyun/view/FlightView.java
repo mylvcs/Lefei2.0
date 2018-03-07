@@ -53,7 +53,7 @@ public class FlightView {
      * 获取当前在导航栏上方显示对应的View
      */
     public static View getView() {
-//        if (mCurrentView == null) {
+//        if (mCurrentView == null) {qq
 //            createView();
 //        }
 //        return mCurrentView;
