@@ -46,7 +46,7 @@
         android:paddingTop="30dp">
 
 
-        <Button
+        <EditText
             android:id="@+id/departure"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -55,7 +55,7 @@
             android:layout_marginBottom="10dp"
             android:inputType="textEmailAddress" />
 
-        <Button
+        <EditText
             android:id="@+id/arrive"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -72,16 +72,13 @@
             android:hint="日期"
             android:inputType="textEmailAddress" />
 
-        <android.support.v7.widget.AppCompatSpinner
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            android:hint="经济舱"
-            >
-
-
-
-        </android.support.v7.widget.AppCompatSpinner>
+            android:background="@color/primary"
+            />
 
 
         <Button

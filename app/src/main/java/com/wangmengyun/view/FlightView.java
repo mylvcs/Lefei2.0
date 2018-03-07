@@ -27,8 +27,7 @@ public class FlightView {
      * 初始化控件
      */
     private void initView() {
-        mCurrentView = mInflater
-                .inflate(R.layout.activity_flight, null);
+        mCurrentView = mInflater.inflate(R.layout.activity_flight, null);
 //        lv_list = (ListView) mCurrentView.findViewById(R.id.);
 //        adapter = new ExercisesAdapter(mContext);
 //        initData();

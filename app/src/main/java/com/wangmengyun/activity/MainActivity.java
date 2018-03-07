@@ -103,7 +103,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //课程的点击事件
             case R.id.bottom_bar_Flight_btn:
                 clearBottomImageState();
-                selectDisplayView(0);
+     //selectDisplayView(0);
+                Intent intent = new Intent(MainActivity.this, SearchFlightActivity.class);
+                startActivity(intent);
                 break;
             //习题的点击事件
             case R.id.bottom_bar_exercises_btn:

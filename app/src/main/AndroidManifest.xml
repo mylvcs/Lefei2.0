@@ -40,7 +40,9 @@
         <activity android:name=".activity.FindPswActivity"></activity>
         <activity android:name=".activity.CityActivity"></activity>
         <activity android:name=".activity.RegisterActivity"></activity>
-        <activity android:name=".activity.DingweiActivity" />
+<activity android:name=".activity.SearchFlightActivity"></activity>
+        <activity android:name=".activity.DingweiActivity">
+        </activity>
     </application>
 
 </manifest>

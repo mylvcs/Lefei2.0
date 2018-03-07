@@ -62,14 +62,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="出发城市"
-                android:inputType="textEmailAddress" />
+                />
 
             <EditText
                 android:id="@+id/arrive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="到达城市"
-                android:inputType="textEmailAddress" />
+                 />
 
             <EditText
                 android:id="@+id/flight_date"

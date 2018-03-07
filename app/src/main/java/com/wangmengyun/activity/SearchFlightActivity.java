@@ -10,10 +10,16 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wangmengyun.R;
 
@@ -21,6 +27,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by wangmengyun on 2018/3/4.
@@ -31,46 +39,58 @@ public class SearchFlightActivity extends AppCompatActivity implements View.OnCl
     private TextView tv_dancheng, tv_wangfan, tv_chapter_intro;
     private ListView lv_flight_search;
     private Button mButton;
+    private Spinner spinner;
+    private List<String> datalist;
+    private ArrayAdapter<String> adapter;
+    private EditText departCity;
 
-    //   private VideoListAdapter adapter;
-//    private List<VideoBean> videoList;
-    private int chapterId;
-    private String intro;
-//    private DBUtils db;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+
+
+    public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchflight);
-        // 设置此界面为竖屏
-        //      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        // 从课程界面传递过来的章节id
-        //     chapterId = getIntent().getIntExtra("id", 0);
-        // 从课程界面传递过来的章节简介
-        //   tv_dancheng = getIntent().getStringExtra("intro");
-        // 创建数据库工具类的对象
-//        db = DBUtils.getInstance(SearchFlightActivity.this);
-        //       initData();
-        init();
-    }
-    /**
-     * 初始化界面UI控件
-     */
-    private void init() {
-        tv_dancheng= (TextView) findViewById(R.id.tv_dancheng);
+
+
+        tv_dancheng = (TextView) findViewById(R.id.tv_dancheng);
         tv_wangfan = (TextView) findViewById(R.id.tv_wangfan);
-        mButton = (Button) findViewById(R.id.departure);
+        mButton = (Button) findViewById(R.id.search_flight);
+        departCity = (EditText) findViewById(R.id.departure);
+
         tv_wangfan.setOnClickListener(this);
-        tv_dancheng.setOnClickListener(new View.OnClickListener() {
+        departCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SearchFlightActivity.this,CityActivity.class);
+                Intent intent = new Intent(SearchFlightActivity.this, CityActivity.class);
                 startActivity(intent);
             }
 
 
         });
-//        adapter.setData(videoList);
-//        tv_chapter_intro.setText(intro);
+
+        datalist = new ArrayList<String>();
+        datalist.add("经济舱");
+        datalist.add("商务舱");
+
+        spinner = (Spinner) findViewById(R.id.spinner);
+        adapter= new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,datalist);
+
+        spinner.setAdapter(adapter);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setOnItemClickListener(new AdapterView.OnItemSelectedListener() {
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                //TODO
+//                //textView.setText("您当前选择的是："+adapter.getItem(position));
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//              //  textView.setText("请选择您的城市");
+//
+//            }
+//        });
+
+
         tv_dancheng.setBackgroundColor(Color.parseColor("#30B4FF"));
         tv_wangfan.setBackgroundColor(Color.parseColor("#FFFFFF"));
         tv_dancheng.setTextColor(Color.parseColor("#FFFFFF"));

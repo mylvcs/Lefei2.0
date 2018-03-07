@@ -7,4 +7,5 @@
     <string name="arrive">LosAngeles</string>
     <string name="Date">today</string>
     <string name="searchflight">search</string>
+    <string name="latitude">latitude</string>
 </resources>
