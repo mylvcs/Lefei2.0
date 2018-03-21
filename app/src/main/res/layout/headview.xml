@@ -31,6 +31,18 @@
             android:background="#32B9AB"
             android:textColor="@android:color/white"
             android:textSize="14sp" />
+
+        <GridView
+            android:id="@+id/gv_hot_city"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="66dp"
+            android:text="主要城市"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
     </RelativeLayout>
 
     <View
@@ -61,12 +73,4 @@
 
     </ListView>
 
-    <GridView
-        android:layout_width="wrap_content"
-        android:id="@+id/gv_hot_city"
-        android:layout_height="35dp"
-        android:layout_marginLeft="16dp"
-        android:text="主要城市"
-        android:textColor="@android:color/black"
-        android:textSize="14sp" />
 </LinearLayout>
