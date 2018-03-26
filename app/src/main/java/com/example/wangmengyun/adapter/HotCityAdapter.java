@@ -2,17 +2,18 @@ package com.example.wangmengyun.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.wangmengyun.Bean.City;
-import com.example.wangmengyun.activity.PickCityActivity;
-import com.example.wangmengyun.activity.SearchFlightActivity;
+
 import com.example.wangmengyun.lefei.R;
 
 import java.util.List;
@@ -23,6 +24,10 @@ public class HotCityAdapter extends BaseAdapter {
 	private List<City> mHotCityList;
 	private LayoutInflater mInflater;
 	private Context mContext;
+
+	public static String Departure_City= "departureCity";
+
+//	public final static String Arrive_City = "";
 
 	public HotCityAdapter(Context context, List<City> hotCityList) {
 		this.mHotCityList = hotCityList;
@@ -60,21 +65,29 @@ public class HotCityAdapter extends BaseAdapter {
 		viewHolder.tvCityName.setText(mHotCityList.get(position).getName());
 
 
-		viewHolder.tvCityName.setOnClickListener(new OnClickListener() {
+	        viewHolder.tvCityName.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent(mContext, SearchFlightActivity.class);
+                }
+            });
 
-                intent.putExtra(Intent.EXTRA_COMPONENT_NAME,mHotCityList.get(position).getName());
 
-                mContext.startActivity(intent);
+        //                Intent intent2 = getIntent();
+//                intent.setClass(this,OrderManageActivity.class);
+//                TabHost.TabSpec tabSpec2 = tabhost.newTabSpec("tab2").setContent(intent)
+//                        .setIndicator("��������", rs.getDrawable(R.drawable.green_btn_out));
+//
+//                mContext.startActivity(intent2);
 
-            }
-        });
+
         return convertView;
 	}
+
+
+
+
 
 	class ViewHolder {
 		TextView tvCityName;

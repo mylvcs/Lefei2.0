@@ -1,22 +1,19 @@
 package com.example.wangmengyun.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
+
 import android.view.View;
-import android.widget.AdapterView;
+
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.wangmengyun.Bean.City;
 import com.example.wangmengyun.adapter.CityListAdapter;
@@ -24,19 +21,16 @@ import com.example.wangmengyun.adapter.HotCityAdapter;
 import com.example.wangmengyun.adapter.RecentVisitCityAdapter;
 import com.example.wangmengyun.lefei.R;
 import com.example.wangmengyun.sqlite.CitySqliteOpenHelper;
-
 import com.example.wangmengyun.view.SideBar;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
- * 总共四个组成部分：1 搜索框 2 定位城市 3 搜索历史城市 4 热门城市
- *
+ *出发界面
+ *选择好城市后返回城市 到SearchActivity的出发EditText
  */
-
-public class PickCityActivity extends Activity {
+public class ChufaActivity extends Activity {
     private ListView sortListView;
     private SideBar sideBar;
     private SQLiteDatabase cityDb;
@@ -64,30 +58,28 @@ public class PickCityActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_city);
+        setContentView(R.layout.activity_chufa);
         initViews();
         initData();
         setAdapter();
         initHotCityList();
         initRecentVisitCityList();
         initHeadView();
+//
+//        mCityName = findViewById(R.id.et_search);
+//        mCityName.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ChufaActivity.this, ZidongtishiActivity.class);
+//                startActivity(intent);
 
-        mCityName = findViewById(R.id.et_search);
-        mCityName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PickCityActivity.this, ZidongtishiActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
+//        });
 
 
     }
 
     private void initData() {
-        cityOpenHelper = new CitySqliteOpenHelper(PickCityActivity.this);
+        cityOpenHelper = new CitySqliteOpenHelper(ChufaActivity.this);
         cityDb = cityOpenHelper.getWritableDatabase();
         allCityList = new ArrayList<City>();
         hotCityList = new ArrayList<City>();
@@ -138,7 +130,10 @@ public class PickCityActivity extends Activity {
         recentCityAdapter = new RecentVisitCityAdapter(this, recentCityList);
         hotCityAdapter = new HotCityAdapter(this, hotCityList);
 
-        cityListAdapter = new CityListAdapter(this, dingweiCity, hotCityList, recentCityList);
+    //    cityListAdapter = new CityListAdapter(this, dingweiCity, hotCityList, recentCityList);
+//TODO
+    //    cityListAdapter = new CityAdapter;
+
 
         lvhotCity.setAdapter(hotCityAdapter);
         lvRecentCity.setAdapter(recentCityAdapter);
@@ -156,7 +151,7 @@ public class PickCityActivity extends Activity {
             cityList.add(data[i]);
         }
 
-//       CityAdapter adapter = new CityAdapter(getApplicationContext(), R.layout.gridview_item, cityList);
+//        CityAdapter adapter = new CityAdapter(getApplicationContext(), R.layout.gridview_item, cityList);
 //        mGvCity.setAdapter(adapter);
         return headView;
     }

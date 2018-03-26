@@ -1,13 +1,11 @@
 package com.example.wangmengyun.activity;
-/**
- * Created by wangmengyun on 2018/3/7.
- */
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 
 import com.example.wangmengyun.lefei.R;
 
@@ -29,12 +28,6 @@ import java.util.List;
 
 import static android.view.View.OnClickListener;
 import static android.view.View.VISIBLE;
-
-
-/**
- * Created by wangmengyun on 2018/3/4.
- */
-
 
 public class SearchFlightActivity extends AppCompatActivity {
     private TextView tv_dancheng, tv_wangfan, tv_chapter_intro;
@@ -50,7 +43,7 @@ public class SearchFlightActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-       setContentView(R.layout.activity_searchflight);
+        setContentView(R.layout.activity_searchflight);
 
 
         tv_dancheng = (TextView) findViewById(R.id.tv_dancheng);
@@ -61,27 +54,42 @@ public class SearchFlightActivity extends AppCompatActivity {
 
 //        tv_wangfan.setOnClickListener(this);
         departCity.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(SearchFlightActivity.this, PickCityActivity.class);
-                        startActivity(intent);
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(SearchFlightActivity.this, ChufaActivity.class);
+
+                //        intent1.putExtra(Intent.EXTRA_ASSIST_CONTEXT, (Parcelable) departCity);
+                startActivity(intent1);
 
             }
         });
 
-        Intent getSearchedResult = getIntent();
+        Intent getDepartureResult = getIntent();
 
-        if (getSearchedResult.hasExtra(Intent.EXTRA_TEXT)){
-            String textEntered = getSearchedResult.getStringExtra(Intent.EXTRA_TEXT);
+        if (getDepartureResult.hasExtra(Intent.EXTRA_TEXT)) {
+            String textEntered = getDepartureResult.getStringExtra(Intent.EXTRA_TEXT);
             departCity.setText(textEntered);
         }
 
-        Intent getHotCityResult = getIntent();
 
-        if(getHotCityResult.hasExtra(Intent.EXTRA_COMPONENT_NAME)){
-            String textEntered = getHotCityResult.getStringExtra(Intent.EXTRA_COMPONENT_NAME);
-            departCity.setText(textEntered);
-        }
+        arriveCity.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(SearchFlightActivity.this, DaodaActivity.class);
+
+                startActivity(intent);
+
+
+                Intent getArriveResult = getIntent();
+
+                if (getArriveResult.hasExtra(Intent.EXTRA_TEXT)){
+                    String textEntered = getArriveResult.getStringExtra(Intent.EXTRA_COMPONENT_NAME);
+                    arriveCity.setText(textEntered);
+                }
+            }
+        });
+
 
 
 

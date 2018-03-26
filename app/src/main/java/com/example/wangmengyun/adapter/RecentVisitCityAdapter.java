@@ -11,7 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.wangmengyun.activity.SearchFlightActivity;
+//import com.example.wangmengyun.activity.SearchFlightActivity;
 import com.example.wangmengyun.lefei.R;
 
 public class RecentVisitCityAdapter extends BaseAdapter {
@@ -55,21 +55,28 @@ public class RecentVisitCityAdapter extends BaseAdapter {
         }
         viewHolder.tvCityName.setText(mRecentVisitCityList.get(position));
 
-        viewHolder.tvCityName.setOnClickListener(new OnClickListener() {
+//        viewHolder.tvCityName.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                //TODO
-                Intent intent = new Intent(mContext, SearchFlightActivity.class);
+//            @Override
+//            public void onClick(View v) {
 
-                intent.putExtra(Intent.EXTRA_COMPONENT_NAME,mRecentVisitCityList.get(position));
+//            Intent getDepartureintent = new Intent(mContext, SearchFlightActivity.class);
+//
+//                getDepartureintent.putExtra(Intent.EXTRA_COMPONENT_NAME,mRecentVisitCityList.get(position));
+//
+//                mContext.startActivity(getDepartureintent);
+//
+//
+//            Intent getArriveintent = new Intent(mContext, SearchFlightActivity.class);
+//
+//                    getArriveintent.putExtra(Intent.EXTRA_REFERRER,mRecentVisitCityList.get(position));
+//
+//                    mContext.startActivity(getArriveintent);
+//        }
+//            });
+//
+         return convertView;
 
-              //  Toast.makeText(mContext,mRecentVisitCityList.get(position)+"",0).show();
-
-                mContext.startActivity(intent);
-            }
-        });
-        return convertView;
     }
 
     class ViewHolder{
