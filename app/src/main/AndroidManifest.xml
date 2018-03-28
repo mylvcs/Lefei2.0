@@ -48,9 +48,9 @@
 
         <!--</activity>-->
 
-        <!--<activity android:name="com.example.wangmengyun.activity.SearchFlightActivity">-->
+        <activity android:name="com.example.wangmengyun.activity.SearchFlightActivity">
 
-        <!--</activity>-->
+        </activity>
         <!--<activity android:name="com.example.wangmengyun.AsyncTask.Asynctask">-->
 
 

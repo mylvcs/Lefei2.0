@@ -1,6 +1,7 @@
 package com.example.wangmengyun.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,11 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wangmengyun.Bean.Flight;
 import com.example.wangmengyun.Bean.FlightLab;
 import com.example.wangmengyun.activity.FlightActivityFragment;
 
+import com.example.wangmengyun.activity.FlightListActivity;
+import com.example.wangmengyun.activity.SearchFlightActivity;
 import com.example.wangmengyun.lefei.R;
 
 import java.util.List;
@@ -27,7 +32,6 @@ public class FlightListFragment extends Fragment {
     private RecyclerView mFlightRecyclerView;
 
     private FlightAdapter mFlightAdapter;
-
 //        private com.example.wangmengyun.activity.FlightActivityFragment.FlightAdapter mFlightAdapter;
 
 //    Flight[] flight = {
@@ -44,9 +48,11 @@ public class FlightListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         View view = inflater.inflate(R.layout.fragment_flight_list, container, false);
 
-        mFlightRecyclerView = view.findViewById(R.id.flight_recycler_view);
+        mFlightRecyclerView = (RecyclerView)view.findViewById(R.id.flight_recycler_view);
 
         mFlightRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         updateUI();
@@ -55,7 +61,7 @@ public class FlightListFragment extends Fragment {
 
     }
 //
-//        private class FlightHolder extends RecyclerView.ViewHolder {
+//        private class FlightHolder extends RecyclerView.ViewHolder {j
 //
 //            public FlightHolder(LayoutInflater inflater, ViewGroup parent) {
 //
@@ -119,6 +125,9 @@ public class FlightListFragment extends Fragment {
         @Override
         public void onBindViewHolder(FlightHolder holder, int position) {
 
+            Flight flight =mFlights.get(position);
+            holder.bind(flight);
+
         }
 
         @Override
@@ -127,10 +136,46 @@ public class FlightListFragment extends Fragment {
         }
     }
 
-    private class FlightHolder extends RecyclerView.ViewHolder{
+
+    private class FlightHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        private TextView mDepartCityTextView;
+
+        private Flight mFlight;
+
+
 
         public FlightHolder(LayoutInflater inflater,ViewGroup parent) {
             super(inflater.inflate(R.layout.list_flight, parent,false));
+
+            mDepartCityTextView = itemView.findViewById(R.id.departure_City);
+
+            mDepartCityTextView.setOnClickListener(this);
+
+        }
+
+
+        public void bind(Flight flight) {
+            mFlight = flight;
+            mDepartCityTextView.setText(mFlight.getDeparture_City());
+
+        }
+
+        @Override
+        public void onClick(View v) {
+        //    Toast.makeText(getActivity(), mFlight.getDeparture_City()+ "到达",Toast.LENGTH_SHORT).show();
+
+
+//            Intent intent = FlightListActivity.newIntent(getActivity(), mFlight.getArrive_City());
+//
+//            startActivity(intent);
+
+
+            Intent intent = new Intent(getActivity(),SearchFlightActivity.class);
+
+            intent.putExtra(Intent.EXTRA_TEXT, mFlight.getDeparture_City() );
+
+            startActivity(intent);
         }
     }
 }

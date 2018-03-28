@@ -39,7 +39,33 @@ public class FlightLab {
             flight.setArrive_Date("2018/02/03");
             mFlights.add(flight);
         }
-
+        for(int i=0;i<10; i++){
+            Flight flight = new Flight();
+            flight.setFlightNumber(i);
+            flight.setArrive_City("Shanghai");
+            flight.setDeparture_City("Shanghai");
+            flight.setDeparture_Date("2018/02/02");
+            flight.setArrive_Date("2018/02/03");
+            mFlights.add(flight);
+        }
+        for(int i=0;i<10; i++){
+            Flight flight = new Flight();
+            flight.setFlightNumber(i);
+            flight.setArrive_City("Shanghai");
+            flight.setDeparture_City("Guangzhou");
+            flight.setDeparture_Date("2018/02/02");
+            flight.setArrive_Date("2018/02/03");
+            mFlights.add(flight);
+        }
+        for(int i=0;i<10; i++){
+            Flight flight = new Flight();
+            flight.setFlightNumber(i);
+            flight.setArrive_City("Shanghai");
+            flight.setDeparture_City("Nanjing");
+            flight.setDeparture_Date("2018/02/02");
+            flight.setArrive_Date("2018/02/03");
+            mFlights.add(flight);
+        }
 
 
     }
