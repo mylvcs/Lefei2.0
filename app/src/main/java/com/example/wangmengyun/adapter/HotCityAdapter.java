@@ -1,96 +1,157 @@
 package com.example.wangmengyun.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
+import android.database.Cursor;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-
 import android.widget.TextView;
 
-import com.example.wangmengyun.Bean.City;
-
+import com.example.wangmengyun.Bean.CityContract;
 import com.example.wangmengyun.lefei.R;
 
 import java.util.List;
 
+//package com.example.wangmengyun.activity;
+//
+//import android.content.Context;
+//import android.view.LayoutInflater;
+//import android.view.View;
+//import android.view.ViewGroup;
+//import android.widget.ArrayAdapter;
+//import android.widget.Button;
+//import android.widget.LinearLayout;
+//
+//
+//import com.example.wangmengyun.lefei.R;
+//
+//import java.util.List;
+//
+//public class CityAdapter extends ArrayAdapter<String> {
+//    /**
+//     * 需要渲染的item布局文件
+//     */
+//    private int resource;
+//
+//    public CityAdapter(Context context, int textViewResourceId, List<String> objects) {
+//        super(context, textViewResourceId, objects);
+//        resource = textViewResourceId;
+//    }
+//
+//    @Override
+//    public View getView(int position, View convertView, ViewGroup parent) {
+//        LinearLayout layout = null;
+//        if (convertView == null) {
+//            layout = (LinearLayout) LayoutInflater.from(getContext()).inflate(resource, null);
+//        } else {
+//            layout = (LinearLayout) convertView;
+//        }
+//        Button name = (Button) layout.findViewById(R.id.tv_city);
+//        name.setText(getItem(position));
+//        return layout;
+//    }
+//}
+public class HotCityAdapter extends RecyclerView.Adapter<HotCityAdapter.CityViewHolder> {
 
-public class HotCityAdapter extends BaseAdapter {
+	private static final String TAG = CityAdapter.class.getSimpleName();
 
-	private List<City> mHotCityList;
-	private LayoutInflater mInflater;
+
 	private Context mContext;
 
-	public static String Departure_City= "departureCity";
+	private Cursor mCursor;
 
-//	public final static String Arrive_City = "";
+	private int mNumberCity;
 
-	public HotCityAdapter(Context context, List<City> hotCityList) {
-		this.mHotCityList = hotCityList;
+	public interface ListItemClickListener {
+		void onListItemClick(int clickedItemIndex);
+	}
+
+	public HotCityAdapter(Context context, List<String> hotCityList,Cursor cursor) {
 		this.mContext = context;
-		mInflater = LayoutInflater.from(mContext);
+		this.mCursor = cursor;
 	}
 
 	@Override
-	public int getCount() {
-		return mHotCityList.size();
+	public CityViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+		Context context = viewGroup.getContext();
+		int layoutIdforListItem = R.layout.number_list_item;
+		LayoutInflater inflater = LayoutInflater.from(context);
+
+		View view = inflater.inflate(layoutIdforListItem, viewGroup, false);
+
+		CityViewHolder viewHolder = new CityViewHolder(view);
+
+		return viewHolder;
+
+
 	}
 
 	@Override
-	public Object getItem(int position) {
-		return mHotCityList.get(position);
+	public void onBindViewHolder(CityViewHolder holder, int position) {
+		if(!mCursor.moveToPosition(position))
+
+			return ;
+		/**
+		 * 这里需要City的contrast类
+		 */
+		String name = mCursor.getString(mCursor.getColumnIndex(CityContract.CityEntry.COLUMN_CITY_NAME));
+
+		//  int = mCursor.getString(mCursor.getColumnIndex(CityContract.CityEntry.COLUMN_UUID;
+
+
+
+		holder.listItemCityView.setText(name);
+
 	}
 
 	@Override
-	public long getItemId(int position) {
-		return position;
+	public int getItemCount() {
+		return mCursor.getCount();
 	}
 
-	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) {
 
-		ViewHolder viewHolder = null;
-		if (convertView == null) {
-			viewHolder = new ViewHolder();
-			convertView = mInflater.inflate(R.layout.item_city, null);
-			viewHolder.tvCityName = (TextView) convertView.findViewById(R.id.tv_city_name);
-			convertView.setTag(viewHolder);
-		} else {
-			viewHolder = (ViewHolder) convertView.getTag();
+	class CityViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+		TextView listItemCityView;
+
+		TextView viewHolderIndex;
+		private ListItemClickListener mOnClickListener;
+
+
+		public CityViewHolder(View itemView) {
+			super(itemView);
+
+			listItemCityView = (TextView) itemView.findViewById(R.id.tv_item_number);
+			viewHolderIndex = (TextView) itemView.findViewById(R.id.tv_view_holder_instance);
+
+			itemView.setOnClickListener(this);
 		}
-		viewHolder.tvCityName.setText(mHotCityList.get(position).getName());
+
+		void bind(int listIndex) {
+			viewHolderIndex.setText(String.valueOf(listIndex));
+		}
 
 
-	        viewHolder.tvCityName.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
+		// COMPLETED (6) Override onClick, passing the clicked item's position (getAdapterPosition()) to mOnClickListener via its onListItemClick method
 
+		@Override
+		public void onClick(View v) {
+			int clickedPosition = getAdapterPosition();
+			mOnClickListener.onListItemClick(clickedPosition);
 
-                }
-            });
-
-
-        //                Intent intent2 = getIntent();
-//                intent.setClass(this,OrderManageActivity.class);
-//                TabHost.TabSpec tabSpec2 = tabhost.newTabSpec("tab2").setContent(intent)
-//                        .setIndicator("��������", rs.getDrawable(R.drawable.green_btn_out));
+//          Intent intent = new Intent(mContext,SearchFlightActivity.class);
+//          String intentExtra = mCursor.getString(mCursor.getColumnIndex(CityContract.CityEntry.COLUMN_CITY_NAME));
 //
-//                mContext.startActivity(intent2);
+//            intent.putExtra("Cityname",intentExtra);
+//
+//            mContext.startActivity(intent);
 
+			//     Toast.makeText(2,"出发城市",Toast.LENGTH_SHORT).show();
 
-        return convertView;
+		}
 	}
-
-
-
-
-
-	class ViewHolder {
-		TextView tvCityName;
-	}
-
 }
+
+
+
+

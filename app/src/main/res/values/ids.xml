@@ -5,6 +5,7 @@
 
     <item name="btn_right" type="id">多程</item>
     <item name="btn_left" type="id" >单程</item>
+    <item name="flight_recycler_view" type="id" />
 
 
 </resources>

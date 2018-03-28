@@ -26,63 +26,65 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name="com.example.wangmengyun.activity.MainActivity"
-            android:label="@string/app_name">
+        <!--<activity-->
+            <!--android:name="com.example.wangmengyun.activity.MainActivity"-->
+            <!--android:label="@string/app_name">-->
 
-        </activity>
+        <!--</activity>-->
 
-        <activity android:name="com.example.wangmengyun.activity.LoginActivity">
+        <!--<activity android:name="com.example.wangmengyun.activity.LoginActivity">-->
 
-        </activity>
-        <activity android:name="com.example.wangmengyun.activity.DingweiActivity">
+        <!--</activity>-->
+        <!--<activity android:name="com.example.wangmengyun.activity.DingweiActivity">-->
 
-        </activity>
-        <activity android:name="com.example.wangmengyun.activity.RegisterActivity"></activity>
-
-
-        <activity android:name="com.example.wangmengyun.activity.PickCityActivity">
-
-        </activity>
-        <activity android:name="com.example.wangmengyun.activity.FindPswActivity">
-
-        </activity>
-
-        <activity android:name="com.example.wangmengyun.activity.SearchFlightActivity">
-
-        </activity>
-        <activity android:name="com.example.wangmengyun.AsyncTask.Asynctask">
+        <!--</activity>-->
+        <!--<activity android:name="com.example.wangmengyun.activity.RegisterActivity"></activity>-->
 
 
-        </activity>
-        <activity android:name="com.example.wangmengyun.activity.AddressActivity">
+        <!--&lt;!&ndash;<activity android:name="com.example.wangmengyun.activity.PickCityActivity">&ndash;&gt;-->
+
+        <!--&lt;!&ndash;</activity>&ndash;&gt;-->
+        <!--<activity android:name="com.example.wangmengyun.activity.FindPswActivity">-->
+
+        <!--</activity>-->
+
+        <!--<activity android:name="com.example.wangmengyun.activity.SearchFlightActivity">-->
+
+        <!--</activity>-->
+        <!--<activity android:name="com.example.wangmengyun.AsyncTask.Asynctask">-->
 
 
-        </activity>
-        <activity android:name="com.example.wangmengyun.activity.FlightActivity" >
+        <!--</activity>-->
+        <!--<activity android:name="com.example.wangmengyun.activity.AddressActivity">-->
 
-        </activity>
 
-        <activity android:name="com.example.wangmengyun.activity.ZidongtishiActivity">
+        <!--</activity>-->
+        <!--<activity android:name="com.example.wangmengyun.activity.FlightActivity" >-->
 
-        </activity>
+        <!--</activity>-->
 
-        <activity android:name="com.example.wangmengyun.activity.ChufaActivity">
+        <!--<activity android:name="com.example.wangmengyun.activity.ZidongtishiActivity">-->
 
-        </activity>
+        <!--</activity>-->
 
-        <activity android:name="com.example.wangmengyun.activity.DaodaActivity">
+        <!--<activity android:name="com.example.wangmengyun.activity.ChufaActivity">-->
 
-        </activity>
+        <!--</activity>-->
 
-        <activity android:name="com.example.wangmengyun.activity.RecyclerViewActivity">
+        <!--&lt;!&ndash;<activity android:name="com.example.wangmengyun.activity.DaodaActivity">&ndash;&gt;-->
+
+        <!--&lt;!&ndash;</activity>&ndash;&gt;-->
+
+        <!--<activity android:name="com.example.wangmengyun.activity.RecyclerViewActivity">-->
+
+        <!--</activity>-->
+
+        <activity android:name="com.example.wangmengyun.activity.FlightListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
 
     </application>

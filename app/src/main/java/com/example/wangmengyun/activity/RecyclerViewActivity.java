@@ -1,12 +1,12 @@
 package com.example.wangmengyun.activity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.wangmengyun.adapter.CityAdapter;
 import com.example.wangmengyun.lefei.R;
 
 /**
@@ -33,9 +33,9 @@ public class RecyclerViewActivity extends AppCompatActivity implements CityAdapt
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mCityList.setLayoutManager(layoutManager);
 
-        mAdapter = new CityAdapter(NUM_LIST_ITEMS,this);
+   //     mAdapter = new CityAdapter();
 
-        mCityList.setAdapter(mAdapter);
+   //     mCityList.setAdapter(mAdapter);
 
 
 

@@ -1,16 +1,13 @@
-package com.example.wangmengyun.activity;
+package com.example.wangmengyun.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.wangmengyun.Bean.City;
 import com.example.wangmengyun.Bean.CityContract;
 import com.example.wangmengyun.lefei.R;
 
@@ -85,7 +82,6 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
 
         return viewHolder;
 
-
     }
 
     @Override
@@ -140,11 +136,15 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
             int clickedPosition = getAdapterPosition();
             mOnClickListener.onListItemClick(clickedPosition);
 
-          //  Intent intent = new Intent(.this,SearchFlightActivity.class);
+//          Intent intent = new Intent(mContext,SearchFlightActivity.class);
+//          String intentExtra = mCursor.getString(mCursor.getColumnIndex(CityContract.CityEntry.COLUMN_CITY_NAME));
+//
+//            intent.putExtra("Cityname",intentExtra);
+//
+//            mContext.startActivity(intent);
 
-         //   intent.putExtra(mCursor.getString(mCursor.getColumnIndex(City.getName)));
+       //     Toast.makeText(2,"出发城市",Toast.LENGTH_SHORT).show();
 
-            mContext.startActivity(intent);
         }
     }
 }
