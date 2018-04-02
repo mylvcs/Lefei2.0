@@ -14,6 +14,7 @@ public class Flight {
     public String departure_Date;
     public String arrive_Date;
     public Date date;
+    public String price;
    
 //    public Flight(String departure_city, String arrive_city, String departure_date, String arrive_date)
 //    {
@@ -27,10 +28,14 @@ public class Flight {
         flightNumber = id;
         date = new Date();
     }
+    
+    public Flight() {
+        this(UUID.randomUUID());
+    }
 
     public Flight(String DepartureCity){
         departure_City = DepartureCity;
-        
+
     }
 
     public Date getDate() {
@@ -40,6 +45,14 @@ public class Flight {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public UUID getFlightNumber() {

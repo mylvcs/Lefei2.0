@@ -113,7 +113,7 @@ public class FlightListFragment extends Fragment {
     private void updateUI() {
 
         FlightLab flightLab = FlightLab.get(getActivity());
-        List<Flight> flights = flightLab.getFlights();
+        List<Flight> flights = flightLab.getFlight();
 
         mFlightAdapter = new FlightAdapter(flights);
         mFlightRecyclerView.setAdapter(mFlightAdapter);

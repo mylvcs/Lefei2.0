@@ -71,8 +71,6 @@ public class SearchFlightFragment extends Fragment {
 
 
     }
-
-    @SuppressLint("WrongViewCast")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -137,9 +135,7 @@ public class SearchFlightFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
 
-//                DatePickerFragment dialog = DatePickerFragment.newInstance(mFlight.getDate());
-
-                DatePickerFragment dialog = new DatePickerFragment();
+                DatePickerFragment dialog = DatePickerFragment.newInstance(mFlight.getDate());
 
                 dialog.setTargetFragment(SearchFlightFragment.this, REQUEST_DATE);
 
