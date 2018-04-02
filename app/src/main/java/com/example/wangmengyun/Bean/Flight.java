@@ -1,17 +1,19 @@
 package com.example.wangmengyun.Bean;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
  * Created by poornima-udacity on 6/26/15.
- * 航班类里有航班号，出发城市，到达城市，出发时间，到达时间，核载人数，
+ * 航班类里有航班号，出发城市，到达城市，出发时间，到达时间，核载人数，出发日期
  */
 public class Flight {
-    public int flightNumber;
+    public UUID flightNumber;
     public String departure_City;
     public String arrive_City;
     public String departure_Date;
     public String arrive_Date;
+    public Date date;
    
 //    public Flight(String departure_city, String arrive_city, String departure_date, String arrive_date)
 //    {
@@ -21,18 +23,30 @@ public class Flight {
 //        this.arrive_Date = arrive_date;
 //    }
 
-
-    public int getID(){
-
-        return flightNumber;
-
+    public Flight(UUID id) {
+        flightNumber = id;
+        date = new Date();
     }
 
-    public int getFlightNumber() {
+    public Flight(String DepartureCity){
+        departure_City = DepartureCity;
+        
+    }
+
+    public Date getDate() {
+
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public UUID getFlightNumber() {
         return flightNumber;
     }
 
-    public void setFlightNumber(int flightNumber) {
+    public void setFlightNumber(UUID flightNumber) {
         this.flightNumber = flightNumber;
     }
 

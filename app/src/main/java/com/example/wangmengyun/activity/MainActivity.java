@@ -1,292 +1,214 @@
-//package com.example.wangmengyun.activity;
+package com.example.wangmengyun.activity;
+
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.example.wangmengyun.Bean.City;
+import com.example.wangmengyun.lefei.R;
+import com.example.wangmengyun.sqlite.AllCitySqliteOpenHelper;
+import com.example.wangmengyun.view.FlightView;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    protected static final String TAG = "MainActivity";
+
+    /**
+     * 视图
+     */
+    private FlightView mFlightView;
+ /**
+     * 中间内容栏
+     */
+    private FrameLayout mBodyLayout;
+    /**
+     * 底部按钮栏
+     */
+    public LinearLayout mBottomLayout;
+    /**
+     * 底部按钮
+     */
+    private View mFlightBtn;
+
+    private TextView tv_flight;
+
+    private ImageView iv_flight;
+
+    private TextView tv_back;
+    private RelativeLayout rl_title_bar;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        init();
+        initBottomBar();
+        setListener();
+        setInitStatus();
+
+
+    }
+
+    private void initBottomBar() {
+
+        mBottomLayout = (LinearLayout) findViewById(R.id.main_bottom_bar);
+
+        tv_flight = (TextView) findViewById(R.id.bottom_bar_text_Flight);
+
+        iv_flight = (ImageView) findViewById(R.id.bottom_bar_image_Flight);
+
+
+    }
+
+    private void setListener() {
+
+        for (int i = 0; i < mBottomLayout.getChildCount(); i++) {
+            mBottomLayout.getChildAt(i).setOnClickListener(this);
+        }
+    }
+
+    private void setInitStatus() {
+
+
+
+    }
+
+    private void init() {
+
+        mFlightBtn = findViewById(R.id.bottom_bar_Flight_btn);
+
+        initBodyLayout();
+
+
+
+    }
+
+    private void initBodyLayout() {
+        mBodyLayout = (FrameLayout) findViewById(R.id.main_body);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        mFlightBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SearchFlightActivity.class);
+
+                startActivity(intent);
+            }
+        });
+
+
+    }
+
+
 //
-//import android.content.Context;
-//import android.content.Intent;
-//import android.content.SharedPreferences;
-//import android.content.pm.ActivityInfo;
-//import android.graphics.Color;
-//import android.os.Bundle;
-//import android.support.v7.app.AppCompatActivity;
-//import android.view.KeyEvent;
-//import android.view.View;
-//import android.widget.FrameLayout;
-//import android.widget.ImageView;
-//import android.widget.LinearLayout;
-//import android.widget.RelativeLayout;
-//import android.widget.TextView;
-//import android.widget.Toast;
+//    private ArrayList<City> getCityList() {
+//        SQLiteDatabase db;
+//        Cursor cursor = null;
+//        AllCitySqliteOpenHelper op = new AllCitySqliteOpenHelper(MainActivity.this);
+//        ArrayList<City> cityList = new ArrayList<City>();
+//        try {
+//            op.createDataBase();
+//            db = op.getWritableDatabase();
+//            cursor = db.rawQuery("select * from city", null);
 //
-//import com.example.wangmengyun.lefei.R;
-//import com.example.wangmengyun.view.FlightView;
-//import com.example.wangmengyun.view.MyInfoView;
-//import com.example.wangmengyun.view.TicketView;
-//
-//
-//public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-//    /**
-//     * 视图
-//     */
-//    private FlightView mFlightView;
-//    private TicketView mTicketView;
-//    private MyInfoView mMyInfoView;
-//    /**
-//     * 中间内容栏
-//     */
-//    private FrameLayout mBodyLayout;
-//    /**
-//     * 底部按钮栏
-//     */
-//    public LinearLayout mBottomLayout;
-//    /**
-//     * 底部按钮
-//     */
-//    private View FlightBtn;
-//    private View mTicketBtn;
-//    private View mMyInfoBtn;
-//    private TextView tv_flight;
-//    private TextView tv_ticket;
-//    private TextView tv_myInfo;
-//    private ImageView iv_flight;
-//    private ImageView iv_ticket;
-//    private ImageView iv_myInfo;
-//    private TextView tv_back;
-//    private TextView tv_main_title;
-//    private RelativeLayout rl_title_bar;
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//        //设置此界面为竖屏
-//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//        init();
-//        initBottomBar();
-//        setListener();
-////        setInitStatus();
-//    }
-//    /**
-//     * 获取界面上的UI控件
-//     */
-//    private void init() {
-//        tv_back = (TextView) findViewById(R.id.tv_back);
-//        tv_main_title = (TextView) findViewById(R.id.tv_main_title);
-//        tv_main_title.setText("机票");
-//        rl_title_bar = (RelativeLayout) findViewById(R.id.title_bar);
-//        rl_title_bar.setBackgroundColor(Color.parseColor("#30B4FF"));
-//        tv_back.setVisibility(View.GONE);
-//        initBodyLayout();
-//    }
-//    /**
-//     * 获取底部导航栏上的控件
-//     */
-//    private void initBottomBar() {
-//        mBottomLayout = (LinearLayout) findViewById(R.id.main_bottom_bar);
-//        FlightBtn = findViewById(R.id.bottom_bar_Flight_btn);
-//        mTicketBtn = findViewById(R.id.bottom_bar_exercises_btn);
-//        mMyInfoBtn = findViewById(R.id.bottom_bar_myinfo_btn);
-//        tv_flight = (TextView) findViewById(R.id.bottom_bar_text_Flight);
-//        tv_ticket = (TextView) findViewById(R.id.bottom_bar_text_exercises);
-//        tv_myInfo = (TextView) findViewById(R.id.bottom_bar_text_myinfo);
-//        iv_flight = (ImageView) findViewById(R.id.bottom_bar_image_Flight);
-//        iv_ticket = (ImageView) findViewById(R.id.bottom_bar_image_exercises);
-//        iv_myInfo = (ImageView) findViewById(R.id.bottom_bar_image_myinfo);
-//    }
-//    private void initBodyLayout() {
-//        mBodyLayout = (FrameLayout) findViewById(R.id.main_body);
-//    }
-//    /**
-//     * 控件的点击事件
-//     */
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()) {
-//            //课程的点击事件
-//            case R.id.bottom_bar_Flight_btn:
-//                clearBottomImageState();
-//                //selectDisplayView(0);
-//                Intent intent = new Intent(MainActivity.this,SearchFlightActivity.class);
-//                startActivity(intent);
-//                break;
-//            //习题的点击事件
-//            case R.id.bottom_bar_exercises_btn:
-//                //               clearBottomImageState();
-//                selectDisplayView(1);
-//                break;
-//            //我的点击事件
-//            case R.id.bottom_bar_myinfo_btn:
-////                clearBottomImageState();
-//                selectDisplayView(2);
-//                if (mMyInfoView != null) {
-//                    mMyInfoView.setLoginParams(readLoginStatus());
-//                }
-//                break;
-//            default:
-//                break;
-//        }
-//    }
-//    /**
-//     * 设置底部三个按钮的点击监听事件
-//     */
-//    private void setListener() {
-//        for (int i = 0; i < mBottomLayout.getChildCount(); i++) {
-//            mBottomLayout.getChildAt(i).setOnClickListener(this);
-//        }
-//    }
-//    /**
-//     * 清除底部按钮的选中状态
-//     */
-//    private void clearBottomImageState() {
-//        tv_flight.setTextColor(Color.parseColor("#666666"));
-//        tv_ticket.setTextColor(Color.parseColor("#666666"));
-//        tv_myInfo.setTextColor(Color.parseColor("#666666"));
-//        iv_flight.setImageResource(R.drawable.main_flight_icon_selected);
-//        iv_ticket.setImageResource(R.drawable.main_exercises_icon);
-//        iv_myInfo.setImageResource(R.drawable.main_my_icon);
-//        for (int i = 0; i < mBottomLayout.getChildCount(); i++) {
-//            mBottomLayout.getChildAt(i).setSelected(false);
-//        }
-//    }
-//    /**
-//     * 设置底部按钮选中状态
-//     */
-//    public void setSelectedStatus(int index) {
-//        switch (index) {
-//            case 0:
-//                FlightBtn.setSelected(true);
-//                iv_ticket.setImageResource(R.drawable.main_flight_icon_selected);
-//                tv_ticket.setTextColor(Color.parseColor("#0097F7"));
-//                rl_title_bar.setVisibility(View.VISIBLE);
-//                tv_main_title.setText("机票");
-//                break;
-//            case 1:
-//                mTicketBtn.setSelected(true);
-//                iv_ticket.setImageResource(R.drawable.main_exercises_icon_selected);
-//                tv_ticket.setTextColor(Color.parseColor("#0097F7"));
-//                rl_title_bar.setVisibility(View.VISIBLE);
-//                tv_main_title.setText("航班管理");
-//                break;
-//            case 2:
-//                mMyInfoBtn.setSelected(true);
-//                iv_myInfo.setImageResource(R.drawable.main_my_icon_selected);
-//                tv_myInfo.setTextColor(Color.parseColor("#0097F7"));
-//                rl_title_bar.setVisibility(View.GONE);
-//
-//        }
-//    }
-//    /**
-//     * 移除不需要的视图
-//     */
-//    private void removeAllView() {
-//        for (int i = 0; i < mBodyLayout.getChildCount(); i++) {
-//            mBodyLayout.getChildAt(i).setVisibility(View.GONE);
-//        }
-//    }
-//    /**
-//     * 设置界面view的初始化状态
-//     */
-//    private void setInitStatus() {
-//        clearBottomImageState();
-//        setSelectedStatus(0);
-//        createView(0);
-//    }
-//    /**
-//     * 显示对应的页面
-//     */
-//    private void selectDisplayView(int index) {
-//        removeAllView();
-//        createView(index);
-//        setSelectedStatus(index);
-//    }
-//    /**
-//     * 选择视图
-//     */
-//    private void createView(int viewIndex) {
-//        switch (viewIndex) {
-//            case 0:
-//                //课程界面
-//                if (mFlightView == null) {
-//                    mFlightView = new FlightView(this);
-//                    mBodyLayout.addView(FlightView.getView());
-//                } else {
-//                    FlightView.getView();
-//                }
-//                FlightView.showView();
-//                break;
-//            case 1:
-//                //习题界面
-//                if (mTicketView == null) {
-//                    mTicketView= new TicketView(this);
-//                    mBodyLayout.addView(mTicketView.getView());
-//                } else {
-//                    mTicketView.getView();
-//                }
-//                mTicketView.showView();
-//                break;
-//            case 2:
-//                //我的界面
-//                if (mMyInfoView == null) {
-//                    mMyInfoView = new MyInfoView(this);
-//                    mBodyLayout.addView(mMyInfoView.getView());
-//                } else {
-//                    mMyInfoView.getView();
-//                }
-//                mMyInfoView.showView();
-//                break;
-//        }
-//    }
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(data!=null){
-//            //从设置界面或登录界面传递过来的登录状态
-//            boolean isLogin=data.getBooleanExtra("isLogin",false);
-//            if(isLogin){//登录成功时显示课程界面
-//                clearBottomImageState();
-//                selectDisplayView(0);
+//            while (cursor.moveToNext()) {
+//                String cityName = cursor.getString(cursor.getColumnIndex("name"));
+//                String cityPinyin = cursor.getString(cursor.getColumnIndex("pinyin"));
+//                City city = new City(cityName, cityPinyin);
+//                cityList.add(city);
 //            }
-//            if (mMyInfoView != null) {//登录成功或退出登录时根据isLogin设置我的界面
-//                mMyInfoView.setLoginParams(isLogin);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (cursor == null) throw new AssertionError();
+//            cursor.close();
+//        }
+//        Collections.sort(cityList, comparator);
+//        return cityList;
+//
+//    }
+//
+//    private void initRecentVisitCityData() {
+//        InsertCity("±±¾©");
+//        InsertCity("ÉÏº£");
+//        InsertCity("¹ãÖÝ");
+//        SQLiteDatabase recentVisitDb = cityOpenHelper.getWritableDatabase();
+//        Cursor cursor = recentVisitDb.rawQuery("select * from recentcity order by date desc limit 0, 3", null);
+//        while (cursor.moveToNext()) {
+//            String recentVisitCityName = cursor.getString(cursor.getColumnIndex("name"));
+//            recentCityList.add(recentVisitCityName);
+//        }
+//        cursor.close();
+//        recentVisitDb.close();
+//    }
+
+}
+
+//    @SuppressWarnings("unchecked")
+//    private void getResultCityList(String keyword) {
+//        AllCitySqliteOpenHelper dbHelper = new AllCitySqliteOpenHelper(this);
+//        try {
+//            dbHelper.createDataBase();
+//            SQLiteDatabase db = dbHelper.getWritableDatabase();
+//            Cursor cursor = db.rawQuery(
+//                    "select * from city where name like \"%" + keyword
+//                            + "%\" or pinyin like \"%" + keyword + "%\"", null);
+//            City city;
+//            while (cursor.moveToNext()) {
+//                String cityName=cursor.getString(cursor.getColumnIndex("name"));
+//                String cityPinyin=cursor.getString(cursor.getColumnIndex("pinyin"));
+//                city = new City(cityName,cityPinyin);
+//                searchCityList.add(city);
 //            }
+//            cursor.close();
+//            db.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        //½«µÃµ½µÄ¼¯ºÏ°´ÕÕ×Ô¶¨ÒåµÄcomparatorµÄ¹æÔò½øÐÐÅÅÐò
+//        Collections.sort(searchCityList, comparator);
+//    }
+//
+//    // ÉèÖÃÏÔÊ¾×ÖÄ¸µÄTextViewÎª²»¿É¼û
+//    private class OverlayThread implements Runnable {
+//        @Override
+//        public void run() {
+//            tvDialog.setVisibility(View.INVISIBLE);
 //        }
 //    }
-//    protected long exitTime;//记录第一次点击时的时间
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK
-//                && event.getAction() == KeyEvent.ACTION_DOWN) {
-//            if ((System.currentTimeMillis() - exitTime) > 2000) {
-//                Toast.makeText(MainActivity.this, "再按一次退出",
-//                        Toast.LENGTH_SHORT).show();
-//                exitTime = System.currentTimeMillis();
-//            } else {
-//                MainActivity.this.finish();
-//                if (readLoginStatus()) {
-//                    //如果退出此应用时是登录状态，则需要清除登录状态，同时需清除登录时的用户名
-//                    clearLoginStatus();
-//                }
-//                System.exit(0);
-//            }
-//            return true;
+//    //²åÈëÊý¾Ýµ½×î½ü·ÃÎÊµÄ³ÇÊÐ
+//    public void InsertCity(String name) {
+//        SQLiteDatabase db = cityOpenHelper.getReadableDatabase();
+//        Cursor cursor = db.rawQuery("select * from recentcity where name = '"
+//                + name + "'", null);
+//        if (cursor.getCount() > 0) { //
+//            db.delete("recentcity", "name = ?", new String[] { name });
 //        }
-//        return super.onKeyDown(keyCode, event);
-//    }
-//    /**
-//     * 获取SharedPreferences中的登录状态
-//     */
-//    private boolean readLoginStatus() {
-//        SharedPreferences sp = getSharedPreferences("loginInfo",
-//                Context.MODE_PRIVATE);
-//        boolean isLogin = sp.getBoolean("isLogin", false);
-//        return isLogin;
-//    }
-//    /**
-//     * 清除SharedPreferences中的登录状态
-//     */
-//    private void clearLoginStatus() {
-//        SharedPreferences sp = getSharedPreferences("loginInfo",
-//                Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sp.edit();//获取编辑器
-//        editor.putBoolean("isLogin", false);//清除登录状态
-//        editor.putString("loginUserName", "");//清除登录时的用户名
-//        editor.commit();//提交修改
+//        db.execSQL("insert into recentcity(name, date) values('" + name + "', "
+//                + System.currentTimeMillis() + ")");
+//        db.close();
 //    }
 //}

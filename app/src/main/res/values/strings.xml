@@ -8,4 +8,6 @@
     <string name="Date">today</string>
     <string name="searchflight">search</string>
     <string name="latitude">latitude</string>
+
+    <string name="date_picker_title">Date</string>
 </resources>

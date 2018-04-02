@@ -18,7 +18,7 @@ public class FlightLab {
     private List<Flight> mFlights;
 
     public static FlightLab get(Context context) {
-        if (sflightLab ==null){
+        if (sflightLab == null) {
             sflightLab = new FlightLab(context);
         }
         return sflightLab;
@@ -30,43 +30,6 @@ public class FlightLab {
 
         mFlights = new ArrayList<>();
 
-        for(int i=0;i<10; i++){
-            Flight flight = new Flight();
-            flight.setFlightNumber(i);
-            flight.setArrive_City("Shanghai");
-            flight.setDeparture_City("Beijing");
-            flight.setDeparture_Date("2018/02/02");
-            flight.setArrive_Date("2018/02/03");
-            mFlights.add(flight);
-        }
-        for(int i=0;i<10; i++){
-            Flight flight = new Flight();
-            flight.setFlightNumber(i);
-            flight.setArrive_City("Shanghai");
-            flight.setDeparture_City("Shanghai");
-            flight.setDeparture_Date("2018/02/02");
-            flight.setArrive_Date("2018/02/03");
-            mFlights.add(flight);
-        }
-        for(int i=0;i<10; i++){
-            Flight flight = new Flight();
-            flight.setFlightNumber(i);
-            flight.setArrive_City("Shanghai");
-            flight.setDeparture_City("Guangzhou");
-            flight.setDeparture_Date("2018/02/02");
-            flight.setArrive_Date("2018/02/03");
-            mFlights.add(flight);
-        }
-        for(int i=0;i<10; i++){
-            Flight flight = new Flight();
-            flight.setFlightNumber(i);
-            flight.setArrive_City("Shanghai");
-            flight.setDeparture_City("Nanjing");
-            flight.setDeparture_Date("2018/02/02");
-            flight.setArrive_Date("2018/02/03");
-            mFlights.add(flight);
-        }
-
 
     }
 
@@ -75,12 +38,15 @@ public class FlightLab {
 
     }
 
-//    public Flight getFlight(UUID id){
-//        for (Flight flight:mFlights){
-//            if (flight.getId().equals(id)){
-//
-//            }
-//        }
-//            return null;
+    public Flight getFlight(UUID mId) {
+
+        for (Flight flight : mFlights) {
+            if (flight.getFlightNumber().equals(mId)) {
+                return flight;
+            }
+
+        }
+        return null;
+    }
 
 }

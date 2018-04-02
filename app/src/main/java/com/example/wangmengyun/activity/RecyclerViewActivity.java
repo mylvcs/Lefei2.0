@@ -33,9 +33,9 @@ public class RecyclerViewActivity extends AppCompatActivity implements CityAdapt
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mCityList.setLayoutManager(layoutManager);
 
-   //     mAdapter = new CityAdapter();
+     //   mAdapter = new CityAdapter();
 
-   //     mCityList.setAdapter(mAdapter);
+    //    mCityList.setAdapter(mAdapter);
 
 
 

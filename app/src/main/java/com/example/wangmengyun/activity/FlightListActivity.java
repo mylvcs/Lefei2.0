@@ -18,15 +18,14 @@ public class FlightListActivity extends SingleFragmentActivity {
     }
 
 
-    public static final String Departure_City = "到达城市";
-
-    public static Intent newIntent(Context packageContext, String departure_City) {
-
-        Intent intent = new Intent(packageContext, FlightListActivity.class);
-        intent.putExtra(Departure_City, departure_City);
-
-        return intent;
-    }
+//    public static final String Departure_City = "到达城市";
+//
+//    public static Intent newIntent(Context packageContext, String departure_City) {
+//
+//        Intent intent = new Intent(packageContext, FlightListActivity.class);
+//        intent.putExtra(Departure_City, departure_City);
+//
+//        return intent;
+//    }
 
 }
-

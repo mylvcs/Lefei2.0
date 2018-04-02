@@ -1,9 +1,13 @@
 package com.example.wangmengyun.Fragment;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,6 +26,8 @@ import com.example.wangmengyun.lefei.R;
 
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by wangmengyun on 2018/3/28.
  */
@@ -29,6 +35,10 @@ import java.util.List;
 public class FlightListFragment extends Fragment {
 
 
+    private static final String ARG_CITY = "departureCity";
+
+    public static final String EXTRA_DEPARTURE = "NULL";
+    private static final int REQUEST_DEPARTURE = 1;
     private RecyclerView mFlightRecyclerView;
 
     private FlightAdapter mFlightAdapter;
@@ -41,7 +51,10 @@ public class FlightListFragment extends Fragment {
 //
 //    };
 
-    public FlightListFragment() {
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
     }
 
@@ -52,9 +65,11 @@ public class FlightListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_flight_list, container, false);
 
-        mFlightRecyclerView = (RecyclerView)view.findViewById(R.id.flight_recycler_view);
+
+        mFlightRecyclerView = (RecyclerView) view.findViewById(R.id.flight_recycler_view);
 
         mFlightRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         updateUI();
 
         return view;
@@ -97,35 +112,35 @@ public class FlightListFragment extends Fragment {
 
     private void updateUI() {
 
-        FlightLab flightLab= FlightLab.get(getActivity());
+        FlightLab flightLab = FlightLab.get(getActivity());
         List<Flight> flights = flightLab.getFlights();
-        
+
         mFlightAdapter = new FlightAdapter(flights);
         mFlightRecyclerView.setAdapter(mFlightAdapter);
-        
-        
+
+
     }
 
-    private class FlightAdapter extends RecyclerView.Adapter<FlightHolder>{
+    private class FlightAdapter extends RecyclerView.Adapter<FlightHolder> {
 
-            private List<Flight> mFlights;
-            
-            public FlightAdapter(List<Flight> flights){
-                mFlights = flights;
-            }
+        private List<Flight> mFlights;
+
+        public FlightAdapter(List<Flight> flights) {
+            mFlights = flights;
+        }
 
 
         @Override
         public FlightHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            
-            return new FlightHolder(layoutInflater,parent);
+
+            return new FlightHolder(layoutInflater, parent);
         }
 
         @Override
         public void onBindViewHolder(FlightHolder holder, int position) {
 
-            Flight flight =mFlights.get(position);
+            Flight flight = mFlights.get(position);
             holder.bind(flight);
 
         }
@@ -136,17 +151,15 @@ public class FlightListFragment extends Fragment {
         }
     }
 
-
-    private class FlightHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    private class FlightHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mDepartCityTextView;
 
         private Flight mFlight;
 
 
-
-        public FlightHolder(LayoutInflater inflater,ViewGroup parent) {
-            super(inflater.inflate(R.layout.list_flight, parent,false));
+        public FlightHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.list_flight, parent, false));
 
             mDepartCityTextView = itemView.findViewById(R.id.departure_City);
 
@@ -163,19 +176,67 @@ public class FlightListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-        //    Toast.makeText(getActivity(), mFlight.getDeparture_City()+ "到达",Toast.LENGTH_SHORT).show();
+  //          Toast.makeText(getActivity(), mFlight.getDeparture_City()+ "到达",Toast.LENGTH_SHORT).show();
 
-
-//            Intent intent = FlightListActivity.newIntent(getActivity(), mFlight.getArrive_City());
+//           FragmentManager fm = getFragmentManager();
+//            FlightListFragment dialog= FlightListFragment.newInstance(mFlight.getDeparture_City());
 //
-//            startActivity(intent);
+//
+            Intent intent = new Intent();
+            intent.putExtra( "Departure_city", mFlight.getDeparture_City() );
+
+            intent.putExtra("Arrive_city", mFlight.getArrive_City());
+
+            getActivity().setResult(Activity.RESULT_OK,intent);
+            getActivity().finish();
 
 
-            Intent intent = new Intent(getActivity(),SearchFlightActivity.class);
 
-            intent.putExtra(Intent.EXTRA_TEXT, mFlight.getDeparture_City() );
+      //     sendResult(Activity.RESULT_OK, mFlight.getDeparture_City());
+      //      returnResult();
 
-            startActivity(intent);
+
+//
+//            Intent intent = SearchFlightActivity.newIntent(getActivity(), mFlight.getDeparture_City());
+//            startActivityForResult(intent, REQUEST_DEPARTCITY);
+
+
         }
+
+        private void sendResult(int resultOk, String DepartCity) {
+
+            if (getTargetFragment() == null) {
+                return;
+            }
+            Intent in = new Intent();
+            in.putExtra(EXTRA_DEPARTURE, DepartCity);
+
+            getTargetFragment().onActivityResult(getTargetRequestCode(), resultOk, in);
+        }
+
+    }
+
+    public static FlightListFragment newInstance(String departure_city) {
+
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_CITY, departure_city);
+
+        FlightListFragment fragment = new FlightListFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//
+//        if (requestCode== REQUEST_DEPARTCITY){
+//            //Handle result;
+//        }
+//    }
+
+    public void returnResult(){
+
+        getActivity().setResult(Activity.RESULT_OK,null);
     }
 }
