@@ -45,11 +45,14 @@
 
         </activity>
 
-        <activity android:name="com.example.wangmengyun.activity.PickCityActivity">
-
+        <activity android:name="com.example.wangmengyun.activity.PickCityActivity1">
 
         </activity>
 
+        <activity android:name="com.example.wangmengyun.activity.PickCityActivity2">
+
+
+        </activity>
         <activity android:name="com.example.wangmengyun.activity.RecyclerViewActivity">
 
         </activity>

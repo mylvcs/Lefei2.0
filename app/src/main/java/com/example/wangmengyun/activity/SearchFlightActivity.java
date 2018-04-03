@@ -45,6 +45,7 @@ public class SearchFlightActivity extends SingleFragmentActivity {
     protected Fragment createFragment() {
         UUID flightNumber = (UUID) getIntent().getSerializableExtra(ExtraData);
 
+
         return SearchFlightFragment.newInstance(flightNumber);
 
     }

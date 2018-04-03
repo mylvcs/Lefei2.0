@@ -1,5 +1,9 @@
 package com.example.wangmengyun.Fragment;
 
+/**
+ * Created by wangmengyun on 2018/4/3.
+ */
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,29 +15,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.wangmengyun.Bean.City;
 import com.example.wangmengyun.Bean.CityLab;
-import com.example.wangmengyun.Bean.Flight;
-import com.example.wangmengyun.Bean.FlightLab;
 import com.example.wangmengyun.lefei.R;
 
 import java.util.List;
 
-/**
- * Created by wangmengyun on 2018/4/1.
- *
- * 总共四个组成部分：1 搜索框 2 定位城市 3 搜索历史城市 4 热门城市
- *
- */
 
-public class PickCityFragment extends Fragment {
+public class PickCityFragment2 extends Fragment {
 
     private static final String ARG_CITY = "departureCity";
     public static final String EXTRA_DEPARTURE = "NULL";
 
     private static final int REQUEST_DEPARTURE = 1;
+    private static final String EXTRA_ARRIVE = "NULL";
 
     private RecyclerView mCityRecyclerView;
 
@@ -128,17 +124,22 @@ public class PickCityFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-         //         Toast.makeText(getActivity(), mCity.getName()+ "到达",Toast.LENGTH_SHORT).show();
+            //         Toast.makeText(getActivity(), mCity.getName()+ "到达",Toast.LENGTH_SHORT).show();
 
 
             //     sendResult(Activity.RESULT_OK, mFlight.getDeparture_City());
             //      returnResult();
-            Intent intent = new Intent();
-            intent.putExtra( "Departure_city", mCity.getName() );
+//            Intent intent1 = new Intent();
+//            intent1.putExtra( "Departure_city", mCity.getName() );
+//
+//            getActivity().setResult(Activity.RESULT_OK,intent1);
 
-     //       intent.putExtra("Arrive_city", mCity.getName());
+            Intent intent2 =new Intent();
+            intent2.putExtra("Arrive_city", mCity.getName());
 
-            getActivity().setResult(Activity.RESULT_OK,intent);
+            getActivity().setResult(Activity.RESULT_OK, intent2);
+
+
             getActivity().finish();
 
 
@@ -149,16 +150,30 @@ public class PickCityFragment extends Fragment {
 
         }
 
-        private void sendResult(int resultOk, String DepartCity) {
+//        private void sendResult(int resultOk,String ArriveCity) {
+//
+//            if (getTargetFragment() == null) {
+//                return;
+//            }
+//            Intent in = new Intent();
+//
+//            in.putExtra(EXTRA_ARRIVE, ArriveCity);
+//
+//            getTargetFragment().onActivityResult(getTargetRequestCode(), resultOk, in);
+//        }
 
-            if (getTargetFragment() == null) {
-                return;
-            }
-            Intent in = new Intent();
-            in.putExtra(EXTRA_DEPARTURE, DepartCity);
-
-            getTargetFragment().onActivityResult(getTargetRequestCode(), resultOk, in);
-        }
+//
+//        private void setResult(int resultOk, String DepartCity ){
+//            if (getTargetFragment() ==null){
+//                return;
+//            }
+//
+//            Intent in = new Intent();
+//
+//            in.putExtra(EXTRA_DEPARTURE , DepartCity);
+//
+//            getTargetFragment().onActivityResult(getTargetRequestCode(), resultOk,in);
+//        }
 
         public void bind(City city) {
             mCity = city;

@@ -39,6 +39,7 @@ public class FlightListFragment extends Fragment {
 
     public static final String EXTRA_DEPARTURE = "NULL";
     private static final int REQUEST_DEPARTURE = 1;
+    public static final String EXTRA_ARRIVE = "NULL";
     private RecyclerView mFlightRecyclerView;
 
     private FlightAdapter mFlightAdapter;
@@ -191,9 +192,8 @@ public class FlightListFragment extends Fragment {
 //
 //
             Intent intent = new Intent();
-            intent.putExtra( "Departure_city", mFlight.getDeparture_City() );
-
-            intent.putExtra("Arrive_city", mFlight.getArrive_City());
+           intent.putExtra( "DepartCity", mFlight.getDeparture_City() );
+            intent.putExtra("ArriveCity", mFlight.getArrive_City());
 
             getActivity().setResult(Activity.RESULT_OK,intent);
             getActivity().finish();
@@ -211,13 +211,14 @@ public class FlightListFragment extends Fragment {
 
         }
 
-        private void sendResult(int resultOk, String DepartCity) {
+        private void sendResult(int resultOk, String DepartCity,String ArriveCity) {
 
             if (getTargetFragment() == null) {
                 return;
             }
             Intent in = new Intent();
             in.putExtra(EXTRA_DEPARTURE, DepartCity);
+            in.putExtra(EXTRA_ARRIVE, ArriveCity);
 
 
             getTargetFragment().onActivityResult(getTargetRequestCode(), resultOk, in);

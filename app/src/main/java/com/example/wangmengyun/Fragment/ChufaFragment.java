@@ -16,7 +16,8 @@ import com.example.wangmengyun.Bean.Flight;
 import com.example.wangmengyun.Bean.FlightLab;
 import com.example.wangmengyun.activity.ChufaActivity;
 import com.example.wangmengyun.activity.MainActivity;
-import com.example.wangmengyun.activity.PickCityActivity;
+
+import com.example.wangmengyun.activity.PickCityActivity1;
 import com.example.wangmengyun.activity.SearchFlightActivity;
 import com.example.wangmengyun.lefei.R;
 
@@ -98,7 +99,7 @@ public class ChufaFragment extends Fragment {
 //                FlightListFragment dialog= FlightListFragment.newInstance(mFlight.getDeparture_City());
 //
 //                dialog
-                Intent in = new Intent(getActivity(), PickCityActivity.class);
+                Intent in = new Intent(getActivity(), PickCityActivity1.class);
                 startActivityForResult(in, REQUEST_DEPARTURE);
 
 
@@ -138,7 +139,7 @@ public class ChufaFragment extends Fragment {
 
 
         public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (resultCode != Activity.RESULT_OK) {
+        if (resultCode != Activity.RESULT_CANCELED) {
             return;
         }
         if (requestCode == REQUEST_DEPARTURE) {

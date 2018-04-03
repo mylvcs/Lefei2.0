@@ -20,7 +20,8 @@ import com.example.wangmengyun.Bean.Flight;
 import com.example.wangmengyun.Bean.FlightLab;
 import com.example.wangmengyun.activity.FlightListActivity;
 import com.example.wangmengyun.activity.MainActivity;
-import com.example.wangmengyun.activity.PickCityActivity;
+import com.example.wangmengyun.activity.PickCityActivity1;
+import com.example.wangmengyun.activity.PickCityActivity2;
 import com.example.wangmengyun.activity.SearchFlightActivity;
 import com.example.wangmengyun.lefei.R;
 
@@ -108,7 +109,7 @@ public class SearchFlightFragment extends Fragment {
 //                FlightListFragment dialog= FlightListFragment.newInstance(mFlight.getDeparture_City());
 //
 //                dialog
-                Intent in = new Intent(getActivity(),PickCityActivity.class);
+                Intent in = new Intent(getActivity(),PickCityActivity1.class);
             startActivityForResult(in, REQUEST_DEPARTURE);
 
 
@@ -127,7 +128,7 @@ public class SearchFlightFragment extends Fragment {
 //               FragmentManager fragmentManager = getFragmentManager();
 //               FlightListFragment flightListFragment = new FlightListFragment();
 
-                Intent in = new Intent(getActivity(),PickCityActivity.class);
+                Intent in = new Intent(getActivity(),PickCityActivity2.class);
                 startActivityForResult(in, REQUEST_ARRIVE);
 
 //               flightListFragment.show(fragmentManager, arrive_city);
@@ -174,25 +175,17 @@ public class SearchFlightFragment extends Fragment {
 
             mArriveButton.setText(intent.getStringExtra("Arrive_city"));
 
-        }
-    }
+        }else if(requestCode ==REQUEST_DATE){
 
-//    public void onActivityResult(int requestCode, int resultCode, Intent in) {
-//        if (resultCode!=Activity.RESULT_OK){
-//            return;
-//        }
-//
-//        if(requestCode ==REQUEST_DATE){
-//
-//
-//            Date date = (Date) in.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-//
-//            mFlight.setDate(date);
-//            mDateButton.setText(mFlight.getDate().toString());
-//
-//        }
-//
-//    }
+
+            Date date = (Date) intent.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+
+            mFlight.setDate(date);
+            mDateButton.setText(mFlight.getDate().toString());
+
+        }
+
+    }
     public static SearchFlightFragment newInstance(UUID mID) {
 
         Bundle args = new Bundle();

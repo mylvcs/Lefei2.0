@@ -17,7 +17,7 @@ import com.example.wangmengyun.Bean.FlightLab;
 import com.example.wangmengyun.activity.ChufaActivity;
 import com.example.wangmengyun.activity.DaodaActivity;
 import com.example.wangmengyun.activity.MainActivity;
-import com.example.wangmengyun.activity.PickCityActivity;
+
 import com.example.wangmengyun.lefei.R;
 
 import java.util.UUID;
@@ -30,17 +30,15 @@ public class DaodaFragment extends Fragment{
 
     private static final String DIALOG_DATE = "DialogDate";
 
-    private static final int REQUEST_DEPARTURE = 0;
-    private static final int REQUEST_ARRIVE = 0;
 
-    private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_ARRIVE = 0;
 
     private static final String arrive_city = "arriveCity";
 
-    private static final String EXTRA_DEPART_CITY = "DepartCity";
     private static final String ARG_FLIGHT_ID = "flight_id";
 
     private static final String ARG_CITY = "null";
+    private static final String EXTRA_ARRIVE_CITY = "ArriveCity";
     /**
      * 声明组件
      */
@@ -64,11 +62,11 @@ public class DaodaFragment extends Fragment{
 
     }
 
-    public void onPause() {
-        super.onPause();
-
-        FlightLab.get(getActivity()).updateFlight(mFlight);
-    }
+//    public void onPause() {
+//        super.onPause();
+//
+//        FlightLab.get(getActivity()).updateFlight(mFlight);
+//    }
 
     @Nullable
     @Override
@@ -98,8 +96,8 @@ public class DaodaFragment extends Fragment{
 //                FlightListFragment dialog= FlightListFragment.newInstance(mFlight.getDeparture_City());
 //
 //                dialog
-                Intent in = new Intent(getActivity(), PickCityActivity.class);
-                startActivityForResult(in, REQUEST_DEPARTURE);
+                Intent in = new Intent(getActivity(), PickCityFragment2.class);
+                startActivityForResult(in, REQUEST_ARRIVE);
 
 
             }
@@ -129,9 +127,9 @@ public class DaodaFragment extends Fragment{
 
     }
 
-    public static Intent newIntent(Context context, String departCity) {
+    public static Intent newIntent(Context context, String arriveCity) {
         Intent in = new Intent(context, DaodaActivity.class);
-        in.putExtra(EXTRA_DEPART_CITY, departCity);
+        in.putExtra(EXTRA_ARRIVE_CITY, arriveCity);
 
         return in;
     }
@@ -141,12 +139,12 @@ public class DaodaFragment extends Fragment{
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
-        if (requestCode == REQUEST_DEPARTURE) {
-            String departureCity = (String) intent.getSerializableExtra(FlightListFragment.EXTRA_DEPARTURE);
+        if (requestCode == REQUEST_ARRIVE) {
+            String arriveCity = (String) intent.getSerializableExtra(FlightListFragment.EXTRA_ARRIVE);
 
-            mFlight.setDeparture_City(departureCity);
+            mFlight.setArrive_City(arriveCity);
 
-            mArriveButton.setText(intent.getStringExtra("Departure_city"));
+            mArriveButton.setText(intent.getStringExtra("Arrive_city"));
 
         }
     }
