@@ -1,65 +1,30 @@
-//package com.example.wangmengyun.activity;
-//
-//import android.database.Cursor;
-//import android.database.sqlite.SQLiteDatabase;
-//import android.database.sqlite.SQLiteOpenHelper;
-//
-//import android.os.Bundle;
-//import android.os.Handler;
-//
-//import android.support.v7.app.AppCompatActivity;
-//import android.view.View;
-//
-//import android.widget.EditText;
-//import android.widget.GridView;
-//import android.widget.ListAdapter;
-//import android.widget.ListView;
-//import android.widget.TextView;
-//import android.widget.Toast;
-//
-//import com.example.wangmengyun.Bean.City;
-//import com.example.wangmengyun.adapter.CityAdapter;
-////import com.example.wangmengyun.adapter.CityListAdapter;
-//import com.example.wangmengyun.adapter.HotCityAdapter;
-//import com.example.wangmengyun.adapter.RecentVisitCityAdapter;
-//import com.example.wangmengyun.lefei.R;
-//import com.example.wangmengyun.sqlite.CitySqliteOpenHelper;
-//import com.example.wangmengyun.view.SideBar;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-///**
-// *出发界面
-// *选择好城市后返回城市 到SearchActivity的出发EditText
-// */
-//public class ChufaActivity extends AppCompatActivity implements CityAdapter.ListItemClickListener{
-//
-//    private ListView sortListView;
-//    private SideBar sideBar;
-//    private SQLiteDatabase cityDb;
-//    private SQLiteOpenHelper cityOpenHelper;
-//
-//    private EditText mCityName;
-//    private ListView lvhotCity;
-//    private ListView lvRecentCity;
-//    private List<City> allCityList;
-//    private List<City> hotCityList;
-//    private List<String> recentCityList;
-//
-// //   private CityListAdapter cityListAdapter;
-//    private City dingweiCity;
-//    private RecentVisitCityAdapter recentCityAdapter;
-//    private List<City> historyCityList;
-//    private HotCityAdapter hotCityAdapter;
-//    private Handler handler;
-//    private CityAdapter cityAdapter;
-//
-//    private TextView mTextview;
-//    public String getDepartureOrArrive;
-//    private Toast mToast;
-//
-//
+package com.example.wangmengyun.activity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.Fragment;
+
+import com.example.wangmengyun.Fragment.SearchFlightFragment;
+
+import java.util.UUID;
+
+/**
+ *出发界面
+ *选择好城市后返回城市 到SearchActivity的出发EditText
+ */
+public class ChufaActivity extends SingleFragmentActivity{
+
+    public static final String ExtraData = "com.example.wangmengyun.FlightNumber";
+
+    public static Intent newIntent (Context packageContext, String DepartCity) {
+
+        Intent intent = new Intent(packageContext, SearchFlightActivity.class);
+        intent.putExtra(ExtraData, DepartCity);
+
+        return intent;
+
+    }
+
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
@@ -230,4 +195,12 @@
 //
 //        mToast.show();
 //    }
-//}
+
+    @Override
+    protected Fragment createFragment() {
+        UUID flightNumber = (UUID) getIntent().getSerializableExtra(ExtraData);
+
+        return SearchFlightFragment.newInstance(flightNumber);
+    }
+
+}

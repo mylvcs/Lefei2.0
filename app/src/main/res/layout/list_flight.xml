@@ -20,5 +20,17 @@
         android:textSize="18sp"/>
 
 
+    <TextView
+        android:layout_height="wrap_content"
+        android:id="@+id/arrive_City"
+        android:text="Shanghai"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="0dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"/>
+
 
 </android.support.constraint.ConstraintLayout>

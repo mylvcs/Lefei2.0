@@ -7,9 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.wangmengyun.Bean.Flight;
 import com.example.wangmengyun.database.FlightDbSchema.FlightTable;
 
-/**
- * Created by dhanushu on 28/06/17.
- */
 
 public class FlightBaseHelper extends SQLiteOpenHelper {
     public static final int VERSION = 1;

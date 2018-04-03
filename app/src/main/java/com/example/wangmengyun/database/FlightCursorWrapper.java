@@ -9,9 +9,6 @@ import com.example.wangmengyun.Bean.Flight;
 import java.util.Date;
 import java.util.UUID;
 
-/**
- * Created by dhanushu on 28/06/17.
- */
 
 public class FlightCursorWrapper extends CursorWrapper {
     public FlightCursorWrapper(Cursor cursor) {
@@ -27,6 +24,11 @@ public class FlightCursorWrapper extends CursorWrapper {
          String price = getString(getColumnIndex(FlightTable.Cols.PRICE));
 
         Flight flight = new Flight(UUID.fromString(flightNumber));
+
+        flight.setDeparture_City(Departure_City);
+
+        flight.setArrive_City(Arrive_City);
+        flight.setPrice(price);
 
         return flight;
     }

@@ -154,6 +154,7 @@ public class FlightListFragment extends Fragment {
     private class FlightHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mDepartCityTextView;
+        private TextView mArriveCityTextView;
 
         private Flight mFlight;
 
@@ -165,12 +166,19 @@ public class FlightListFragment extends Fragment {
 
             mDepartCityTextView.setOnClickListener(this);
 
+            mArriveCityTextView = itemView.findViewById(R.id.arrive_City);
+
+            mArriveCityTextView.setOnClickListener(this);
+
+
         }
 
 
         public void bind(Flight flight) {
             mFlight = flight;
             mDepartCityTextView.setText(mFlight.getDeparture_City());
+
+            mArriveCityTextView.setText(mFlight.getArrive_City());
 
         }
 
@@ -210,6 +218,7 @@ public class FlightListFragment extends Fragment {
             }
             Intent in = new Intent();
             in.putExtra(EXTRA_DEPARTURE, DepartCity);
+
 
             getTargetFragment().onActivityResult(getTargetRequestCode(), resultOk, in);
         }

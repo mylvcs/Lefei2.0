@@ -1,38 +1,31 @@
 package com.example.wangmengyun.Fragment;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.wangmengyun.Bean.Flight;
 import com.example.wangmengyun.Bean.FlightLab;
-import com.example.wangmengyun.activity.FlightListActivity;
+import com.example.wangmengyun.activity.ChufaActivity;
 import com.example.wangmengyun.activity.MainActivity;
 import com.example.wangmengyun.activity.PickCityActivity;
 import com.example.wangmengyun.activity.SearchFlightActivity;
 import com.example.wangmengyun.lefei.R;
 
-import java.util.Date;
 import java.util.UUID;
 
-
 /**
- * Created by wangmengyun on 2018/3/30.
+ * Created by wangmengyun on 2018/4/3.
  */
-
-public class SearchFlightFragment extends Fragment {
+public class ChufaFragment extends Fragment {
     private static final String DIALOG_DATE = "DialogDate";
 
     private static final int REQUEST_DEPARTURE = 0;
@@ -42,13 +35,12 @@ public class SearchFlightFragment extends Fragment {
 
     private static final String arrive_city = "arriveCity";
 
-    private static final String EXTRA_DEPART_CITY= "DepartCity";
+    private static final String EXTRA_DEPART_CITY = "DepartCity";
     private static final String ARG_FLIGHT_ID = "flight_id";
 
     private static final String ARG_CITY = "null";
     /**
-     *
-     *声明组件
+     * 声明组件
      */
     private Button mSearchFlightButton;
     private Button mDepartureButton;
@@ -64,20 +56,18 @@ public class SearchFlightFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        UUID flightNumber = (UUID) getArguments().getSerializable(ARG_FLIGHT_ID);
-
         mFlight = new Flight("Shanghai");
 
 //            mFlight= (Flight) FlightLab.get(getActivity()).getFlight();
 
     }
 
-        public void onPause(){
-            super.onPause();
+    public void onPause() {
+        super.onPause();
 
-            FlightLab.get(getActivity()).updateFlight(mFlight);
+        FlightLab.get(getActivity()).updateFlight(mFlight);
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -108,8 +98,8 @@ public class SearchFlightFragment extends Fragment {
 //                FlightListFragment dialog= FlightListFragment.newInstance(mFlight.getDeparture_City());
 //
 //                dialog
-                Intent in = new Intent(getActivity(),PickCityActivity.class);
-            startActivityForResult(in, REQUEST_DEPARTURE);
+                Intent in = new Intent(getActivity(), PickCityActivity.class);
+                startActivityForResult(in, REQUEST_DEPARTURE);
 
 
             }
@@ -117,23 +107,7 @@ public class SearchFlightFragment extends Fragment {
 
         mDepartureButton.setText("出发城市");
 
-  //     mDepartureButton.setText(mFlight.getDeparture_City());
-
-        mArriveButton.setText("到达城市");
-
-        mArriveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//               FragmentManager fragmentManager = getFragmentManager();
-//               FlightListFragment flightListFragment = new FlightListFragment();
-
-                Intent in = new Intent(getActivity(),PickCityActivity.class);
-                startActivityForResult(in, REQUEST_ARRIVE);
-
-//               flightListFragment.show(fragmentManager, arrive_city);
-            }
-        });
-
+        //     mDepartureButton.setText(mFlight.getDeparture_City());
 
         mDateButton = v.findViewById(R.id.flight_date);
         mDateButton.setOnClickListener(new View.OnClickListener() {
@@ -144,9 +118,9 @@ public class SearchFlightFragment extends Fragment {
 
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mFlight.getDate());
 
-                dialog.setTargetFragment(SearchFlightFragment.this, REQUEST_DATE);
+                dialog.setTargetFragment(ChufaFragment.this, REQUEST_DATE);
 
-                dialog.show(manager,DIALOG_DATE);
+                dialog.show(manager, DIALOG_DATE);
 
             }
         });
@@ -154,14 +128,16 @@ public class SearchFlightFragment extends Fragment {
         return v;
 
     }
-    public static Intent newIntent (Context context, String departCity){
-        Intent in = new Intent(context, SearchFlightActivity.class);
+
+    public static Intent newIntent(Context context, String departCity) {
+        Intent in = new Intent(context, ChufaActivity.class);
         in.putExtra(EXTRA_DEPART_CITY, departCity);
 
         return in;
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+        public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
@@ -172,33 +148,16 @@ public class SearchFlightFragment extends Fragment {
 
             mDepartureButton.setText(intent.getStringExtra("Departure_city"));
 
-            mArriveButton.setText(intent.getStringExtra("Arrive_city"));
-
         }
     }
 
-//    public void onActivityResult(int requestCode, int resultCode, Intent in) {
-//        if (resultCode!=Activity.RESULT_OK){
-//            return;
-//        }
-//
-//        if(requestCode ==REQUEST_DATE){
-//
-//
-//            Date date = (Date) in.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-//
-//            mFlight.setDate(date);
-//            mDateButton.setText(mFlight.getDate().toString());
-//
-//        }
-//
-//    }
-    public static SearchFlightFragment newInstance(UUID mID) {
+
+    public static ChufaFragment newInstance(UUID mID) {
 
         Bundle args = new Bundle();
-        args.putSerializable(ARG_FLIGHT_ID,mID);
+        args.putSerializable(ARG_FLIGHT_ID, mID);
 
-        SearchFlightFragment fragment = new SearchFlightFragment();
+        ChufaFragment fragment = new ChufaFragment();
         fragment.setArguments(args);
 
         return fragment;

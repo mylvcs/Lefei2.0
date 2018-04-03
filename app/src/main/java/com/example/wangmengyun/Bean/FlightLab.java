@@ -28,13 +28,12 @@ public class FlightLab {
 
     private SQLiteDatabase mDatabase;
 
-    public static FlightLab get(Context context){
-        if(sFlightLab == null) {
+    public static FlightLab get(Context context) {
+        if (sFlightLab == null) {
             sFlightLab = new FlightLab(context);
         }
         return sFlightLab;
     }
-
 
 
     private FlightLab(Context context) {
@@ -45,39 +44,38 @@ public class FlightLab {
 
     public List<Flight> getFlight() {
         List<Flight> flights = new ArrayList<>();
-        FlightCursorWrapper cursor = queryFlights(null,null);
+        FlightCursorWrapper cursor = queryFlights(null, null);
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 flights.add(cursor.getFlight());
                 cursor.moveToNext();
             }
-        }
-        finally {
+        } finally {
             cursor.close();
         }
 
         return flights;
     }
+//
+//    public Flight getFlight(UUID id) {
+//        FlightCursorWrapper cursor = queryFlights(
+//                FlightTable.Cols.UUID + " = ?",
+//                new String[] {id.toString()}
+//        );
+//
+//        try {
+//            if (cursor.getCount() == 0) {
+//                return null;
+//            }
+//
+//            cursor.moveToFirst();
+//            return cursor.getFlight();
+//        } finally {
+//            cursor.close();
+//        }
+//    }
 
-    public Flight getFlight(UUID id) {
-        FlightCursorWrapper cursor = queryFlights(
-                FlightTable.Cols.UUID + " = ?",
-                new String[] {id.toString()}
-        );
-
-        try {
-            if (cursor.getCount() == 0) {
-                return null;
-            }
-
-            cursor.moveToFirst();
-            return cursor.getFlight();
-        }
-        finally {
-            cursor.close();
-        }
-    }
 
     public void addFlight(Flight flight) {
         ContentValues values = getContentValues(flight);

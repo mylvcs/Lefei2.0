@@ -35,6 +35,8 @@ public class Flight {
 
     public Flight(String DepartureCity){
         departure_City = DepartureCity;
+        date = new Date();
+        flightNumber = UUID.randomUUID();
 
     }
 
