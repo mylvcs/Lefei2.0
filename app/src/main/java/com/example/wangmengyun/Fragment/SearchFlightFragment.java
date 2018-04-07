@@ -37,9 +37,9 @@ public class SearchFlightFragment extends Fragment {
     private static final String DIALOG_DATE = "DialogDate";
 
     private static final int REQUEST_DEPARTURE = 0;
-    private static final int REQUEST_ARRIVE = 0;
+    private static final int REQUEST_ARRIVE = 2;
 
-    private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_DATE = 1;
 
     private static final String arrive_city = "arriveCity";
 
@@ -74,11 +74,6 @@ public class SearchFlightFragment extends Fragment {
 
     }
 
-        public void onPause(){
-            super.onPause();
-
-            FlightLab.get(getActivity()).updateFlight(mFlight);
-    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -100,18 +95,13 @@ public class SearchFlightFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+//
         mDepartureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//
-//                FragmentManager fm = getFragmentManager();
-//                FlightListFragment dialog= FlightListFragment.newInstance(mFlight.getDeparture_City());
-//
-//                dialog
-                Intent in = new Intent(getActivity(),PickCityActivity1.class);
-            startActivityForResult(in, REQUEST_DEPARTURE);
 
+                Intent in = new Intent(getActivity(), PickCityActivity1.class);
+                startActivityForResult(in, REQUEST_DEPARTURE);
 
             }
         });
@@ -131,7 +121,6 @@ public class SearchFlightFragment extends Fragment {
                 Intent in = new Intent(getActivity(),PickCityActivity2.class);
                 startActivityForResult(in, REQUEST_ARRIVE);
 
-//               flightListFragment.show(fragmentManager, arrive_city);
             }
         });
 
@@ -151,6 +140,8 @@ public class SearchFlightFragment extends Fragment {
 
             }
         });
+
+        updateDate();
 
         return v;
 
@@ -173,19 +164,40 @@ public class SearchFlightFragment extends Fragment {
 
             mDepartureButton.setText(intent.getStringExtra("Departure_city"));
 
-            mArriveButton.setText(intent.getStringExtra("Arrive_city"));
 
-        }else if(requestCode ==REQUEST_DATE){
-
+        }
+        else if(requestCode == REQUEST_DATE){
 
             Date date = (Date) intent.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
 
             mFlight.setDate(date);
-            mDateButton.setText(mFlight.getDate().toString());
 
-        }
+            updateDate();
+
+        }else if (requestCode == REQUEST_ARRIVE){
+
+                String arriveCity = (String) intent.getSerializableExtra(FlightListFragment.EXTRA_ARRIVE);
+
+                mFlight.setArrive_City(arriveCity);
+
+                mArriveButton.setText(intent.getStringExtra("Arrive_city"));
+
+            }
 
     }
+
+    private void updateDate() {
+
+        mDateButton.setText(mFlight.getDate().toString());
+
+    }
+
+    public void onPause(){
+        super.onPause();
+
+        FlightLab.get(getActivity()).updateFlight(mFlight);
+    }
+
     public static SearchFlightFragment newInstance(UUID mID) {
 
         Bundle args = new Bundle();

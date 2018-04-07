@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -50,8 +51,16 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
     private void init() {
         tv_back = (TextView) findViewById(R.id.tv_back);
         tv_main_title = (TextView) findViewById(R.id.tv_main_title);
-
         tv_main_title.setText("个人资料");
+        rl_title_bar = (RelativeLayout) findViewById(R.id.title_bar);
+        rl_title_bar.setBackgroundColor(Color.parseColor("#30B4FF"));
+        rl_nickName = (RelativeLayout) findViewById(R.id.rl_nickName);
+        rl_sex = (RelativeLayout) findViewById(R.id.rl_sex);
+        rl_signature = (RelativeLayout) findViewById(R.id.rl_signature);
+        tv_nickName = (TextView) findViewById(R.id.tv_nickName);
+        tv_user_name = (TextView) findViewById(R.id.tv_user_name);
+        tv_sex = (TextView) findViewById(R.id.tv_sex);
+        tv_signature = (TextView) findViewById(R.id.tv_signature);
 
 
     }
@@ -65,9 +74,9 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         if (bean == null) {
             bean = new UserBean();
             bean.userName=spUserName;
-            bean.nickName="问答精灵";
-            bean.sex="男";
-            bean.signature="问答精灵";
+            bean.nickName="王梦云";
+            bean.sex="女";
+            bean.signature="王梦云";
             //保存用户信息到数据库
       //      DBUtils.getInstance(this).saveUserInfo(bean);
         }
@@ -100,6 +109,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
             case R.id.tv_back://返回键的点击事件
                 this.finish();
                 break;
+//
 //            case R.id.rl_nickName://昵称的点击事件
 //                String name = tv_nickName.getText().toString();//获取昵称控件上的数据
 //                Bundle bdName = new Bundle();

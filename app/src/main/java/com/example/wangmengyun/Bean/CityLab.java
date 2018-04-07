@@ -1,6 +1,7 @@
 package com.example.wangmengyun.Bean;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,21 +14,19 @@ import java.util.UUID;
 public class CityLab {
 
     private static CityLab sCityLab;
+    private Context mContext;
 
     private List<City> mCities;
+    private SQLiteDatabase mDatabase;
 
     public CityLab(Context context) {
+        mContext = context.getApplicationContext();
+        mDatabase = new CityBaseHelper(mContext).getWritableDatabase();
 
         mCities= new ArrayList<>();
 
-        for (int i = 0;i <100; i++){
-            City city = new City();
-            city.setName("City #" +i);
-
-            mCities.add(city);
         }
 
-    }
 
     public static CityLab get(Context context){
         if(sCityLab == null){

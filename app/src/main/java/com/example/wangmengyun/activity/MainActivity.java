@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 底部按钮
      */
     private View mFlightBtn;
+    private View mMyInfoBtn;
+
+    private View mTicketBtn;
 
     private TextView tv_flight;
 
@@ -95,6 +98,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mFlightBtn = findViewById(R.id.bottom_bar_Flight_btn);
 
+        mMyInfoBtn = findViewById(R.id.bottom_bar_myinfo_btn);
+
+        mTicketBtn = findViewById(R.id.bottom_bar_Ticket_btn);
+
+
         initBodyLayout();
 
 
@@ -118,6 +126,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        mMyInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(MainActivity.this, UserInfoActivity.class);
+
+                startActivity(in);
+            }
+        });
+
+        mTicketBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(MainActivity.this, MainActivity.class);
+
+                startActivity(in);
+            }
+        });
 
     }
 

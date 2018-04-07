@@ -5,8 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
-import com.example.wangmengyun.Fragment.ChufaFragment;
-import com.example.wangmengyun.Fragment.DaodaFragment;
+
 import com.example.wangmengyun.Fragment.SearchFlightFragment;
 
 import java.util.UUID;
@@ -17,7 +16,7 @@ public class DaodaActivity extends SingleFragmentActivity {
 
         public static Intent newIntent (Context packageContext, String DepartCity) {
 
-            Intent intent = new Intent(packageContext, SearchFlightActivity.class);
+            Intent intent = new Intent(packageContext, DaodaActivity.class);
             intent.putExtra(ExtraData, DepartCity);
 
             return intent;
@@ -192,7 +191,7 @@ public class DaodaActivity extends SingleFragmentActivity {
 protected Fragment createFragment() {
     UUID flightNumber = (UUID) getIntent().getSerializableExtra(ExtraData);
 
-    return DaodaFragment.newInstance(flightNumber);
+    return SearchFlightFragment.newInstance(flightNumber);
 }
 
 }

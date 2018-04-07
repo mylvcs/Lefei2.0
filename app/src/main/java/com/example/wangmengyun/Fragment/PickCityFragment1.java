@@ -37,7 +37,6 @@ public class PickCityFragment1 extends Fragment {
     private static final String EXTRA_ARRIVE = "NULL";
 
     private RecyclerView mCityRecyclerView;
-
     private CityAdapter mCityAdapter;
 
     @Override

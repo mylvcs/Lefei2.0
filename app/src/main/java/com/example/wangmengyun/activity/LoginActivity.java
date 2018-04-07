@@ -20,7 +20,6 @@ import com.example.wangmengyun.Utils.MD5Utils;
 import com.example.wangmengyun.lefei.R;
 
 
-
 public class LoginActivity extends AppCompatActivity {
     private TextView tv_main_title;
     private TextView tv_back,tv_register,tv_find_psw;
@@ -39,8 +38,6 @@ public class LoginActivity extends AppCompatActivity {
      * 获取界面控件
      */
     private void init(){
-        tv_main_title=(TextView) findViewById(R.id.tv_main_title);
-        tv_main_title.setText("登录");
         tv_back=(TextView) findViewById(R.id.tv_back);
         tv_register=(TextView) findViewById(R.id.tv_register);
         tv_find_psw= (TextView) findViewById(R.id.tv_find_psw);

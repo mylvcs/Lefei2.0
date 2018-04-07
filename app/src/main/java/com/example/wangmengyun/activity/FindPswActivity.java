@@ -21,7 +21,6 @@ import com.example.wangmengyun.Utils.MD5Utils;
 import com.example.wangmengyun.lefei.R;
 
 
-
 public class FindPswActivity extends AppCompatActivity {
     private EditText et_validate_name,et_user_name;
     private Button btn_validate;

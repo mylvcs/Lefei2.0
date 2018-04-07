@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
+
 import com.example.wangmengyun.Fragment.SearchFlightFragment;
 
 import java.util.UUID;
@@ -12,13 +13,13 @@ import java.util.UUID;
  *出发界面
  *选择好城市后返回城市 到SearchActivity的出发EditText
  */
-public class ChufaActivity extends SingleFragmentActivity{
+public class ChufaActivity extends SingleFragmentActivity {
 
     public static final String ExtraData = "com.example.wangmengyun.FlightNumber";
 
-    public static Intent newIntent (Context packageContext, String DepartCity) {
+    public static Intent newIntent(Context packageContext, String DepartCity) {
 
-        Intent intent = new Intent(packageContext, SearchFlightActivity.class);
+        Intent intent = new Intent(packageContext, ChufaActivity.class);
         intent.putExtra(ExtraData, DepartCity);
 
         return intent;
@@ -202,5 +203,4 @@ public class ChufaActivity extends SingleFragmentActivity{
 
         return SearchFlightFragment.newInstance(flightNumber);
     }
-
 }
