@@ -4,6 +4,8 @@ package com.example.wangmengyun.Fragment;
  * Created by wangmengyun on 2018/4/7.
  */
 
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,12 +17,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wangmengyun.Bean.City;
 import com.example.wangmengyun.Bean.CityLab;
+import com.example.wangmengyun.activity.SearchFlightActivity;
 import com.example.wangmengyun.adapter.CityAdapter;
 import com.example.wangmengyun.adapter.CityListAdapter;
 import com.example.wangmengyun.lefei.R;
@@ -34,7 +39,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
-import static android.databinding.DataBindingUtil.setContentView;
 
 /**
  * Created by wangmengyun on 2018/4/1.
@@ -53,6 +57,7 @@ public class PickCityFragment extends Fragment {
     private RecyclerView mCityRecyclerView;
     private CityAdapter mCityAdapter;
 
+
     private ListView lvCity;
     private EditText etSearch;
     private ListView lvResult;
@@ -65,6 +70,7 @@ public class PickCityFragment extends Fragment {
     public CitySqliteOpenHelper cityOpenHelper;
     public SQLiteDatabase cityDb;
     public CityListAdapter cityListAdapter;
+    public HotCityAdapter hotCityAdapter;
     private boolean mReady = false;
     private Handler handler;
 
@@ -114,7 +120,13 @@ public class PickCityFragment extends Fragment {
     private void setAdapter() {
         cityListAdapter = new CityListAdapter(getContext(),allCityList,hotCityList,recentCityList);
 
-        lvCity.setAdapter(cityListAdapter);
+//        lvCity.setAdapter(cityListAdapter);
+
+
+        hotCityAdapter = new HotCityAdapter(getContext(),hotCityList);
+
+        lvCity.setAdapter(hotCityAdapter);
+
     }
 
 
@@ -203,5 +215,73 @@ public class PickCityFragment extends Fragment {
         }
     }
 
+    public class HotCityAdapter extends BaseAdapter {
+
+        private List<City> mHotCityList;
+        private LayoutInflater mInflater;
+        private Context mContext;
+
+        public HotCityAdapter(Context context, List<City> hotCityList) {
+            this.mHotCityList = hotCityList;
+            this.mContext = context;
+            mInflater = LayoutInflater.from(mContext);
+        }
+
+        @Override
+        public int getCount() {
+            return mHotCityList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return mHotCityList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+
+            ViewHolder viewHolder = null;
+            if (convertView == null) {
+                viewHolder = new ViewHolder();
+                convertView = mInflater.inflate(R.layout.item_city, null);
+                viewHolder.tvCityName = (TextView) convertView
+                        .findViewById(R.id.tv_city_name);
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
+            viewHolder.tvCityName.setText(mHotCityList.get(position).getName());
+            viewHolder.tvCityName.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent2 =new Intent(mContext, SearchFlightActivity.class);
+
+                    intent2.putExtra(Intent.EXTRA_TEXT, mHotCityList.get(position).getName());
+
+                    getContext().startActivity(intent2);
+
+			//	getActivity().setResult(Activity.RESULT_OK, intent2);
+
+			//	getActivity().finish();
+
+
+                    Toast.makeText(mContext,mHotCityList.get(position).getName() + "", 0).show();
+                }
+            });
+            return convertView;
+        }
+
+        class ViewHolder {
+            TextView tvCityName;
+        }
+
+    }
 
 }

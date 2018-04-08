@@ -4,7 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -19,6 +23,9 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.example.wangmengyun.Bean.City;
+import com.example.wangmengyun.Fragment.PickCityFragment;
+import com.example.wangmengyun.activity.ChufaActivity;
+import com.example.wangmengyun.activity.SearchFlightActivity;
 import com.example.wangmengyun.lefei.R;
 import com.example.wangmengyun.view.MyGridView;
 
@@ -32,13 +39,13 @@ public class CityListAdapter extends BaseAdapter {
     public HashMap<String, Integer> alphaIndexer;
     private String[] sections;
     private LocationClient myLocationClient;
-    private String currentCity;//��ǰ����
+    private String currentCity;
     private MyLocationListener myLocationListener;
     private boolean isNeedRefresh;
     private TextView tvCurrentLocateCity;
     private ProgressBar pbLocate;
     private TextView tvLocate;
-    private final int VIEW_TYPE = 5;//view�����͸���
+    private final int VIEW_TYPE = 5;
 
     public CityListAdapter(Context context, List<City> allCityList,
                            List<City> hotCityList, List<String> recentCityList) {
@@ -75,7 +82,8 @@ public class CityListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent)  {
+
         ViewHolder viewHolder = null;
         int viewType = getItemViewType(position);
         if (viewType == 0) {
@@ -111,7 +119,7 @@ public class CityListAdapter extends BaseAdapter {
             MyGridView gvRecentVisitCity = (MyGridView) convertView.findViewById(R.id.gv_recent_visit_city);
             gvRecentVisitCity.setAdapter(new RecentVisitCityAdapter(mContext,mRecentCityList));
 
-        } else if (viewType == 2) {//���ų���
+        } else if (viewType == 2) {
             convertView = View.inflate(mContext,R.layout.item_recent_visit_city, null);
             TextView tvRecentVisitCity=(TextView) convertView.findViewById(R.id.tv_recent_visit_city);
             tvRecentVisitCity.setText("hot城市");
@@ -119,7 +127,7 @@ public class CityListAdapter extends BaseAdapter {
             gvRecentVisitCity.setAdapter(new HotCityAdapter(mContext,mHotCityList));
         } else if (viewType == 3) {
             convertView = View.inflate(mContext,R.layout.item_all_city_textview, null);
-        } else {//���ݿ������еĳ��е�����չʾ
+        } else {
             if (convertView == null) {
                 viewHolder = new ViewHolder();
                 convertView = View.inflate(mContext, R.layout.item_city_list,null);
@@ -132,11 +140,20 @@ public class CityListAdapter extends BaseAdapter {
             }
             if (position >= 1) {
                 viewHolder.tvCityName.setText(mAllCityList.get(position).getName());
+
                 viewHolder.llMain.setOnClickListener(new OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(mContext, mAllCityList.get(position).getName(), 0).show();
+
+                        //TODO
+//                        String City = (String) getItem(position);
+//
+//                        Intent intent = ChufaActivity.newIntent(,City);
+//                        startActivity(intent);
+
+                        Toast.makeText(mContext,mAllCityList.get(position).getName(),0).show();
+
                     }
                 });
 
@@ -147,7 +164,7 @@ public class CityListAdapter extends BaseAdapter {
         return convertView;
     }
 
-    // ��ú���ƴ������ĸ
+
     private String getAlpha(String str) {
         if (str == null) {
             return "#";
@@ -156,18 +173,18 @@ public class CityListAdapter extends BaseAdapter {
             return "#";
         }
         char c = str.trim().substring(0, 1).charAt(0);
-        // ������ʽ���ж�����ĸ�Ƿ���Ӣ����ĸ
+
         Pattern pattern = Pattern.compile("^[A-Za-z]+$");
         if (pattern.matcher(c + "").matches()) {
             return (c + "").toUpperCase();
         } else if (str.equals("0")) {
-            return "��λ";
+            return "";
         } else if (str.equals("1")) {
-            return "���";
+            return "";
         } else if (str.equals("2")) {
-            return "����";
+            return "";
         } else if (str.equals("3")) {
-            return "ȫ��";
+            return "";
         } else {
             return "#";
         }
@@ -183,22 +200,21 @@ public class CityListAdapter extends BaseAdapter {
         myLocationClient = new LocationClient(mContext);
         myLocationListener=new MyLocationListener();
         myLocationClient.registerLocationListener(myLocationListener);
-        // ���ö�λ����
+
         LocationClientOption option = new LocationClientOption();
-        option.setCoorType("bd09ll"); // ������������
-        option.setScanSpan(10000); // 10����ɨ��1��
-        // ��Ҫ��ַ��Ϣ������Ϊ�����κ�ֵ��string���ͣ��Ҳ���Ϊnull��ʱ������ʾ�޵�ַ��Ϣ��
+        option.setCoorType("bd09ll");
+        option.setScanSpan(10000);
+
         option.setAddrType("all");
-        // �����Ƿ񷵻�POI�ĵ绰�͵�ַ����ϸ��Ϣ��Ĭ��ֵΪfalse����������POI�ĵ绰�͵�ַ��Ϣ��
+
         option.setPoiExtraInfo(true);
-        // ���ò�Ʒ�����ơ�ǿ�ҽ�����ʹ���Զ���Ĳ�Ʒ�����ƣ����������Ժ�Ϊ���ṩ����Ч׼ȷ�Ķ�λ����
+
         option.setProdName("ͨ��GPS��λ�ҵ�ǰ��λ��");
-        // �������û��涨λ����
+
         option.disableCache(true);
-        // �������ɷ��ص�POI������Ĭ��ֵΪ3������POI��ѯ�ȽϺķ�������������෵�ص�POI�������Ա��ʡ������
+
         option.setPoiNumber(3);
-        // ���ö�λ��ʽ�����ȼ���
-        // ��gps���ã����һ�ȡ�˶�λ���ʱ�����ٷ�����������ֱ�ӷ��ظ��û����ꡣ���ѡ���ʺ�ϣ���õ�׼ȷ����λ�õ��û������gps�����ã��ٷ����������󣬽��ж�λ��
+
         option.setPriority(LocationClientOption.GpsFirst);
         myLocationClient.setLocOption(option);
         myLocationClient.start();
@@ -212,15 +228,15 @@ public class CityListAdapter extends BaseAdapter {
             isNeedRefresh=false;
             if(arg0.getCity()==null){
                 //��λʧ��
-                tvLocate.setText("δ��λ������,��ѡ��");
+                tvLocate.setText("定位城市");
                 tvCurrentLocateCity.setVisibility(View.VISIBLE);
-                tvCurrentLocateCity.setText("����ѡ��");
+                tvCurrentLocateCity.setText("附近城市");
                 pbLocate.setVisibility(View.GONE);
                 return;
             }else{
-                //��λ�ɹ�
+
                 currentCity=arg0.getCity().substring(0,arg0.getCity().length()-1);
-                tvLocate.setText("��ǰ��λ����");
+                tvLocate.setText("定位城市");
                 tvCurrentLocateCity.setVisibility(View.VISIBLE);
                 tvCurrentLocateCity.setText(currentCity);
                 myLocationClient.stop();

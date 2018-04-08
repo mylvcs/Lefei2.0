@@ -1,6 +1,5 @@
 package com.example.wangmengyun.Fragment;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +20,7 @@ import com.example.wangmengyun.Bean.Flight;
 import com.example.wangmengyun.Bean.FlightLab;
 import com.example.wangmengyun.activity.FlightListActivity;
 import com.example.wangmengyun.activity.MainActivity;
+import com.example.wangmengyun.activity.PickCityActivity;
 import com.example.wangmengyun.activity.PickCityActivity1;
 import com.example.wangmengyun.activity.PickCityActivity2;
 import com.example.wangmengyun.activity.SearchFlightActivity;
@@ -100,8 +101,9 @@ public class SearchFlightFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(getActivity(), PickCityActivity1.class);
+                Intent in = new Intent(getActivity(), PickCityActivity.class);
                 startActivityForResult(in, REQUEST_DEPARTURE);
+
 
             }
         });

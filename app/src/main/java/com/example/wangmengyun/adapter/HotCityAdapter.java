@@ -2,7 +2,9 @@ package com.example.wangmengyun.adapter;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wangmengyun.Bean.City;
+import com.example.wangmengyun.activity.MainActivity;
+import com.example.wangmengyun.activity.PickCityActivity;
+import com.example.wangmengyun.activity.SearchFlightActivity;
 import com.example.wangmengyun.lefei.R;
 
 public class HotCityAdapter extends BaseAdapter {
@@ -54,13 +59,28 @@ public class HotCityAdapter extends BaseAdapter {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
+
 		viewHolder.tvCityName.setText(mHotCityList.get(position).getName());
 		viewHolder.tvCityName.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(mContext,mHotCityList.get(position).getName() + "", 0).show();
-			}
+
+//				Intent intent2 =new Intent(mContext, SearchFlightActivity.class);
+//
+//				intent2.putExtra(Intent.EXTRA_TEXT, mHotCityList.get(position).getName());
+//                Intent getDepartureintent = new Intent(mContext, SearchFlightActivity.class);
+//
+//                getDepartureintent.putExtra(Intent.EXTRA_TEXT,mHotCityList.get(position).getName());
+//
+//                mContext.startActivity(getDepartureintent);
+
+//				setResult(Activity.RESULT_OK, intent2);
+//
+//
+//				getActivity().finish();
+
+            }
 		});
 		return convertView;
 	}

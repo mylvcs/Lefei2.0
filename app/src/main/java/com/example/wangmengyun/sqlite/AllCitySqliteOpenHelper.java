@@ -62,7 +62,7 @@ public class AllCitySqliteOpenHelper extends SQLiteOpenHelper {
         }
     }
 
-    // ¼ì²éÊý¾Ý¿âÊÇ·ñÓÐÐ§
+
     private boolean checkDataBase() {
         SQLiteDatabase checkDB = null;
         String myPath = DB_PATH + DB_NAME;
@@ -70,7 +70,7 @@ public class AllCitySqliteOpenHelper extends SQLiteOpenHelper {
             checkDB = SQLiteDatabase.openDatabase(myPath, null,
                     SQLiteDatabase.OPEN_READONLY);
         } catch (SQLiteException e) {
-            // database does't exist yet.
+
         }
         if (checkDB != null) {
             checkDB.close();
@@ -78,21 +78,22 @@ public class AllCitySqliteOpenHelper extends SQLiteOpenHelper {
         return checkDB != null ? true : false;
     }
 
-    //½«assetsÄ¿Â¼ÏÂµÄ³ÇÊÐµÄÊý¾Ý¸´ÖÆµ½Ëù´´½¨µÄÊý¾Ý¿âÏÂ
+
     private void copyDataBase() throws IOException {
-        // Open your local db as the input stream
+
         InputStream myInput = mContext.getAssets().open(ASSETS_NAME);
-        // Path to the just created empty db
+
         String outFileName = DB_PATH + DB_NAME;
-        // Open the empty db as the output stream
+
         OutputStream myOutput = new FileOutputStream(outFileName);
-        // transfer bytes from the inputfile to the outputfile
+
         byte[] buffer = new byte[1024];
         int length;
         while ((length = myInput.read(buffer)) > 0) {
             myOutput.write(buffer, 0, length);
         }
-        // Close the streams
+
+
         myOutput.flush();
         myOutput.close();
         myInput.close();
