@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.wangmengyun.Bean.City;
 import com.example.wangmengyun.activity.MainActivity;
-import com.example.wangmengyun.activity.PickCityActivity;
 import com.example.wangmengyun.activity.SearchFlightActivity;
 import com.example.wangmengyun.lefei.R;
 

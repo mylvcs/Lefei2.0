@@ -51,17 +51,6 @@
             android:listSelector="@android:color/transparent" >
         </ListView>
 
-        <TextView
-            android:id="@+id/tv_dialog"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:background="@android:color/darker_gray"
-            android:gravity="center"
-            android:textColor="#ffffffff"
-            android:textSize="30dp"
-            android:visibility="gone" />
-
         <ListView
             android:id="@+id/lv_result"
             android:layout_width="match_parent"

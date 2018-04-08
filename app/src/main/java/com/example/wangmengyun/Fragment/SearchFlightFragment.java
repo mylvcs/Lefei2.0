@@ -18,12 +18,14 @@ import android.widget.Toast;
 
 import com.example.wangmengyun.Bean.Flight;
 import com.example.wangmengyun.Bean.FlightLab;
+import com.example.wangmengyun.activity.DaodaCityActivity;
 import com.example.wangmengyun.activity.FlightListActivity;
 import com.example.wangmengyun.activity.MainActivity;
-import com.example.wangmengyun.activity.PickCityActivity;
+
 import com.example.wangmengyun.activity.PickCityActivity1;
 import com.example.wangmengyun.activity.PickCityActivity2;
 import com.example.wangmengyun.activity.SearchFlightActivity;
+import com.example.wangmengyun.activity.ZidongtishiActivity;
 import com.example.wangmengyun.lefei.R;
 
 import java.util.Date;
@@ -91,7 +93,7 @@ public class SearchFlightFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //TODO
-                Intent intent = new Intent(getActivity(), MainActivity.class);
+                Intent intent = new Intent(getActivity(), ZidongtishiActivity.class);
 
                 startActivity(intent);
             }
@@ -101,7 +103,7 @@ public class SearchFlightFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(getActivity(), PickCityActivity.class);
+                Intent in = new Intent(getActivity(), PickCityActivity1.class);
                 startActivityForResult(in, REQUEST_DEPARTURE);
 
 
@@ -120,7 +122,7 @@ public class SearchFlightFragment extends Fragment {
 //               FragmentManager fragmentManager = getFragmentManager();
 //               FlightListFragment flightListFragment = new FlightListFragment();
 
-                Intent in = new Intent(getActivity(),PickCityActivity2.class);
+                Intent in = new Intent(getActivity(),DaodaCityActivity.class);
                 startActivityForResult(in, REQUEST_ARRIVE);
 
             }

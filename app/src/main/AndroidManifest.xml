@@ -79,6 +79,13 @@
 
         </activity>
 
+        <activity android:name="com.example.wangmengyun.activity.ZidongtishiActivity">
+
+        </activity>
+
+        <activity android:name="com.example.wangmengyun.activity.DaodaCityActivity">
+
+        </activity>
     </application>
 
 </manifest>

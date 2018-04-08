@@ -120,12 +120,12 @@ public class PickCityFragment extends Fragment {
     private void setAdapter() {
         cityListAdapter = new CityListAdapter(getContext(),allCityList,hotCityList,recentCityList);
 
-//        lvCity.setAdapter(cityListAdapter);
+        lvCity.setAdapter(cityListAdapter);
 
 
         hotCityAdapter = new HotCityAdapter(getContext(),hotCityList);
 
-        lvCity.setAdapter(hotCityAdapter);
+//        lvCity.setAdapter(hotCityAdapter);
 
     }
 
