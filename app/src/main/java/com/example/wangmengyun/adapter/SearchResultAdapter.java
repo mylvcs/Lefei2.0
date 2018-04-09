@@ -16,7 +16,6 @@ import com.example.wangmengyun.lefei.R;
 import java.util.List;
 
 
-
 public class SearchResultAdapter extends BaseAdapter {
 
 	private List<City> mSearchList;

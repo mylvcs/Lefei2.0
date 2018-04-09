@@ -18,74 +18,98 @@ import com.example.wangmengyun.activity.MainActivity;
 import com.example.wangmengyun.activity.SearchFlightActivity;
 import com.example.wangmengyun.lefei.R;
 
-public class HotCityAdapter extends BaseAdapter {
+public class HotCityAdapter extends BaseAdapter implements OnClickListener {
 
-	private List<City> mHotCityList;
-	private LayoutInflater mInflater;
-	private Context mContext;
+    private List<City> mHotCityList;
+    private LayoutInflater mInflater;
+    private Context mContext;
 
-	public HotCityAdapter(Context context, List<City> hotCityList) {
-		this.mHotCityList = hotCityList;
-		this.mContext = context;
-		mInflater = LayoutInflater.from(mContext);
-	}
 
-	@Override
-	public int getCount() {
-		return mHotCityList.size();
-	}
+    private SubClickListener subClickListener;
 
-	@Override
-	public Object getItem(int position) {
-		return mHotCityList.get(position);
-	}
 
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
+    public HotCityAdapter(Context context, List<City> hotCityList, HotCityAdapter.MyClickListener listener) {
+        this.mHotCityList = hotCityList;
+        this.mContext = context;
+        mInflater = LayoutInflater.from(mContext);
+    }
 
-	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) {
+    public void setsubClickListener(SubClickListener topicClickListener) {
+        this.subClickListener = topicClickListener;
+    }
 
-		ViewHolder viewHolder = null;
-		if (convertView == null) {
-			viewHolder = new ViewHolder();
-			convertView = mInflater.inflate(R.layout.item_city, null);
-			viewHolder.tvCityName = (TextView) convertView
-					.findViewById(R.id.tv_city_name);
-			convertView.setTag(viewHolder);
-		} else {
-			viewHolder = (ViewHolder) convertView.getTag();
-		}
+    @Override
+    public void onClick(View v) {
 
-		viewHolder.tvCityName.setText(mHotCityList.get(position).getName());
-		viewHolder.tvCityName.setOnClickListener(new OnClickListener() {
+    }
 
-			@Override
-			public void onClick(View v) {
+    public interface SubClickListener {
+        void OntopicClickListener(View v, City city, int position);
+    }
 
-//				Intent intent2 =new Intent(mContext, SearchFlightActivity.class);
-//
-//				intent2.putExtra(Intent.EXTRA_TEXT, mHotCityList.get(position).getName());
-//                Intent getDepartureintent = new Intent(mContext, SearchFlightActivity.class);
-//
-//                getDepartureintent.putExtra(Intent.EXTRA_TEXT,mHotCityList.get(position).getName());
-//
-//                mContext.startActivity(getDepartureintent);
 
-//				setResult(Activity.RESULT_OK, intent2);
-//
-//
-//				getActivity().finish();
+    @Override
+    public int getCount() {
+        return mHotCityList.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return mHotCityList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+
+        ViewHolder viewHolder = null;
+        if (convertView == null) {
+            viewHolder = new ViewHolder();
+            convertView = mInflater.inflate(R.layout.item_city, null);
+            viewHolder.tvCityName = (TextView) convertView
+                    .findViewById(R.id.tv_city_name);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        viewHolder.tvCityName.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                if (subClickListener != null) {
+                    subClickListener.OntopicClickListener(v, mHotCityList.get(position), position);
+                }
 
             }
-		});
-		return convertView;
-	}
+        });
 
-	class ViewHolder {
-		TextView tvCityName;
-	}
+        viewHolder.tvCityName.setText(mHotCityList.get(position).getName());
+
+        return convertView;
+    }
+
+    class ViewHolder {
+        TextView tvCityName;
+    }
+
+
+    public static abstract class MyClickListener implements OnClickListener {
+        /**
+         * 基类的onClick方法
+         */
+        @Override
+        public void onClick(View v) {
+            myOnClick((Integer) v.getTag(), v);
+        }
+
+        public abstract void myOnClick(int position, View v);
+    }
 
 }
+
+

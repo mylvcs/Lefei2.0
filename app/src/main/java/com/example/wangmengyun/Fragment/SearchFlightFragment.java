@@ -18,10 +18,12 @@ import android.widget.Toast;
 
 import com.example.wangmengyun.Bean.Flight;
 import com.example.wangmengyun.Bean.FlightLab;
+import com.example.wangmengyun.activity.ChufaActivity;
 import com.example.wangmengyun.activity.DaodaCityActivity;
 import com.example.wangmengyun.activity.FlightListActivity;
 import com.example.wangmengyun.activity.MainActivity;
 
+import com.example.wangmengyun.activity.PickCityActivity;
 import com.example.wangmengyun.activity.PickCityActivity1;
 import com.example.wangmengyun.activity.PickCityActivity2;
 import com.example.wangmengyun.activity.SearchFlightActivity;
@@ -103,7 +105,7 @@ public class SearchFlightFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(getActivity(), PickCityActivity1.class);
+                Intent in = new Intent(getActivity(), PickCityActivity.class);
                 startActivityForResult(in, REQUEST_DEPARTURE);
 
 
@@ -162,7 +164,9 @@ public class SearchFlightFragment extends Fragment {
             return;
         }
         if (requestCode == REQUEST_DEPARTURE) {
-            String departureCity = (String) intent.getSerializableExtra(FlightListFragment.EXTRA_DEPARTURE);
+
+            String departureCity= (String) intent.getSerializableExtra("Departure_city");
+         //   String departureCity = (String) intent.getSerializableExtra(PickCityActivity.EXTRA_TEXT);
 
             mFlight.setDeparture_City(departureCity);
 

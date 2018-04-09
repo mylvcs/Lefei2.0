@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import com.example.wangmengyun.Fragment.SearchFlightFragment;
 import com.example.wangmengyun.Utils.PingYinUtil;
 import com.example.wangmengyun.activity.SingleFragmentActivity;
 import com.example.wangmengyun.adapter.CityListAdapter;
+import com.example.wangmengyun.adapter.HotCityAdapter;
 import com.example.wangmengyun.adapter.SearchResultAdapter;
 import com.example.wangmengyun.lefei.R;
 import com.example.wangmengyun.sqlite.AllCitySqliteOpenHelper;
@@ -77,11 +79,12 @@ public class DaodaCityActivity extends Activity {
         mReady = true;
     }
 
-    private void setAdapter() {
+     private void setAdapter() {
         cityListAdapter = new CityListAdapter(this, allCityList, hotCityList, recentCityList);
         searchResultAdapter = new SearchResultAdapter(this, searchCityList);
         lvCity.setAdapter(cityListAdapter);
         lvResult.setAdapter(searchResultAdapter);
+
     }
 
     private void initView() {
@@ -145,6 +148,7 @@ public class DaodaCityActivity extends Activity {
         handler = new Handler();
 
     }
+
 
 
     private void initAllCityData() {

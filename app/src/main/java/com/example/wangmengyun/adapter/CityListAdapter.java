@@ -45,6 +45,7 @@ public class CityListAdapter extends BaseAdapter {
     private TextView tvCurrentLocateCity;
     private ProgressBar pbLocate;
     private TextView tvLocate;
+    private OnClickListener mListener;
     private final int VIEW_TYPE = 5;
 
     public CityListAdapter(Context context, List<City> allCityList,
@@ -86,6 +87,7 @@ public class CityListAdapter extends BaseAdapter {
 
         ViewHolder viewHolder = null;
         int viewType = getItemViewType(position);
+
         if (viewType == 0) {
             convertView = View.inflate(mContext, R.layout.item_location_city,
                     null);
@@ -124,7 +126,7 @@ public class CityListAdapter extends BaseAdapter {
             TextView tvRecentVisitCity=(TextView) convertView.findViewById(R.id.tv_recent_visit_city);
             tvRecentVisitCity.setText("hot城市");
             MyGridView gvRecentVisitCity = (MyGridView) convertView.findViewById(R.id.gv_recent_visit_city);
-            gvRecentVisitCity.setAdapter(new HotCityAdapter(mContext,mHotCityList));
+            gvRecentVisitCity.setAdapter(new HotCityAdapter(mContext,mHotCityList, (HotCityAdapter.MyClickListener) mListener));
         } else if (viewType == 3) {
             convertView = View.inflate(mContext,R.layout.item_all_city_textview, null);
         } else {

@@ -28,6 +28,7 @@ import com.example.wangmengyun.Bean.CityLab;
 import com.example.wangmengyun.activity.SearchFlightActivity;
 import com.example.wangmengyun.adapter.CityAdapter;
 import com.example.wangmengyun.adapter.CityListAdapter;
+import com.example.wangmengyun.adapter.HotCityAdapter;
 import com.example.wangmengyun.lefei.R;
 import com.example.wangmengyun.sqlite.AllCitySqliteOpenHelper;
 import com.example.wangmengyun.sqlite.CitySqliteOpenHelper;
@@ -38,6 +39,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
+import com.example.wangmengyun.adapter.HotCityAdapter.SubClickListener;
 
 
 /**
@@ -66,6 +68,7 @@ public class PickCityFragment extends Fragment {
     private List<City> hotCityList;
     private List<City> searchCityList;
     private List<String> recentCityList;
+    private View.OnClickListener mListener;
 
     public CitySqliteOpenHelper cityOpenHelper;
     public SQLiteDatabase cityDb;
@@ -117,15 +120,25 @@ public class PickCityFragment extends Fragment {
     }
 
 
+
+
     private void setAdapter() {
         cityListAdapter = new CityListAdapter(getContext(),allCityList,hotCityList,recentCityList);
 
-        lvCity.setAdapter(cityListAdapter);
+//        lvCity.setAdapter(cityListAdapter);
 
 
-        hotCityAdapter = new HotCityAdapter(getContext(),hotCityList);
+        hotCityAdapter = new HotCityAdapter(getContext(),hotCityList, (HotCityAdapter.MyClickListener) mListener);
 
-//        lvCity.setAdapter(hotCityAdapter);
+        hotCityAdapter.setsubClickListener(new SubClickListener() {
+            @Override
+            public void OntopicClickListener(View v, City city, int position) {
+                //TODO
+
+            }
+        });
+
+        lvCity.setAdapter(hotCityAdapter);
 
     }
 
@@ -213,75 +226,6 @@ public class PickCityFragment extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public class HotCityAdapter extends BaseAdapter {
-
-        private List<City> mHotCityList;
-        private LayoutInflater mInflater;
-        private Context mContext;
-
-        public HotCityAdapter(Context context, List<City> hotCityList) {
-            this.mHotCityList = hotCityList;
-            this.mContext = context;
-            mInflater = LayoutInflater.from(mContext);
-        }
-
-        @Override
-        public int getCount() {
-            return mHotCityList.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return mHotCityList.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
-
-            ViewHolder viewHolder = null;
-            if (convertView == null) {
-                viewHolder = new ViewHolder();
-                convertView = mInflater.inflate(R.layout.item_city, null);
-                viewHolder.tvCityName = (TextView) convertView
-                        .findViewById(R.id.tv_city_name);
-                convertView.setTag(viewHolder);
-            } else {
-                viewHolder = (ViewHolder) convertView.getTag();
-            }
-            viewHolder.tvCityName.setText(mHotCityList.get(position).getName());
-            viewHolder.tvCityName.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-
-                    Intent intent2 =new Intent(mContext, SearchFlightActivity.class);
-
-                    intent2.putExtra(Intent.EXTRA_TEXT, mHotCityList.get(position).getName());
-
-                    getContext().startActivity(intent2);
-
-			//	getActivity().setResult(Activity.RESULT_OK, intent2);
-
-			//	getActivity().finish();
-
-
-                    Toast.makeText(mContext,mHotCityList.get(position).getName() + "", 0).show();
-                }
-            });
-            return convertView;
-        }
-
-        class ViewHolder {
-            TextView tvCityName;
-        }
-
     }
 
 }

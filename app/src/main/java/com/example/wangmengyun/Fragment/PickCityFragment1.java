@@ -144,6 +144,7 @@ public class PickCityFragment1 extends Fragment {
 //            getActivity().setResult(Activity.RESULT_OK, intent2);
 
 
+
             getActivity().finish();
 
 
