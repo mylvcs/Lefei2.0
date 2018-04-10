@@ -16,13 +16,25 @@ import com.example.wangmengyun.lefei.R;
 import java.util.List;
 
 
-public class SearchResultAdapter extends BaseAdapter {
+public class SearchResultAdapter extends BaseAdapter implements OnClickListener{
 
 	private List<City> mSearchList;
 	private Context mContext;
 	private LayoutInflater mInflater;
 
-	public SearchResultAdapter(Context context, List<City> searchList){
+
+    private SubClickListener subClickListener;
+
+
+    public void setsubClickListener(HotCityAdapter.SubClickListener topicClickListener) {
+        this.subClickListener = (SubClickListener) topicClickListener;
+    }
+
+    public interface SubClickListener {
+        void OntopicClickListener(View v, City city, int position);
+    }
+
+    public SearchResultAdapter(Context context, List<City> searchList, MyClickListener listener){
 		this.mSearchList=searchList;
 		this.mContext=context;
 		mInflater=LayoutInflater.from(mContext);
@@ -67,9 +79,27 @@ public class SearchResultAdapter extends BaseAdapter {
 		return convertView;
 	}
 
+	@Override
+	public void onClick(View v) {
+
+	}
+
 	class ViewHolder{
 		LinearLayout ll_item;
 		TextView tvCityName;
 	}
+
+    public static abstract class MyClickListener implements OnClickListener {
+        /**
+         * 基类的onClick方法
+         */
+        @Override
+        public void onClick(View v) {
+            myOnClick((Integer) v.getTag(), v);
+        }
+
+        public abstract void myOnClick(int position, View v);
+    }
+
 
 }

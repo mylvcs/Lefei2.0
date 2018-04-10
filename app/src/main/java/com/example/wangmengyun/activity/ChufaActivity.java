@@ -2,46 +2,78 @@ package com.example.wangmengyun.activity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.example.wangmengyun.adapter.ContentAdapter;
+import com.example.wangmengyun.Bean.City;
+import com.example.wangmengyun.adapter.CityListAdapter;
+import com.example.wangmengyun.adapter.HotCityAdapter;
 import com.example.wangmengyun.lefei.R;
 
 public class ChufaActivity extends Activity implements OnItemClickListener {
 
-    // 模拟listview中加载的数据
-    private static final String[] CONTENTS = { "北京", "上海", "广州", "深圳", "苏州",
-            "南京", "武汉", "长沙", "杭州" };
     public static String EXTRA_TEXT = "Shanghai";
-    private List<String> contentList;
+
     private ListView mListView;
+
+    private List<City> mHotCityList;
+    private List<String> mRecentCityList;
+
+    private View.OnClickListener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pickcity);
+        setContentView(R.layout.activity_city);
 
         init();
     }
 
     private void init() {
-        mListView = (ListView) findViewById(R.id.listview);
-        contentList = new ArrayList<String>();
-        for (int i = 0; i < CONTENTS.length; i++) {
-            contentList.add(CONTENTS[i]);
-        }
-        //实例化ContentAdapter类，并传入实现类
-        mListView.setAdapter(new ContentAdapter(this, contentList, mListener));
+        //TODO
+
+        mListView = findViewById(R.id.lv_city);
+
+        mHotCityList = new ArrayList<City>();
+
+        City city = new City(UUID.randomUUID(),"Shanghai");
+        mHotCityList.add(city);
+        city=new City(UUID.randomUUID(), "Beijing");
+        mHotCityList.add(city);
+        city=new City(UUID.randomUUID(), "New York");
+        mHotCityList.add(city);
+        city=new City(UUID.randomUUID(), "Paris");
+        mHotCityList.add(city);
+
+        mRecentCityList = new ArrayList<String >();
+
+
+        city=new City(UUID.randomUUID(), "Nanjing");
+        mRecentCityList.add(city.getName());
+        city=new City(UUID.randomUUID(), "Nanjing");
+        mRecentCityList.add(city.getName());
+        city=new City(UUID.randomUUID(), "Nanjing");
+        mRecentCityList.add(city.getName());
+
+
+        mListView.setAdapter(new CityListAdapter(this,mHotCityList,mHotCityList,mRecentCityList, (CityListAdapter.MyClickListener) mListener));
 
         mListView.setOnItemClickListener(this);
+
+//        mListView.setAdapter(new HotCityAdapter(this,mHotCityList, (HotCityAdapter.MyClickListener) mListener));
+//
+//        mListView.setOnItemClickListener(this);
     }
 
 //    @Override
@@ -53,38 +85,19 @@ public class ChufaActivity extends Activity implements OnItemClickListener {
     //响应item点击事件
     @Override
     public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
+//
+        String city = mRecentCityList.get(position);
 
-        String city = contentList.get(position);
 
-        Log.i("City",city);
+        Toast.makeText(ChufaActivity.this, "点击了"+ mRecentCityList.get(position),Toast.LENGTH_SHORT).show();
 
         Intent in = new Intent();
 
-        in.putExtra(Intent.EXTRA_TEXT,city);
+        in.putExtra("Departure_city",city );
 
         setResult(Activity.RESULT_OK,in);
 
         finish();
-
-
     }
 
-    /**
-     * 实现类，响应按钮点击事件
-     */
-    private ContentAdapter.MyClickListener mListener = new ContentAdapter.MyClickListener() {
-        @Override
-        public void myOnClick(int position, View v) {
-
-            String city = contentList.get(position);
-
-            Intent in = new Intent();
-
-            in.putExtra("Departure_city",city);
-
-            setResult(Activity.RESULT_OK,in);
-
-            finish();
-        }
-    };
 }

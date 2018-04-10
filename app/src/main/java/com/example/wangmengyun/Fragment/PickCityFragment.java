@@ -123,7 +123,7 @@ public class PickCityFragment extends Fragment {
 
 
     private void setAdapter() {
-        cityListAdapter = new CityListAdapter(getContext(),allCityList,hotCityList,recentCityList);
+        cityListAdapter = new CityListAdapter(getContext(),allCityList,hotCityList,recentCityList, (CityListAdapter.MyClickListener) mListener);
 
 //        lvCity.setAdapter(cityListAdapter);
 

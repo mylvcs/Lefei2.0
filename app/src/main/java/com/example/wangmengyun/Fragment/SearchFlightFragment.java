@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.wangmengyun.Bean.Flight;
 import com.example.wangmengyun.Bean.FlightLab;
 import com.example.wangmengyun.activity.ChufaActivity;
+import com.example.wangmengyun.activity.DaodaActivity;
 import com.example.wangmengyun.activity.DaodaCityActivity;
 import com.example.wangmengyun.activity.FlightListActivity;
 import com.example.wangmengyun.activity.MainActivity;
@@ -105,7 +106,7 @@ public class SearchFlightFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(getActivity(), PickCityActivity.class);
+                Intent in = new Intent(getActivity(), ChufaActivity.class);
                 startActivityForResult(in, REQUEST_DEPARTURE);
 
 
@@ -124,7 +125,7 @@ public class SearchFlightFragment extends Fragment {
 //               FragmentManager fragmentManager = getFragmentManager();
 //               FlightListFragment flightListFragment = new FlightListFragment();
 
-                Intent in = new Intent(getActivity(),DaodaCityActivity.class);
+                Intent in = new Intent(getActivity(),DaodaActivity.class);
                 startActivityForResult(in, REQUEST_ARRIVE);
 
             }

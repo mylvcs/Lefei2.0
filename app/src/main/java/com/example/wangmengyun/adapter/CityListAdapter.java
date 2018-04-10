@@ -49,11 +49,23 @@ public class CityListAdapter extends BaseAdapter {
     private final int VIEW_TYPE = 5;
 
     public CityListAdapter(Context context, List<City> allCityList,
-                           List<City> hotCityList, List<String> recentCityList) {
+                           List<City> hotCityList, List<String> recentCityList,MyClickListener listener) {
         this.mContext = context;
         this.mAllCityList = allCityList;
         this.mHotCityList = hotCityList;
         this.mRecentCityList=recentCityList;
+        this.mListener = listener;
+    }
+
+    private SubClickListener subClickListener;
+
+
+    public void setsubClickListener(SubClickListener topicClickListener) {
+        this.subClickListener =  topicClickListener;
+    }
+
+    public interface SubClickListener {
+        void OntopicClickListener(View v, City city, int position);
     }
 
     @Override
@@ -119,7 +131,7 @@ public class CityListAdapter extends BaseAdapter {
             TextView tvRecentVisitCity=(TextView) convertView.findViewById(R.id.tv_recent_visit_city);
             tvRecentVisitCity.setText("最近浏览城市");
             MyGridView gvRecentVisitCity = (MyGridView) convertView.findViewById(R.id.gv_recent_visit_city);
-            gvRecentVisitCity.setAdapter(new RecentVisitCityAdapter(mContext,mRecentCityList));
+            gvRecentVisitCity.setAdapter(new RecentVisitCityAdapter(mContext,mRecentCityList , (RecentVisitCityAdapter.MyClickListener) mListener));
 
         } else if (viewType == 2) {
             convertView = View.inflate(mContext,R.layout.item_recent_visit_city, null);
@@ -127,9 +139,12 @@ public class CityListAdapter extends BaseAdapter {
             tvRecentVisitCity.setText("hot城市");
             MyGridView gvRecentVisitCity = (MyGridView) convertView.findViewById(R.id.gv_recent_visit_city);
             gvRecentVisitCity.setAdapter(new HotCityAdapter(mContext,mHotCityList, (HotCityAdapter.MyClickListener) mListener));
+
+
         } else if (viewType == 3) {
             convertView = View.inflate(mContext,R.layout.item_all_city_textview, null);
-        } else {
+        }
+        else {
             if (convertView == null) {
                 viewHolder = new ViewHolder();
                 convertView = View.inflate(mContext, R.layout.item_city_list,null);
@@ -143,6 +158,11 @@ public class CityListAdapter extends BaseAdapter {
             if (position >= 1) {
                 viewHolder.tvCityName.setText(mAllCityList.get(position).getName());
 
+
+                viewHolder.tvCityName.setOnClickListener(mListener);
+
+
+
                 viewHolder.llMain.setOnClickListener(new OnClickListener() {
 
                     @Override
@@ -155,6 +175,9 @@ public class CityListAdapter extends BaseAdapter {
 //                        startActivity(intent);
 
                         Toast.makeText(mContext,mAllCityList.get(position).getName(),0).show();
+
+
+
 
                     }
                 });
@@ -252,5 +275,15 @@ public class CityListAdapter extends BaseAdapter {
         }
 
     }
-
+    public static abstract class MyClickListener implements OnClickListener {
+        /**
+         * 基类的onClick方法
+         */
+        @Override
+        public void onClick(View v) {
+            myOnClick((Integer) v.getTag(), v);
+        }
+        public abstract void myOnClick(int position, View v);
+    }
 }
+

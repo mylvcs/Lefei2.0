@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 
+import com.example.wangmengyun.Fragment.DaodaFragment;
 import com.example.wangmengyun.Fragment.SearchFlightFragment;
 
 import java.util.UUID;
@@ -189,9 +190,9 @@ public class DaodaActivity extends SingleFragmentActivity {
 ////    }
 @Override
 protected Fragment createFragment() {
-    UUID flightNumber = (UUID) getIntent().getSerializableExtra(ExtraData);
+  //  UUID flightNumber = (UUID) getIntent().getSerializableExtra(ExtraData);
 
-    return SearchFlightFragment.newInstance(flightNumber);
+    return new DaodaFragment();
 }
 
 }

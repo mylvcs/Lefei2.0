@@ -1,6 +1,7 @@
 package com.example.wangmengyun.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -37,7 +38,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
-public class DaodaCityActivity extends Activity {
+public class DaodaCityActivity extends Activity implements AdapterView.OnItemClickListener {
 
 
     private MyLetterView myLetterView;//�Զ����View
@@ -59,7 +60,7 @@ public class DaodaCityActivity extends Activity {
     private boolean isScroll = false;
     private boolean mReady = false;
     private Handler handler;
-
+    private AdapterView.OnItemClickListener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +81,8 @@ public class DaodaCityActivity extends Activity {
     }
 
      private void setAdapter() {
-        cityListAdapter = new CityListAdapter(this, allCityList, hotCityList, recentCityList);
-        searchResultAdapter = new SearchResultAdapter(this, searchCityList);
+        cityListAdapter = new CityListAdapter(this, allCityList, hotCityList, recentCityList, (CityListAdapter.MyClickListener) mListener);
+        searchResultAdapter = new SearchResultAdapter(this, searchCityList, (SearchResultAdapter.MyClickListener) mListener);
         lvCity.setAdapter(cityListAdapter);
         lvResult.setAdapter(searchResultAdapter);
 
@@ -168,7 +169,7 @@ public class DaodaCityActivity extends Activity {
     private ArrayList<City> getCityList() {
         SQLiteDatabase db;
         Cursor cursor = null;
-        //��ȡassetsĿ¼�µ����ݿ��е����г��е�openHelper
+
         AllCitySqliteOpenHelper op = new AllCitySqliteOpenHelper(DaodaCityActivity.this);
         ArrayList<City> cityList = new ArrayList<City>();
         try {
@@ -239,4 +240,16 @@ public class DaodaCityActivity extends Activity {
 
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String city = allCityList.get(position).getName();
+
+        Intent in = new Intent();
+
+        in.putExtra("Departure_city",city );
+
+        setResult(Activity.RESULT_OK,in);
+
+        finish();
+    }
 }
