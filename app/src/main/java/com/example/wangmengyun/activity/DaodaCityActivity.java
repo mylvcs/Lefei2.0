@@ -1,6 +1,7 @@
 package com.example.wangmengyun.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,7 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.wangmengyun.Bean.City;
-import com.example.wangmengyun.Fragment.PickCityFragment;
+//import com.example.wangmengyun.Fragment.PickCityFragment;
 import com.example.wangmengyun.Fragment.PickCityFragment1;
 import com.example.wangmengyun.Fragment.SearchFlightFragment;
 import com.example.wangmengyun.Utils.PingYinUtil;
@@ -38,7 +39,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
-public class DaodaCityActivity extends Activity implements AdapterView.OnItemClickListener {
+public class
+DaodaCityActivity extends Activity implements AdapterView.OnItemClickListener {
 
 
     private MyLetterView myLetterView;//�Զ����View
@@ -60,6 +62,8 @@ public class DaodaCityActivity extends Activity implements AdapterView.OnItemCli
     private boolean isScroll = false;
     private boolean mReady = false;
     private Handler handler;
+
+    private List<City> mCities;
     private AdapterView.OnItemClickListener mListener;
 
     @Override
@@ -81,7 +85,7 @@ public class DaodaCityActivity extends Activity implements AdapterView.OnItemCli
     }
 
      private void setAdapter() {
-        cityListAdapter = new CityListAdapter(this, allCityList, hotCityList, recentCityList, (CityListAdapter.MyClickListener) mListener);
+        cityListAdapter = new CityListAdapter(this, mCities);
         searchResultAdapter = new SearchResultAdapter(this, searchCityList, (SearchResultAdapter.MyClickListener) mListener);
         lvCity.setAdapter(cityListAdapter);
         lvResult.setAdapter(searchResultAdapter);
@@ -154,14 +158,15 @@ public class DaodaCityActivity extends Activity implements AdapterView.OnItemCli
 
     private void initAllCityData() {
 
-        City city = new City(UUID.randomUUID(), "0"); // ��ǰ��λ����
-        allCityList.add(city);
-        city = new City(UUID.randomUUID(), "1");
-        allCityList.add(city);
-        city = new City(UUID.randomUUID(), "2");
-        allCityList.add(city);
-        city = new City(UUID.randomUUID(), "3");
-        allCityList.add(city);
+//        City city = new City(UUID.randomUUID(), "0"); // ��ǰ��λ����
+//        allCityList.add(city);
+//        city = new City(UUID.randomUUID(), "1");
+//        allCityList.add(city);
+//        city = new City(UUID.random
+//UUID(), "2");
+//        allCityList.add(city);
+//        city = new City(UUID.randomUUID(), "3");
+//        allCityList.add(city);
         allCityList.addAll(getCityList());
     }
 
@@ -180,8 +185,8 @@ public class DaodaCityActivity extends Activity implements AdapterView.OnItemCli
             while (cursor.moveToNext()) {
                 String cityName = cursor.getString(cursor.getColumnIndex("name"));
                 String cityPinyin = cursor.getString(cursor.getColumnIndex("pinyin"));
-                City city = new City(UUID.randomUUID(), "Shanghai");
-                cityList.add(city);
+            //    City city = new City(UUID.randomUUID(), "Shanghai");
+        //        cityList.add(city);
             }
 
         } catch (IOException e) {
@@ -208,12 +213,12 @@ public class DaodaCityActivity extends Activity implements AdapterView.OnItemCli
     }
 
     private void initHotCityData() {
-        City city = new City(UUID.randomUUID(), "2");
-        hotCityList.add(city);
-        city = new City(UUID.randomUUID(), "1");
-        hotCityList.add(city);
-        city = new City(UUID.randomUUID(), "3");
-        hotCityList.add(city);
+//        City city = new City(UUID.randomUUID(), "2");
+//        hotCityList.add(city);
+//        city = new City(UUID.randomUUID(), "1");
+//        hotCityList.add(city);
+//        city = new City(UUID.randomUUID(), "3");
+ //       hotCityList.add(city);
     }
 
     @SuppressWarnings("unchecked")
@@ -229,8 +234,8 @@ public class DaodaCityActivity extends Activity implements AdapterView.OnItemCli
             while (cursor.moveToNext()) {
                 String cityName = cursor.getString(cursor.getColumnIndex("name"));
                 String cityPinyin = cursor.getString(cursor.getColumnIndex("pinyin"));
-                city = new City(UUID.randomUUID(), "Beijing");
-                searchCityList.add(city);
+             //   city = new City(UUID.randomUUID(), "Beijing");
+            //    searchCityList.add(city);
             }
             cursor.close();
             db.close();

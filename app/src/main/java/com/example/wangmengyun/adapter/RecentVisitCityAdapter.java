@@ -25,16 +25,16 @@ public class RecentVisitCityAdapter extends BaseAdapter {
     private Context mContext;
 
 
-    private SubClickListener subClickListener;
-
-
-    public void setsubClickListener(HotCityAdapter.SubClickListener topicClickListener) {
-        this.subClickListener = (SubClickListener) topicClickListener;
-    }
-
-    public interface SubClickListener {
-        void OntopicClickListener(View v, City city, int position);
-    }
+//    private SubClickListener subClickListener;
+//
+//
+//    public void setsubClickListener(HotCityAdapter.SubClickListener topicClickListener) {
+//        this.subClickListener = (SubClickListener) topicClickListener;
+//    }
+//
+//    public interface SubClickListener {
+//        void OntopicClickListener(View v, City city, int position);
+//    }
 
 
     public RecentVisitCityAdapter(Context context, List<String> recentVisitCityList, MyClickListener listener) {

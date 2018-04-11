@@ -33,16 +33,12 @@
         </activity>
 
         <activity android:name="com.example.wangmengyun.activity.SearchFlightActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name="com.example.wangmengyun.activity.PickCityActivity">
 
         </activity>
+
+        <!--<activity android:name="com.example.wangmengyun.activity.PickCityActivity">-->
+
+        <!--</activity>-->
 
         <activity android:name="com.example.wangmengyun.activity.FlightListActivity">
 
@@ -60,7 +56,11 @@
 
         </activity>
         <activity android:name="com.example.wangmengyun.activity.ChufaActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
 

@@ -23,16 +23,16 @@ public class SearchResultAdapter extends BaseAdapter implements OnClickListener{
 	private LayoutInflater mInflater;
 
 
-    private SubClickListener subClickListener;
+//    private SubClickListener subClickListener;
 
 
-    public void setsubClickListener(HotCityAdapter.SubClickListener topicClickListener) {
-        this.subClickListener = (SubClickListener) topicClickListener;
-    }
-
-    public interface SubClickListener {
-        void OntopicClickListener(View v, City city, int position);
-    }
+//    public void setsubClickListener(HotCityAdapter.SubClickListener topicClickListener) {
+//        this.subClickListener = (SubClickListener) topicClickListener;
+//    }
+//
+//    public interface SubClickListener {
+//        void OntopicClickListener(View v, City city, int position);
+//    }
 
     public SearchResultAdapter(Context context, List<City> searchList, MyClickListener listener){
 		this.mSearchList=searchList;

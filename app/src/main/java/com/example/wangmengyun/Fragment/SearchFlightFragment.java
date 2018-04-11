@@ -24,7 +24,6 @@ import com.example.wangmengyun.activity.DaodaCityActivity;
 import com.example.wangmengyun.activity.FlightListActivity;
 import com.example.wangmengyun.activity.MainActivity;
 
-import com.example.wangmengyun.activity.PickCityActivity;
 import com.example.wangmengyun.activity.PickCityActivity1;
 import com.example.wangmengyun.activity.PickCityActivity2;
 import com.example.wangmengyun.activity.SearchFlightActivity;
@@ -107,6 +106,7 @@ public class SearchFlightFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent in = new Intent(getActivity(), ChufaActivity.class);
+
                 startActivityForResult(in, REQUEST_DEPARTURE);
 
 
@@ -133,7 +133,7 @@ public class SearchFlightFragment extends Fragment {
 
 
         mDateButton = v.findViewById(R.id.flight_date);
-        mDateButton.setOnClickListener(new View.OnClickListener() {
+        mDateButton.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {

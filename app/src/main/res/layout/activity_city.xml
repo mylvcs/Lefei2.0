@@ -1,78 +1,57 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_city"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f0f0f0" >
+    android:background="@color/light_blue"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_view" />
+    <include layout="@layout/search_view"/>
 
     <RelativeLayout
-        android:id="@+id/rl_title"
-        android:layout_width="match_parent"
-        android:layout_height="45dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="出发城市"
-            android:textColor="#ffffff"
-            android:textSize="22sp" />
-    </RelativeLayout>
-
-    <EditText
-        android:id="@+id/et_search"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_below="@id/rl_title"
-        android:layout_margin="10dip"
-        android:drawablePadding="5dp"
-        android:hint="输入城市名或拼音"
-        android:padding="10dip"
-        android:textColor="#515151"
-        android:textSize="16dp" >
-    </EditText>
-
-    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/et_search" >
+        android:background="@android:color/white">
 
         <ListView
-            android:id="@+id/lv_city"
+            android:id="@+id/listview_all_city"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="#00000000"
-            android:dividerHeight="0dp"
-            android:listSelector="@android:color/transparent" >
-        </ListView>
-
-        <ListView
-            android:id="@+id/lv_result"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="7dp"
-            android:divider="#00000000"
-            android:dividerHeight="0dp"
+            android:cacheColorHint="@android:color/transparent"
             android:listSelector="@android:color/transparent"
-            android:scrollbars="none"
-            android:visibility="gone" />
-
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"/>
         <TextView
-            android:id="@+id/tv_noresult"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/tv_letter_overlay"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:gravity="center"
-            android:padding="10dp"
-            android:text="抱歉,暂时没有找到相关城市"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:visibility="gone" />
+            android:layout_centerInParent="true"
+            android:background="@drawable/overlay_bg"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:visibility="gone"/>
 
-    </FrameLayout>
+        <com.example.wangmengyun.view.SlideBar
+            android:id="@+id/side_letter_bar"
+            android:layout_width="@dimen/side_letter_bar_width"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            />
 
-</RelativeLayout>
+        <ListView
+            android:id="@+id/listview_search_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:cacheColorHint="@android:color/transparent"
+            android:listSelector="@android:color/transparent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:visibility="gone"/>
+        <include layout="@layout/view_no_search_result" />
+    </RelativeLayout>
+
+</LinearLayout>

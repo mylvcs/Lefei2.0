@@ -35,7 +35,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
-import com.example.wangmengyun.adapter.HotCityAdapter.SubClickListener;
 
 
 /**
@@ -65,6 +64,7 @@ public class DaodaFragment extends Fragment {
     private List<City> searchCityList;
     private List<String> recentCityList;
     private View.OnClickListener mListener;
+    private List<City> mCities;
 
     public CitySqliteOpenHelper cityOpenHelper;
     public SQLiteDatabase cityDb;
@@ -119,20 +119,20 @@ public class DaodaFragment extends Fragment {
 
 
     private void setAdapter() {
-        cityListAdapter = new CityListAdapter(getContext(),allCityList,hotCityList,recentCityList, (CityListAdapter.MyClickListener) mListener);
+        cityListAdapter = new CityListAdapter(getContext(), mCities);
 
 //        lvCity.setAdapter(cityListAdapter);
 
 
-        hotCityAdapter = new HotCityAdapter(getContext(),hotCityList, (HotCityAdapter.MyClickListener) mListener);
+        hotCityAdapter = new HotCityAdapter(getContext(),hotCityList);
 
-        hotCityAdapter.setsubClickListener(new SubClickListener() {
-            @Override
-            public void OntopicClickListener(View v, City city, int position) {
-                //TODO
-
-            }
-        });
+//        hotCityAdapter.setsubClickListener(new SubClickListener() {
+//            @Override
+//            public void OntopicClickListener(View v, City city, int position) {
+//                //TODO
+//
+//            }
+//        });
 
         lvCity.setAdapter(hotCityAdapter);
 
@@ -141,16 +141,16 @@ public class DaodaFragment extends Fragment {
 
     private void initAllCityData() {
 
-        City city = new City(UUID.randomUUID(),"Shanghai");
-        allCityList.add(city);
-        city=new City(UUID.randomUUID(), "Beijing");
-        allCityList.add(city);
-        city=new City(UUID.randomUUID(), "New York");
-        allCityList.add(city);
-        city=new City(UUID.randomUUID(), "Paris");
-        allCityList.add(city);
+//        City city = new City(UUID.randomUUID(),"Shanghai");
+//        allCityList.add(city);
+//        city=new City(UUID.randomUUID(), "Beijing");
+//        allCityList.add(city);
+//        city=new City(UUID.randomUUID(), "New York");
+//        allCityList.add(city);
+//        city=new City(UUID.randomUUID(), "Paris");
+//        allCityList.add(city);
 
-        allCityList.addAll(getCityList());
+//        allCityList.addAll(getCityList());
     }
 
     private ArrayList<City> getCityList() {
@@ -168,9 +168,9 @@ public class DaodaFragment extends Fragment {
             while (cursor.moveToNext()) {
                 String cityName=cursor.getString(cursor.getColumnIndex("name"));
                 String cityPinyin=cursor.getString(cursor.getColumnIndex("pinyin"));
-                City city=new City(UUID.randomUUID(),"LA ");
+          //      City city=new City(UUID.randomUUID(),"LA ");
 
-                cityList.add(city);
+         //       cityList.add(city);
             }
 
         } catch (IOException e) {
@@ -197,8 +197,8 @@ public class DaodaFragment extends Fragment {
 
     private void initHotCityData() {
 
-        City city=new City(UUID.randomUUID(), "上海");
-        hotCityList.add(city);
+ //       City city=new City(UUID.randomUUID(), "上海");
+ //       hotCityList.add(city);
     }
 
 
@@ -214,8 +214,8 @@ public class DaodaFragment extends Fragment {
             while (cursor.moveToNext()) {
                 String cityName=cursor.getString(cursor.getColumnIndex("CityName"));
 
-                city = new City(UUID.randomUUID(),"Nanjing");
-                searchCityList.add(city);
+//                city = new City(UUID.randomUUID(),"Nanjing");
+//                searchCityList.add(city);
             }
             cursor.close();
             db.close();

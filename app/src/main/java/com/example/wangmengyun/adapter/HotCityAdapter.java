@@ -14,9 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wangmengyun.Bean.City;
+import com.example.wangmengyun.Fragment.SearchFlightFragment;
 import com.example.wangmengyun.activity.MainActivity;
+//import com.example.wangmengyun.activity.PickCityActivity;
 import com.example.wangmengyun.activity.SearchFlightActivity;
 import com.example.wangmengyun.lefei.R;
+
 
 public class HotCityAdapter extends BaseAdapter implements OnClickListener {
 
@@ -25,28 +28,30 @@ public class HotCityAdapter extends BaseAdapter implements OnClickListener {
     private Context mContext;
 
 
-    private SubClickListener subClickListener;
+    private OnClickMyTextView mOnClickMyTextView;
 
 
-    public HotCityAdapter(Context context, List<City> hotCityList, HotCityAdapter.MyClickListener listener) {
+    public HotCityAdapter(Context context, List<City> hotCityList) {
         this.mHotCityList = hotCityList;
         this.mContext = context;
         mInflater = LayoutInflater.from(mContext);
     }
 
-    public void setsubClickListener(SubClickListener topicClickListener) {
-        this.subClickListener = topicClickListener;
-    }
 
     @Override
     public void onClick(View v) {
 
     }
 
-    public interface SubClickListener {
-        void OntopicClickListener(View v, City city, int position);
+    public interface OnClickMyTextView {//创建一个接口类
+
+        void myTextViewClick(int id);
+
     }
 
+    public void setOnClickMyTextView(OnClickMyTextView onClickMyTextView){
+        this.mOnClickMyTextView = onClickMyTextView;
+    }
 
     @Override
     public int getCount() {
@@ -77,17 +82,31 @@ public class HotCityAdapter extends BaseAdapter implements OnClickListener {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.tvCityName.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                if (subClickListener != null) {
-                    subClickListener.OntopicClickListener(v, mHotCityList.get(position), position);
+        if (mOnClickMyTextView != null) {
+            viewHolder.tvCityName.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, mHotCityList.get(position).getName() + "", 0).show();
+                    //TODO
+//                String city = mHotCityList.get(position).getName();
+//
+//                Intent intent = new Intent(mContext,)
+
+                    Intent intent = new Intent (mContext, SearchFlightActivity.class);
+
+                    intent.putExtra(Intent.EXTRA_TEXT, mHotCityList.get(position).getName());
+
+                    mContext.startActivity(intent);
+
+                    mOnClickMyTextView.myTextViewClick(position);
+
+
                 }
 
-            }
-        });
+            });
 
+        }
         viewHolder.tvCityName.setText(mHotCityList.get(position).getName());
 
         return convertView;
@@ -98,17 +117,18 @@ public class HotCityAdapter extends BaseAdapter implements OnClickListener {
     }
 
 
-    public static abstract class MyClickListener implements OnClickListener {
-        /**
-         * 基类的onClick方法
-         */
-        @Override
-        public void onClick(View v) {
-            myOnClick((Integer) v.getTag(), v);
-        }
+//    public static abstract class MyClickListener implements OnClickListener {
+//        /**
+//         * 基类的onClick方法
+//         */
+//        @Override
+//        public void onClick(View v) {
+//            myOnClick((Integer) v.getTag(), v);
+//        }
+//
+//        public abstract void myOnClick(int position, View v);
+//    }
 
-        public abstract void myOnClick(int position, View v);
-    }
 
 }
 
