@@ -29,8 +29,8 @@ public class HotCityGridAdapter extends BaseAdapter {
         mCities.add("武汉");
         mCities.add("重庆");
         mCities.add("成都");
-        mCities.add("浙江");
-        mCities.add("苏州");
+        mCities.add("纽约");
+        mCities.add("洛杉矶" );
     }
 
     @Override

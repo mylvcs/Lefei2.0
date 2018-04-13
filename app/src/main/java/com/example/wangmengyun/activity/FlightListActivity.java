@@ -1,10 +1,7 @@
 package com.example.wangmengyun.activity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 
-import com.example.wangmengyun.Bean.Flight;
 import com.example.wangmengyun.Fragment.FlightListFragment;
 
 /**

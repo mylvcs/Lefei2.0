@@ -1,40 +1,14 @@
 package com.example.wangmengyun.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 
 import com.example.wangmengyun.Fragment.FlightListFragment;
-
 import com.example.wangmengyun.Fragment.SearchFlightFragment;
-import com.example.wangmengyun.lefei.R;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-
-
-import static android.view.View.OnClickListener;
-import static android.view.View.VISIBLE;
 
 
 public class SearchFlightActivity extends SingleFragmentActivity {
@@ -42,14 +16,15 @@ public class SearchFlightActivity extends SingleFragmentActivity {
 
     public static final String ExtraData = "com.example.wangmengyun.FlightNumber";
 
+
+
     @Override
     protected Fragment createFragment() {
-        UUID flightNumber = (UUID) getIntent().getSerializableExtra(ExtraData);
 
-
-        return SearchFlightFragment.newInstance(flightNumber);
+        return new SearchFlightFragment();
 
     }
+
 
 
     public static Intent newIntent (Context packageContext, String DepartCity) {

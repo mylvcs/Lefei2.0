@@ -1,8 +1,9 @@
 package com.example.wangmengyun.activity;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -15,14 +16,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
 
+import com.baidu.location.LocationClientOption;
 import com.example.wangmengyun.Bean.City;
 import com.example.wangmengyun.Bean.LocateState;
+import com.example.wangmengyun.Fragment.ChufaFragment;
+import com.example.wangmengyun.Fragment.FlightListFragment;
+
 import com.example.wangmengyun.Utils.StringUtils;
 import com.example.wangmengyun.Utils.ToastUtils;
 import com.example.wangmengyun.adapter.CityListAdapter;
@@ -31,7 +36,6 @@ import com.example.wangmengyun.database.DBManager;
 import com.example.wangmengyun.lefei.R;
 import com.example.wangmengyun.view.SlideBar;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -55,6 +59,9 @@ public class ChufaActivity extends AppCompatActivity implements View.OnClickList
 
     private int REQUEST_DEPARTURE = 0;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +69,13 @@ public class ChufaActivity extends AppCompatActivity implements View.OnClickList
         initData();
         initView();
 //        initLocation();
+
+
     }
 
+    /**
+     *Google定位功能
+     */
 //    private void initLocation() {
 //        myListener = new MyLocationListener();
 //        mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
@@ -85,8 +97,7 @@ public class ChufaActivity extends AppCompatActivity implements View.OnClickList
 //        option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤GPS仿真结果，默认需要
 //        mLocationClient.setLocOption(option);
 //        mLocationClient.start();
-//
-//    }
+
 
     private void initData() {
         dbManager = new DBManager(this);
@@ -97,7 +108,18 @@ public class ChufaActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onCityClick(String name) {
-                back(name);
+
+                ToastUtils.showToast(getApplicationContext(), "点击的城市：" + name);
+
+                Intent intent = SearchFlightActivity.newIntent(getBaseContext(),name);
+
+                intent.putExtra("Departure_city", name);
+
+                setResult(RESULT_OK, intent);
+
+                finish();
+
+
             }
 
             @Override
@@ -109,6 +131,7 @@ public class ChufaActivity extends AppCompatActivity implements View.OnClickList
         });
 
         mResultAdapter = new ResultListAdapter(this, null);
+
     }
 
     private void initView() {
@@ -160,10 +183,14 @@ public class ChufaActivity extends AppCompatActivity implements View.OnClickList
 
         mResultListView = (ListView) findViewById(R.id.listview_search_result);
         mResultListView.setAdapter(mResultAdapter);
+
         mResultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                back(mResultAdapter.getItem(position).getName());
+             //   back(mResultAdapter.getItem(position).getName());
+
+
+                ToastUtils.showToast(this, "点击的城市：" + mResultAdapter.getItem(position));
             }
         });
 
@@ -189,34 +216,31 @@ public class ChufaActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void back(String cityName) {
-        ToastUtils.showToast(this, "点击的城市：" + cityName);
-
-        Intent in = new Intent(ChufaActivity.this, SearchFlightActivity.class);
-
-        in.putExtra("Departure_city", cityName);
-
-        setResult(RESULT_OK, in);
-
-        startActivity(in);
-
-    }
-
-//    private void sendResult(int resultOk, String  city) {
+//    private void back(String cityName) {
+//        ToastUtils.showToast(this, "点击的城市：" + cityName);
 //
-//        Intent intent = new Intent();
-//        intent.putExtra("Departure_city", city);
+//        Intent in = new Intent(this,SearchFlightActivity.class);
 //
-//        onActivityResult(REQUEST_DEPARTURE, resultOk, intent);
+//        in.putExtra("Departure_city", cityName);
+//
+//        setResult(RESULT_OK, in);
+//
+//        startActivity(in);
+//
 //    }
+
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mLocationClient.stop();
     }
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
+
+//
 //    public class MyLocationListener implements BDLocationListener {
 //
 //        @Override
@@ -245,9 +269,9 @@ public class ChufaActivity extends AppCompatActivity implements View.OnClickList
 //                sb.append("\naddr : ");
 //                sb.append(location.getAddrStr());
 //                sb.append("\ncity : ");
-//                sb.append(location.getCity()+"  aa");
+//                sb.append(location.getCity() + "  aa");
 //                sb.append("\ndisc : ");
-//                sb.append(location.getDistrict()+"  bb");
+//                sb.append(location.getDistrict() + "  bb");
 //                sb.append("\ndescribe : ");
 //                sb.append("gps定位成功");
 //
@@ -285,6 +309,20 @@ public class ChufaActivity extends AppCompatActivity implements View.OnClickList
 //            }
 //            Log.i("BaiduLocationApiDem", sb.toString());
 //        }
-
+//
+//        @Override
+//        public void onReceivePoi(BDLocation bdLocation) {
+//
+//        }
+//    }
+//
+//    public  Intent newIntent (Context packageContext, String DepartCity) {
+//
+//        Intent int
+// ent = new Intent(packageContext, ChufaActivity.class);
+//        intent.putExtra(Intent.EXTRA_TEXT, DepartCity);
+//
+//        return intent;
+//    }
 }
 

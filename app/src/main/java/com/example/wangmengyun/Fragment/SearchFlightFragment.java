@@ -16,6 +16,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.wangmengyun.Bean.City;
+import com.example.wangmengyun.Bean.CityDBSchema;
+import com.example.wangmengyun.Bean.CityLab;
 import com.example.wangmengyun.Bean.Flight;
 import com.example.wangmengyun.Bean.FlightLab;
 import com.example.wangmengyun.activity.ChufaActivity;
@@ -24,8 +27,6 @@ import com.example.wangmengyun.activity.DaodaCityActivity;
 import com.example.wangmengyun.activity.FlightListActivity;
 import com.example.wangmengyun.activity.MainActivity;
 
-import com.example.wangmengyun.activity.PickCityActivity1;
-import com.example.wangmengyun.activity.PickCityActivity2;
 import com.example.wangmengyun.activity.SearchFlightActivity;
 import com.example.wangmengyun.activity.ZidongtishiActivity;
 import com.example.wangmengyun.lefei.R;
@@ -64,18 +65,22 @@ public class SearchFlightFragment extends Fragment {
     private Button mDateButton;
 
     private Flight mFlight;
+    private City city;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        UUID flightNumber = (UUID) getArguments().getSerializable(ARG_FLIGHT_ID);
-
         mFlight = new Flight("Shanghai");
 
 //            mFlight= (Flight) FlightLab.get(getActivity()).getFlight();
+//
+//        String cityName = (String) getActivity().getIntent().getSerializableExtra(SearchFlightActivity.ExtraData);
+//
+//
+//        city= CityLab.get(getActivity()).getCity(cityName);
+
 
     }
 
@@ -112,6 +117,7 @@ public class SearchFlightFragment extends Fragment {
 
             }
         });
+
 
         mDepartureButton.setText("出发城市");
 
@@ -166,12 +172,12 @@ public class SearchFlightFragment extends Fragment {
         }
         if (requestCode == REQUEST_DEPARTURE) {
 
-            String departureCity= (String) intent.getSerializableExtra("Departure_city");
-         //   String departureCity = (String) intent.getSerializableExtra(PickCityActivity.EXTRA_TEXT);
+          String departureCity= (String) intent.getSerializableExtra("Departure_city");
+        //     String departureCity = (String) intent.getSerializableExtra();
 
             mFlight.setDeparture_City(departureCity);
 
-            mDepartureButton.setText(intent.getStringExtra("Departure_city"));
+            mDepartureButton.setText(departureCity);
 
 
         }

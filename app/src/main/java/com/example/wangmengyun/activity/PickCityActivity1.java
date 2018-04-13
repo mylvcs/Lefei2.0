@@ -15,6 +15,8 @@ import com.example.wangmengyun.Fragment.PickCityFragment1;
 public class PickCityActivity1 extends SingleFragmentActivity {
 
 
+
+    @Override
     protected Fragment createFragment() {
         return new PickCityFragment1();
     }
