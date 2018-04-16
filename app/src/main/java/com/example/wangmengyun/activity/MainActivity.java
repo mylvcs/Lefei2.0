@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTicketBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(MainActivity.this, MainActivity.class);
+                Intent in = new Intent(MainActivity.this, GoogleLoginActivity.class);
 
                 startActivity(in);
             }

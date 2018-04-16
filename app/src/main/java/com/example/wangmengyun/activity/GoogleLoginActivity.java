@@ -61,23 +61,14 @@ public class GoogleLoginActivity extends AppCompatActivity{
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         // Initialize references to views
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mMessageListView = (ListView) findViewById(R.id.messageListView);
-        mPhotoPickerButton = (ImageButton) findViewById(R.id.photoPickerButton);
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mSendButton = (Button) findViewById(R.id.sendButton);
 
 
-        // Initialize progress bar
-        mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+        // Initial`ize progress bar
 
         // ImagePickerButton shows an image picker to upload a image for a message
-        mPhotoPickerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO: Fire an intent to show an image picker
-            }
-        });
 
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -92,16 +83,14 @@ public class GoogleLoginActivity extends AppCompatActivity{
 
                 }
                 else{
-
+             //       Toast.makeText(GoogleLoginActivity.this, "Login Out", Toast.LENGTH_SHORT).show();
 
                     startActivityForResult(AuthUI.getInstance()
                                     .createSignInIntentBuilder()
                                     .setAvailableProviders(Arrays.asList(
                                             new AuthUI.IdpConfig.EmailBuilder().build(),
                                             new AuthUI.IdpConfig.PhoneBuilder().build(),
-                                            new AuthUI.IdpConfig.GoogleBuilder().build(),
-                                            new AuthUI.IdpConfig.FacebookBuilder().build(),
-                                            new AuthUI.IdpConfig.TwitterBuilder().build()))
+                                            new AuthUI.IdpConfig.GoogleBuilder().build()))
                                     .build(),
                             RC_SIGN_IN);
                 }
@@ -120,8 +109,7 @@ public class GoogleLoginActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-
-mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
 
     }
 }
