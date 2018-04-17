@@ -20,6 +20,7 @@ import com.example.wangmengyun.Bean.City;
 import com.example.wangmengyun.lefei.R;
 import com.example.wangmengyun.sqlite.AllCitySqliteOpenHelper;
 import com.example.wangmengyun.view.FlightView;
+import com.google.firebase.FirebaseApp;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTicketBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(MainActivity.this, GoogleLoginActivity.class);
+                Intent in = new Intent(MainActivity.this, FireStoreActivity.class);
 
                 startActivity(in);
             }
