@@ -24,6 +24,7 @@ import com.example.wangmengyun.Bean.FlightLab;
 import com.example.wangmengyun.activity.ChufaActivity;
 import com.example.wangmengyun.activity.DaodaActivity;
 import com.example.wangmengyun.activity.DaodaCityActivity;
+import com.example.wangmengyun.activity.FirebaseAuthActivity;
 import com.example.wangmengyun.activity.FlightListActivity;
 import com.example.wangmengyun.activity.MainActivity;
 
@@ -38,7 +39,6 @@ import java.util.UUID;
 /**
  * Created by wangmengyun on 2018/3/30.
  */
-
 public class SearchFlightFragment extends Fragment {
     private static final String DIALOG_DATE = "DialogDate";
 
@@ -100,7 +100,7 @@ public class SearchFlightFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //TODO
-                Intent intent = new Intent(getActivity(), ZidongtishiActivity.class);
+                Intent intent = new Intent(getActivity(), FirebaseAuthActivity.class);
 
                 startActivity(intent);
             }

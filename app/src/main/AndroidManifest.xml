@@ -98,7 +98,7 @@
 
         </activity>
 
-        <activity android:name="com.example.wangmengyun.activity.SignInActivity">
+        <activity android:name="com.example.wangmengyun.activity.FirebaseAuthActivity">
 
         </activity>
     </application>

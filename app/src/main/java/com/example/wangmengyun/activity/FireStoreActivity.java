@@ -12,17 +12,20 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.wangmengyun.lefei.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-
-import org.w3c.dom.Document;
 
 import java.io.FileInputStream;
 import java.util.HashMap;
@@ -51,6 +54,10 @@ public class FireStoreActivity extends AppCompatActivity {
     private EditText mMessageEditText;
     private Button mSendButton;
 
+
+    private DocumentReference mDocRef = FirebaseFirestore.getInstance().document("sampleData/inspiration");
+
+
     private com.google.android.gms.common.SignInButton signInButton;
 
     @Override
@@ -78,36 +85,83 @@ public class FireStoreActivity extends AppCompatActivity {
 
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Map<String, Object> user = new HashMap<>();
-                user.put("first", "Ada");
-                user.put("last", "Lovelace");
-                user.put("born", 1815);
+//                Map<String, Object> user = new HashMap<>();
+//                user.put("first", "Ada");
+//                user.put("last", "Lovelace");
+//                user.put("born", 1815);
+//
+//                db.collection("users")
+//                        .add(user)
+//                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                            @Override
+//                            public void onSuccess(DocumentReference documentReference) {
+//                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
 
-                db.collection("users")
-                        .add(user)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document", e);
-                            }
-                        });
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w(TAG, "Error adding document", e);
+//                    }
+
+                Log.i(TAG,"Clicked");
+
+                Map<String,Object> dataToSave = new HashMap<>();
+
+                dataToSave.put("firstname","Ada ");
+
+                dataToSave.put("lastname", "Liu");
+
+                mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Document has been saved!");
+                    }
+                });
+
 
             }
         });
 
+
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
     }
 
+    public void saveQuote (View view){
+        Map<String,Object> dataToSave = new HashMap<>();
 
-    private DocumentReference mDocRef = FirebaseFirestore.getInstance().document("sampleData/inspiration");
+        dataToSave.put("firstname","Mengyun");
 
+        dataToSave.put("lastname", "Wang");
+
+        mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "Document has been saved!");
+            }
+        });
+
+
+    }
 
 }
+
+
