@@ -101,6 +101,16 @@
         <activity android:name="com.example.wangmengyun.activity.FirebaseAuthActivity">
 
         </activity>
+
+
+        <activity android:name="com.example.wangmengyun.activity.SearchHistoryActivity">
+
+        </activity>
+
+        <activity android:name="com.example.wangmengyun.activity.BoardingpassActivity">
+
+        </activity>
+
     </application>
 
 </manifest>

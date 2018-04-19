@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTicketBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(MainActivity.this, FireStoreActivity.class);
+                Intent in = new Intent(MainActivity.this,  FirebaseAuthActivity.class);
 
                 startActivity(in);
             }

@@ -85,4 +85,6 @@
 
     <!-- was "Signing up..." -->
     <string name="fui_progress_dialog_signing_up">Creating your shiny new account...</string>
+
+    <string name="send_button_label">Send</string>
 </resources>

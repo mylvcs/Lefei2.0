@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-<ScrollView
+
+<LinearLayout
     android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -16,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include layout="@layout/title_view" />
 
         <!-- COMPLETED (3) Create a TextView for the Passenger label and name -->
         <TextView
@@ -357,5 +359,5 @@
             />
 
     </android.support.constraint.ConstraintLayout>
-</ScrollView>
+</LinearLayout>
 </layout>

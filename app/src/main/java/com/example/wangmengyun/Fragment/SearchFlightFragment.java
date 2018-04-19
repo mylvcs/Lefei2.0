@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import com.example.wangmengyun.Bean.FlightLab;
 import com.example.wangmengyun.activity.ChufaActivity;
 import com.example.wangmengyun.activity.DaodaActivity;
 import com.example.wangmengyun.activity.DaodaCityActivity;
+import com.example.wangmengyun.activity.FireStoreActivity;
 import com.example.wangmengyun.activity.FirebaseAuthActivity;
 import com.example.wangmengyun.activity.FlightListActivity;
 import com.example.wangmengyun.activity.MainActivity;
@@ -31,8 +34,13 @@ import com.example.wangmengyun.activity.MainActivity;
 import com.example.wangmengyun.activity.SearchFlightActivity;
 import com.example.wangmengyun.activity.ZidongtishiActivity;
 import com.example.wangmengyun.lefei.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -63,9 +71,14 @@ public class SearchFlightFragment extends Fragment {
     private Button mArriveButton;
 
     private Button mDateButton;
+    private ImageView clearBtn;
+    private ImageView backBtn;
 
     private Flight mFlight;
     private City city;
+
+    private DocumentReference mDocRef = FirebaseFirestore.getInstance().document("sampleData/CityPair");
+    private String TAG = "CityPair";
 
 
     @Override
@@ -81,7 +94,6 @@ public class SearchFlightFragment extends Fragment {
 //
 //        city= CityLab.get(getActivity()).getCity(cityName);
 
-
     }
 
     @Nullable
@@ -89,6 +101,18 @@ public class SearchFlightFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_searchflight, container, false);
+
+        clearBtn = (ImageView) v. findViewById(R.id.iv_search_clear);
+        backBtn = (ImageView) v. findViewById(R.id.back);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+
+            }
+        });
+
 
         mSearchFlightButton = v.findViewById(R.id.btn_search);
 
@@ -100,9 +124,34 @@ public class SearchFlightFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //TODO
-                Intent intent = new Intent(getActivity(), FirebaseAuthActivity.class);
+//                Intent intent = new Intent(getActivity(), FireStoreActivity.class);
+//
+//                startActivity(intent);
+/*
+这里是把出发城市和到达城市写入数据库
 
-                startActivity(intent);
+ */
+
+                Log.i(TAG,"Clicked");
+
+                String chufaCity = mDepartureButton.getText().toString();
+
+                String daodaCity = mArriveButton.getText().toString();
+
+                Map<String,Object> dataToSave = new HashMap<>();
+
+                dataToSave.put("chufaCity", chufaCity);
+
+                dataToSave.put("daodaCity", daodaCity);
+
+                mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "城市对存储成功!");
+                    }
+                });
+
+
             }
         });
 //
