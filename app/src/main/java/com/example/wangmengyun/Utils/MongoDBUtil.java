@@ -10,7 +10,7 @@
 //
 //public class MongoDBUtil {
 //
-//    MongoClientURI uri = new MongoClientURI( "mongodb://wmy:ilovecd@ds251799.mlab.com:51799/mongo_connect" );
+//    MongoClientURI uri = new MongoClientURI( "mongodb://<>.mlab.com:51799/mongo_connect" );
 //    MongoClient mongoClient = new MongoClient(uri);
 //    MongoDatabase db = mongoClient.getDatabase(uri.getDatabase());
 //
