@@ -111,6 +111,11 @@
 
         </activity>
 
+        <activity android:name="com.example.wangmengyun.activity.AsynctaskActivity">
+
+        </activity>
+
+
     </application>
 
 </manifest>
