@@ -114,7 +114,13 @@
         <activity android:name="com.example.wangmengyun.activity.AsynctaskActivity">
 
         </activity>
+        <activity android:name="com.example.wangmengyun.activity.ChangeUserInfoActivity">
 
+        </activity>
+
+        <activity android:name="com.example.wangmengyun.activity.FlightActivity">
+
+        </activity>
 
     </application>
 

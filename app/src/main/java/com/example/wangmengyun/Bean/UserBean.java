@@ -10,4 +10,7 @@ public class UserBean {
     // 签名
     public String signature;
 
+    public String psw;
+
+
 }

@@ -1,30 +1,18 @@
 package com.example.wangmengyun.activity;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.wangmengyun.Bean.City;
+import com.example.wangmengyun.Bean.Flight;
 import com.example.wangmengyun.lefei.R;
-import com.example.wangmengyun.sqlite.AllCitySqliteOpenHelper;
 import com.example.wangmengyun.view.FlightView;
-import com.google.firebase.FirebaseApp;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -130,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMyInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(MainActivity.this, UserInfoActivity.class);
+                Intent in = new Intent(MainActivity.this, AsynctaskActivity.class);
 
                 startActivity(in);
             }
@@ -139,7 +127,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTicketBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(MainActivity.this,  AsynctaskActivity.class);
+
+                Intent in = new Intent(MainActivity.this,  FlightActivity.class);
 
                 startActivity(in);
             }

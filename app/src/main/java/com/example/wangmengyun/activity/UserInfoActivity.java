@@ -1,16 +1,12 @@
 package com.example.wangmengyun.activity;
 
-/**
- * Created by wangmengyun on 2018/3/6.
- */
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -22,14 +18,12 @@ import com.example.wangmengyun.Utils.AnalysisUtils;
 import com.example.wangmengyun.Utils.DBUtils;
 import com.example.wangmengyun.lefei.R;
 
-
 public class UserInfoActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView tv_back;
     private TextView tv_main_title;
     private TextView tv_nickName, tv_signature, tv_user_name, tv_sex;
     private RelativeLayout rl_nickName, rl_sex, rl_signature,
             rl_title_bar;
-
     private static final int CHANGE_NICKNAME = 1;//修改昵称的自定义常量
     private static final int CHANGE_SIGNATURE = 2;//修改个性签名的自定义常量
     private String spUserName;
@@ -61,8 +55,6 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         tv_user_name = (TextView) findViewById(R.id.tv_user_name);
         tv_sex = (TextView) findViewById(R.id.tv_sex);
         tv_signature = (TextView) findViewById(R.id.tv_signature);
-
-
     }
     /**
      * 获取数据
@@ -74,11 +66,11 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         if (bean == null) {
             bean = new UserBean();
             bean.userName=spUserName;
-            bean.nickName="王梦云";
-            bean.sex="女";
-            bean.signature="王梦云";
+            bean.nickName="问答精灵";
+            bean.sex="男";
+            bean.signature="问答精灵";
             //保存用户信息到数据库
-      //      DBUtils.getInstance(this).saveUserInfo(bean);
+            DBUtils.getInstance(this).saveUserInfo(bean);
         }
         setValue(bean);
     }
@@ -109,26 +101,28 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
             case R.id.tv_back://返回键的点击事件
                 this.finish();
                 break;
-//
-//            case R.id.rl_nickName://昵称的点击事件
-//                String name = tv_nickName.getText().toString();//获取昵称控件上的数据
-//                Bundle bdName = new Bundle();
-//                bdName.putString("content", name);//传递界面上的昵称数据
-//                bdName.putString("title", "昵称");
-//                bdName.putInt("flag", 1);//flag传递1时表示是修改昵称
-//                enterActivityForResult(ChangeUserInfoActivity.class,
-//                        CHANGE_NICKNAME, bdName);//跳转到个人资料修改界面
-//                break;
-//
-//            case R.id.rl_signature://签名的点击事件
-//                String signature = tv_signature.getText().toString();//获取签名控件上的数据
-//                Bundle bdSignature = new Bundle();
-//                bdSignature.putString("content", signature);//传递界面上的签名数据
-//                bdSignature.putString("title", "签名");
-//                bdSignature.putInt("flag", 2);//flag传递2时表示是修改签名
-//                enterActivityForResult(ChangeUserInfoActivity.class,
-//                        CHANGE_SIGNATURE, bdSignature);//跳转到个人资料修改界面
-//                break;
+            case R.id.rl_nickName://昵称的点击事件
+                String name = tv_nickName.getText().toString();//获取昵称控件上的数据
+                Bundle bdName = new Bundle();
+                bdName.putString("content", name);//传递界面上的昵称数据
+                bdName.putString("title", "昵称");
+                bdName.putInt("flag", 1);//flag传递1时表示是修改昵称
+                enterActivityForResult(ChangeUserInfoActivity.class,
+                        CHANGE_NICKNAME, bdName);//跳转到个人资料修改界面
+                break;
+            case R.id.rl_sex://性别的点击事件
+                String sex = tv_sex.getText().toString();//获取性别控件上的数据
+                sexDialog(sex);
+                break;
+            case R.id.rl_signature://签名的点击事件
+                String signature = tv_signature.getText().toString();//获取签名控件上的数据
+                Bundle bdSignature = new Bundle();
+                bdSignature.putString("content", signature);//传递界面上的签名数据
+                bdSignature.putString("title", "签名");
+                bdSignature.putInt("flag", 2);//flag传递2时表示是修改签名
+                enterActivityForResult(ChangeUserInfoActivity.class,
+                        CHANGE_SIGNATURE, bdSignature);//跳转到个人资料修改界面
+                break;
             default:
                 break;
         }
@@ -150,7 +144,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(DialogInterface dialog, int which) {//第二个参数是默认选中的哪个项
                 dialog.dismiss();
-                Toast.makeText(UserInfoActivity.this,items[which], Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserInfoActivity.this,items[which],Toast.LENGTH_SHORT).show();
                 setSex(items[which]);
             }
         });

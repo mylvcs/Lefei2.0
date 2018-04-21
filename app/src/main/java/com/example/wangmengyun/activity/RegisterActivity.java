@@ -18,8 +18,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.wangmengyun.Bean.UserBean;
 import com.example.wangmengyun.Utils.MD5Utils;
 import com.example.wangmengyun.lefei.R;
+import com.firebase.ui.auth.data.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
     //标题
@@ -34,6 +36,8 @@ public class RegisterActivity extends AppCompatActivity {
     private String userName,psw,pswAgain;
     //标题布局
     private RelativeLayout rl_title_bar;
+
+    UserBean user = new UserBean();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +46,10 @@ public class RegisterActivity extends AppCompatActivity {
         //设置此界面为竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         init();
+
     }
     private void init(){
+
         //从main_title_bar.xml页面布局中获得对应的UI控件
         tv_main_title=(TextView) findViewById(R.id.tv_main_title);
         tv_main_title.setText("注册");
@@ -66,30 +72,35 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //获取输入在相应控件中的字符串
                 getEditString();
-                if(TextUtils.isEmpty(userName)){
+                if(TextUtils.isEmpty(user.userName)){
                     Toast.makeText(RegisterActivity.this, "请输入用户名", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(TextUtils.isEmpty(psw)){
+                }else if(TextUtils.isEmpty(user.psw)){
                     Toast.makeText(RegisterActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
                     return;
                 }else if(TextUtils.isEmpty(pswAgain)){
                     Toast.makeText(RegisterActivity.this, "请再次输入密码", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(!psw.equals(pswAgain)){
+                }else if(!user.psw.equals(pswAgain)){
                     Toast.makeText(RegisterActivity.this, "输入两次的密码不一样", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(isExistUserName(userName)){
+                }else if(isExistUserName(user.userName)){
                     Toast.makeText(RegisterActivity.this, "此账户名已经存在", Toast.LENGTH_SHORT).show();
                     return;
                 }else{
                     Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
                     //把账号、密码和账号标识保存到sp里面
-                    saveRegisterInfo(userName, psw);
+                    saveRegisterInfo(user.userName, user.psw);
                     //注册成功后把账号传递到LoginActivity.java中
                     Intent data =new Intent();
-                    data.putExtra("userName", userName);
+                    data.putExtra("userName", user.userName);
                     setResult(RESULT_OK, data);
+
+                    SaveAsyncTask tsk = new SaveAsyncTask();
+                    tsk.execute(user);
+
                     RegisterActivity.this.finish();
+
                 }
             }
         });
@@ -97,10 +108,12 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * 获取控件中的字符串
      */
-    private void getEditString(){
-        userName=et_user_name.getText().toString().trim();
-        psw=et_psw.getText().toString().trim();
+    public void getEditString(){
+
+        user.userName =et_user_name.getText().toString().trim();
+        user.psw=et_psw.getText().toString().trim();
         pswAgain=et_psw_again.getText().toString().trim();
+
     }
     /**
      *从SharedPreferences中读取输入的用户名，判断SharedPreferences中是否有此用户名
@@ -127,4 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
         editor.putString(userName, md5Psw);
         editor.commit();//提交修改
     }
+
+
+
 }
