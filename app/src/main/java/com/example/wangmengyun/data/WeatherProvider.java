@@ -146,7 +146,7 @@ public class WeatherProvider extends ContentProvider {
      */
     @Override
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
-        throw new RuntimeException("Student, you need to implement the bulkInsert mehtod!");
+        throw new RuntimeException("Student, you need to implement the bulkInsert method!");
     }
 
 //  COMPLETED (9) Provide an implementation for the query method

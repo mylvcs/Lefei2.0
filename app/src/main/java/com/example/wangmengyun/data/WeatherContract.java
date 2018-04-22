@@ -33,13 +33,13 @@ public class WeatherContract {
      * content authority is the package name for the app, which is guaranteed to be unique on the
      * Play Store.
      */
-    public static final String CONTENT_AUTHORITY = "com.example.android.sunshine";
+    public static final String CONTENT_AUTHORITY = "com.example.wangmengyun.lefei";
 
     /*
      * Use CONTENT_AUTHORITY to create the base of all URI's which apps will use to contact
      * the content provider for Sunshine.
      */
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://"+CONTENT_AUTHORITY);
 
     /*
      * Possible paths that can be appended to BASE_CONTENT_URI to form valid URI's that Sunshine

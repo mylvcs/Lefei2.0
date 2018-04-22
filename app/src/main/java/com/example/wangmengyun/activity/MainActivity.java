@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wangmengyun.Bean.Flight;
+import com.example.wangmengyun.MongoLab.CodePerspective;
 import com.example.wangmengyun.lefei.R;
 import com.example.wangmengyun.view.FlightView;
 
@@ -128,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(MainActivity.this,  FlightActivity.class);
+                Intent in = new Intent(MainActivity.this, FlightActivity.class);
 
                 startActivity(in);
             }

@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.example.wangmengyun.Bean.City;
 import com.example.wangmengyun.Bean.CityContract;
+import com.example.wangmengyun.data.WeatherContract;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -128,30 +129,22 @@ public class OpenWeatherJsonUtils{
 
             weatherId = weatherObject.getInt(OWM_WEATHER_ID);
 
-            /*
-             * Temperatures are sent by Open Weather Map in a child object called "temp".
-             *
-             * Editor's Note: Try not to name variables "temp" when working with temperature.
-             * It confuses everybody. Temp could easily mean any number of things, including
-             * temperature, temporary variable, temporary folder, temporary employee, or many
-             * others, and is just a bad variable name.
-             */
-            JSONObject temperatureObject = dayForecast.getJSONObject(OWM_TEMPERATURE);
-            high = temperatureObject.getDouble(OWM_MAX);
-            low = temperatureObject.getDouble(OWM_MIN);
+//            /*
+//             * Temperatures are sent by Open Weather Map in a child object called "temp".
+//             *
+//             * Editor's Note: Try not to name variables "temp" when working with temperature.
+//             * It confuses everybody. Temp could easily mean any number of things, including
+//             * temperature, temporary variable, temporary folder, temporary employee, or many
+//             * others, and is just a bad variable name.
+//             */
+//            JSONObject temperatureObject = dayForecast.getJSONObject(OWM_TEMPERATURE);
+//            high = temperatureObject.getDouble(OWM_MAX);
+//            low = temperatureObject.getDouble(OWM_MIN);
 
             ContentValues weatherValues = new ContentValues();
 
-//            weatherValues.put(CityContract.CityEntry.COLUMN_HUMIDITY, humidity);
-//
-//            weatherValues.put(CityContract.CityEntry.COLUMN_HUMIDITY, windDirection);
-//
-//            weatherValues.put(CityContract.CityEntry.COLUMN_HUMIDITY, pressure);
-//
-//            weatherValues.put(CityContract.CityEntry.COLUMN_WIND_SPEED, windSpeed);
-//
-//            weatherValues.put(CityContract.CityEntry.COLUMN_MAX_TEMP, high);
-//            weatherValues.put(CityContract.CityEntry.COLUMN_MIN_TEMP, low);
+            weatherValues.put(WeatherContract.WeatherEntry.COLUMN_HUMIDITY, humidity);
+
 
             weatherContentValues[i] = weatherValues;
         }

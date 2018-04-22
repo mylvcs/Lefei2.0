@@ -58,11 +58,11 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
      */
     public class FlightListAdapterViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
 
-        public final TextView mFlightTextView;
+        public  TextView mFlightTextView;
 
         public FlightListAdapterViewHolder(View view) {
             super(view);
-            mFlightTextView = (TextView) view.findViewById(R.id.tv_weather_data);
+    //        mFlightTextView = (TextView) view.findViewById(R.id.tv_weather_data);
             view.setOnClickListener(this);
         }
 

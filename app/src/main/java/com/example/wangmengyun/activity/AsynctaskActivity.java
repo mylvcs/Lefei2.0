@@ -155,7 +155,7 @@ public class AsynctaskActivity extends AppCompatActivity {
 
         String flightQuery = mSearchBoxEditText.getText().toString();
 
-        URL flightSearchUrl = NetworkUtils.buildUrl(flightQuery);
+        URL flightSearchUrl = NetworkUtils.getUrl(this);
 
         mUrlDisplayTextView.setText(flightSearchUrl.toString());
 

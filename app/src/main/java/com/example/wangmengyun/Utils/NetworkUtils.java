@@ -18,7 +18,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
-
 import com.example.wangmengyun.data.SunshinePreferences;
 
 import java.io.IOException;
@@ -83,7 +82,6 @@ public final class NetworkUtils {
     /* The days parameter allows us to designate how many days of weather data we want */
     private static final String DAYS_PARAM = "cnt";
 
-    private static final String PARAM_QUERY = "q";
     /**
      * Retrieves the proper URL to query for the weather data. The reason for both this method as
      * well as {@link #buildUrlWithLocationQuery(String)} is two fold.
@@ -108,22 +106,6 @@ public final class NetworkUtils {
             String locationQuery = SunshinePreferences.getPreferredWeatherLocation(context);
             return buildUrlWithLocationQuery(locationQuery);
         }
-    }
-
-    public static URL buildUrl(String locationQuery) {
-        Uri builtUri = Uri.parse(STATIC_WEATHER_URL).buildUpon()
-                .appendQueryParameter(PARAM_QUERY,locationQuery )
-                .build();
-
-        URL url = null;
-        try {
-            url = new URL(builtUri.toString());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        return url;
-
     }
 
     /**
