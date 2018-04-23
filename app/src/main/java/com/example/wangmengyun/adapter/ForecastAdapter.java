@@ -49,7 +49,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
 
         public ForecastAdapterViewHolder(View view) {
             super(view);
-            mWeatherTextView = (TextView) view.findViewById(R.id.tv_weather_data);
+            mWeatherTextView = (TextView) view.findViewById(R.id.flight_duration);
             view.setOnClickListener(this);
         }
 
@@ -82,7 +82,9 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
     @Override
     public ForecastAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
+
         int layoutIdForListItem = R.layout.forecast_list_item;
+
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
 

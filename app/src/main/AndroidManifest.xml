@@ -133,7 +133,7 @@
 
         <provider
             android:name="com.example.wangmengyun.data.FlightProvider"
-            android:authorities="@string/content_authority"
+            android:authorities="com.example.wangmengyun.lefei"
             android:exported="false"/>
 
 
