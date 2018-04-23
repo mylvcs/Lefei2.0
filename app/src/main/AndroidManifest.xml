@@ -127,7 +127,9 @@
         <activity android:name="com.example.wangmengyun.MongoLab.ViewContactsActivity">
 
         </activity>
-        <activity android:name="com.example.wangmengyun.activity.WeatherActivity" />
+        <activity android:name="com.example.wangmengyun.activity.DetailActivity" >
+
+        </activity>
 
         <provider
             android:name="com.example.wangmengyun.data.FlightProvider"

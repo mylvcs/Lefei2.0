@@ -34,21 +34,9 @@ public final class NetworkUtils {
 
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
-    /*
-     * Sunshine was originally built to use OpenWeatherMap's API. However, we wanted to provide
-     * a way to much more easily test the app and provide more varied weather data. After all, in
-     * Mountain View (Google's HQ), it gets very boring looking at a forecast of perfectly clear
-     * skies at 75°F every day... (UGH!) The solution we came up with was to host our own fake
-     * weather server. With this server, there are two URL's you can use. The first (and default)
-     * URL will return dynamic weather data. Each time the app refreshes, you will get different,
-     * completely random weather data. This is incredibly useful for testing the robustness of your
-     * application, as different weather JSON will provide edge cases for some of your methods.
-     *
-     * If you'd prefer to test with the weather data that you will see in the videos on Udacity,
-     * you can do so by setting the FORECAST_BASE_URL to STATIC_WEATHER_URL below.
-     */
+
     private static final String DYNAMIC_WEATHER_URL =
-            "https://andfun-weather.udacity.com/weather";
+            "https://api.mlab.com/api/1/databases/mongo_connect/collections/flights/?&apiKey=l2vM_qRqK1SfqIbQsV9zq4PJVINybEvN";
 
     private static final String STATIC_WEATHER_URL =
             "https://andfun-weather.udacity.com/staticweather";
@@ -99,12 +87,28 @@ public final class NetworkUtils {
     public static URL getUrl(Context context) {
         if (SunshinePreferences.isLocationLatLonAvailable(context)) {
             double[] preferredCoordinates = SunshinePreferences.getLocationCoordinates(context);
+
             double latitude = preferredCoordinates[0];
             double longitude = preferredCoordinates[1];
+
             return buildUrlWithLatitudeLongitude(latitude, longitude);
         } else {
             String locationQuery = SunshinePreferences.getPreferredWeatherLocation(context);
             return buildUrlWithLocationQuery(locationQuery);
+        }
+    }
+
+    public static URL getUrl() {
+
+        Uri flightQueryUri = Uri.parse(DYNAMIC_WEATHER_URL).buildUpon().build();
+        try {
+            URL flightQueryUrl = new URL(flightQueryUri.toString());
+            Log.v(TAG, "URL: " + flightQueryUri);
+
+            return flightQueryUrl;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -160,13 +164,7 @@ public final class NetworkUtils {
         }
     }
 
-    /**
-     * This method returns the entire result from the HTTP response.
-     *
-     * @param url The URL to fetch the HTTP response from.
-     * @return The contents of the HTTP response, null if no response
-     * @throws IOException Related to network and stream reading
-     */
+
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {

@@ -27,9 +27,9 @@ public class FlightContract {
      * content authority is the package name for the app, which is guaranteed to be unique on the
      * Play Store.
      */
- //   public static final String CONTENT_AUTHORITY = "api.mongolab.com/api/1/databases/mongo_connect/collections/flights?apiKey=l2vM_qRqK1SfqIbQsV9zq4PJVINybEvN";
+   public static final String CONTENT_AUTHORITY = "api.mongolab.com/api/1/databases/mongo_connect/collections/flights?apiKey=l2vM_qRqK1SfqIbQsV9zq4PJVINybEvN";
 
-    public static final String CONTENT_AUTHORITY = "com.example.wangmengyun.lefei";
+//    public static final String CONTENT_AUTHORITY = "com.example.wangmengyun.lefei";
     /*
      * Use CONTENT_AUTHORITY to create the base of all URI's which apps will use to contact
      * the content provider for Sunshine.

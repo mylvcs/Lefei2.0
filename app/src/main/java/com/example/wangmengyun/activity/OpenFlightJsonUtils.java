@@ -1,45 +1,30 @@
-package com.example.wangmengyun.Utils;
+package com.example.wangmengyun.activity;
 
-import android.content.ContentValues;
+/**
+ * Created by wangmengyun on 2018/4/23.
+ */
+
 import android.content.Context;
-
-
-import com.example.wangmengyun.data.SunshinePreferences;
-import com.example.wangmengyun.data.WeatherContract;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.HttpURLConnection;
-
-/**
- * Utility functions to handle OpenWeatherMap JSON data.
- */
-public final class OpenWeatherJsonUtils {
-
-    /* Location information */
-    private static final String CITY = "city";
+public final class OpenFlightJsonUtils {
 
     private static final String FLIGHTID = "id";
-    private static final String LATITUDE = "lat";
-    private static final String LONGITUDE = "lon";
-
-    /* Flight information. Each info is an element of the "list" array */
     private static final String LIST = "list";
 
-    /* All temperatures are children of the "temp" object */
-    private static final String TEMPERATURE = "temp";
     private static final String DEPARTURE = "departure";
     private static final String ARRIVAL = "arrival" ;
 
 
-    public static String[] getSimpleWeatherStringsFromJson(Context context, String forecastJsonStr)
+    public static String[] getJsonData(Context context, String JsonStr)
             throws JSONException {
 
-        String[] parsedFlightData;
+        String parsedFlightData[];
 
-        JSONObject forecastJson = new JSONObject(forecastJsonStr);
+        JSONArray flightArray  = new JSONArray(JsonStr);
 //
 //        /* Is there an error? */
 //        if (forecastJson.has(OWM_MESSAGE_CODE)) {
@@ -58,32 +43,19 @@ public final class OpenWeatherJsonUtils {
 //            }
 //        }
 
-        JSONArray flightArray = forecastJson.getJSONArray(LIST);
-
         parsedFlightData = new String[flightArray.length()];
 
-//        long startDay = SunshineDateUtils.getNormalizedUtcDateForToday();
-
         for (int i = 0; i < flightArray.length(); i++) {
-//            String date;
-            int flightId;
-            String departure;
-            String arrival;
 
-            JSONObject jsonObject = flightArray.getJSONObject(i);
+            JSONObject flight = flightArray.getJSONObject(i);
 
-//            dateTime = startDay + SunshineDateUtils.DAY_IN_MILLIS * i;
-//            date = SunshineDateUtils.getFriendlyDateString(context, dateTime, false)
+            String flightId = flight.getString("_id");
 
-            flightId = jsonObject.getInt(String.valueOf(FLIGHTID));
-
-            departure = jsonObject.getString(DEPARTURE);
-            arrival = jsonObject.getString(ARRIVAL);
-
+            String departure = flight.getString("departure");
+            String arrival = flight.getString("arrival");
 
             parsedFlightData[i] = flightId + " - " + departure + " - " + arrival;
         }
-
         return parsedFlightData;
     }
 

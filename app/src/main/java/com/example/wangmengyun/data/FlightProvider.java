@@ -19,6 +19,7 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.wangmengyun.Bean.FlightContract;
 
@@ -139,7 +140,6 @@ public class FlightProvider extends ContentProvider {
 
         Cursor cursor;
         switch (sUriMatcher.match(uri)) {
-
 
             case CODE_WEATHER: {
                 cursor = mOpenHelper.getReadableDatabase().query(
