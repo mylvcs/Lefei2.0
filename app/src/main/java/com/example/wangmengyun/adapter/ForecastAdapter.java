@@ -1,128 +1,123 @@
 package com.example.wangmengyun.adapter;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+
+import com.example.wangmengyun.Bean.Flight;
+import com.example.wangmengyun.Utils.SunshineDateUtils;
+import com.example.wangmengyun.Utils.SunshineWeatherUtils;
+import com.example.wangmengyun.activity.FlightActivity;
 
 import com.example.wangmengyun.lefei.R;
 
-/**
- * {@link ForecastAdapter} exposes a list of weather forecasts to a
- * {@link android.support.v7.widget.RecyclerView}
- */
+import java.util.List;
+
+
 public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapterViewHolder> {
 
-    private String[] mWeatherData;
+    private static final int VIEW_TYPE_TODAY = 0;
+    private static final int VIEW_TYPE_FUTURE_DAY = 1;
 
-    /*
-     * An on-click handler that we've defined to make it easy for an Activity to interface with
-     * our RecyclerView
-     */
+    private final Context mContext;
+
+    private List<Flight> flights;
+
+    private String[] mFlightData;
+
     final private ForecastAdapterOnClickHandler mClickHandler;
 
-    /**
-     * The interface that receives onClick messages.
-     */
     public interface ForecastAdapterOnClickHandler {
-        void onClick(String weatherForDay);
+        void onClick(String Flightdate);
     }
 
-    /**
-     * Creates a ForecastAdapter.
-     *
-     * @param clickHandler The on-click handler for this adapter. This single handler is called
-     *                     when an item is clicked.
-     */
-    public ForecastAdapter(ForecastAdapterOnClickHandler clickHandler) {
+
+ //   private Cursor mCursor;
+
+
+    public ForecastAdapter(@NonNull Context context, ForecastAdapterOnClickHandler clickHandler) {
+        mContext = context;
         mClickHandler = clickHandler;
     }
 
-    /**
-     * Cache of the children views for a forecast list item.
-     */
-    public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
-        public final TextView mWeatherTextView;
 
-        public ForecastAdapterViewHolder(View view) {
-            super(view);
-            mWeatherTextView = (TextView) view.findViewById(R.id.flight_duration);
-            view.setOnClickListener(this);
-        }
+   public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        /**
-         * This gets called by the child views during a click.
-         *
-         * @param v The View that was clicked
-         */
-        @Override
-        public void onClick(View v) {
-            int adapterPosition = getAdapterPosition();
+       final ImageView iconView;
 
-            String weatherForDay = mWeatherData[adapterPosition];
+       final TextView dateView;
+       final TextView descriptionView;
+       final TextView highTempView;
+       final TextView lowTempView;
 
-            mClickHandler.onClick(weatherForDay);
-        }
-    }
+       ForecastAdapterViewHolder(View view) {
+           super(view);
 
-    /**
-     * This gets called when each new ViewHolder is created. This happens when the RecyclerView
-     * is laid out. Enough ViewHolders will be created to fill the screen and allow for scrolling.
-     *
-     * @param viewGroup The ViewGroup that these ViewHolders are contained within.
-     * @param viewType  If your RecyclerView has more than one type of item (which ours doesn't) you
-     *                  can use this viewType integer to provide a different layout. See
-     *                  {@link android.support.v7.widget.RecyclerView.Adapter#getItemViewType(int)}
-     *                  for more details.
-     * @return A new ForecastAdapterViewHolder that holds the View for each list item
-     */
+           iconView = (ImageView) view.findViewById(R.id.weather_icon);
+           dateView = (TextView) view.findViewById(R.id.zhida);
+           descriptionView = (TextView) view.findViewById(R.id.flight_duration);
+           highTempView = (TextView) view.findViewById(R.id.flight_date);
+           lowTempView = (TextView) view.findViewById(R.id.airline_description);
+
+           view.setOnClickListener(this);
+       }
+
+
+       @Override
+       public void onClick(View v) {
+           int adapterPosition = getAdapterPosition();
+
+           String weatherForDay = mFlightData[adapterPosition];
+
+           mClickHandler.onClick(weatherForDay);
+       }
+
+   }
+
+
+    @NonNull
     @Override
-    public ForecastAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        Context context = viewGroup.getContext();
+    public ForecastAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
-        int layoutIdForListItem = R.layout.forecast_list_item;
+        Context context = viewGroup.getContext();
 
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
 
-        View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
+
+        View view = inflater.inflate( R.layout.forecast_list_item , viewGroup, shouldAttachToParentImmediately);
+
+
         return new ForecastAdapterViewHolder(view);
     }
 
-    /**
-     * OnBindViewHolder is called by the RecyclerView to display the data at the specified
-     * position. In this method, we update the contents of the ViewHolder to display the weather
-     * details for this particular position, using the "position" argument that is conveniently
-     * passed into us.
-     *
-     * @param forecastAdapterViewHolder The ViewHolder which should be updated to represent the
-     *                                  contents of the item at the given position in the data set.
-     * @param position                  The position of the item within the adapter's data set.
-     */
     @Override
-    public void onBindViewHolder(ForecastAdapterViewHolder forecastAdapterViewHolder, int position) {
-        String weatherForThisDay = mWeatherData[position];
-        forecastAdapterViewHolder.mWeatherTextView.setText(weatherForThisDay);
+    public void onBindViewHolder(@NonNull ForecastAdapterViewHolder holder, int position) {
+
+        Flight flight  = flights.get(position);
+
+        holder.dateView.setText(flight.getDate().toString());
+
+        holder.descriptionView.setText(flight.getDeparture_City());
+
+        holder.highTempView.setText(flight.getArrive_City());
+
+        holder.lowTempView.setText(flight.getPrice());
+
+
     }
 
     @Override
     public int getItemCount() {
-        if (null == mWeatherData) return 0;
-        return mWeatherData.length;
-    }
+        if (null == mFlightData) return 0;
 
-    /**
-     * This method is used to set the weather forecast on a ForecastAdapter if we've already
-     * created one. This is handy when we get new data from the web but don't want to create a
-     * new ForecastAdapter to display it.
-     *
-     * @param weatherData The new weather data to be displayed.
-     */
-    public void setWeatherData(String[] weatherData) {
-        mWeatherData = weatherData;
-        notifyDataSetChanged();
+        return mFlightData.length;
     }
 }

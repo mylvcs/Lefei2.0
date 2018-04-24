@@ -6,9 +6,16 @@ package com.example.wangmengyun.activity;
 
 import android.content.Context;
 
+import com.example.wangmengyun.Bean.Flight;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.mongodb.util.JSON;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 public final class OpenFlightJsonUtils {
 
@@ -43,19 +50,22 @@ public final class OpenFlightJsonUtils {
 //            }
 //        }
 
+
+
         parsedFlightData = new String[flightArray.length()];
 
         for (int i = 0; i < flightArray.length(); i++) {
 
             JSONObject flight = flightArray.getJSONObject(i);
 
-            String flightId = flight.getString("_id");
+            String flightId = flight.getString("airline");
 
             String departure = flight.getString("departure");
             String arrival = flight.getString("arrival");
 
             parsedFlightData[i] = flightId + " - " + departure + " - " + arrival;
         }
+
         return parsedFlightData;
     }
 

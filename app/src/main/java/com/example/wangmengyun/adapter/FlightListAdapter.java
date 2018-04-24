@@ -1,149 +1,124 @@
-package com.example.wangmengyun.adapter;/*
- * Copyright (C) 2016 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+package com.example.wangmengyun.adapter;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+
+import com.example.wangmengyun.Bean.Flight;
+import com.example.wangmengyun.Utils.SunshineDateUtils;
+import com.example.wangmengyun.Utils.SunshineWeatherUtils;
+import com.example.wangmengyun.activity.FlightActivity;
 
 import com.example.wangmengyun.lefei.R;
 
+import java.util.List;
 
-public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.FlightListAdapterViewHolder> {
+
+public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.ForecastAdapterViewHolder>
+implements View.OnClickListener {
+
+    private static final int VIEW_TYPE_TODAY = 0;
+    private static final int VIEW_TYPE_FUTURE_DAY = 1;
+
+    private final Context mContext;
+
+    private List<Flight> flights;
 
     private String[] mFlightData;
 
-    /*
-     * An on-click handler that we've defined to make it easy for an Activity to interface with
-     * our RecyclerView
-     */
-    final private ForecastAdapterOnClickHandler mClickHandler;
+    final private FlightListAdapterClickHandler mClickHandler;
 
-    /**
-     * The interface that receives onClick messages.
-     */
-    public interface ForecastAdapterOnClickHandler {
-        void onClick(String FlightForDay);
+    @Override
+    public void onClick(View v) {
+
     }
 
-    /**
-     * Creates a ForecastAdapter.
-     *
-     * @param clickHandler The on-click handler for this adapter. This single handler is called
-     *                     when an item is clicked.
-     */
-    public FlightListAdapter(ForecastAdapterOnClickHandler clickHandler) {
+    public interface FlightListAdapterClickHandler {
+        void onClick(String Flightdate);
+    }
+
+
+    public FlightListAdapter(@NonNull Context context, FlightListAdapterClickHandler clickHandler) {
+        mContext = context;
         mClickHandler = clickHandler;
     }
 
-    /**
-     * Cache of the children views for a forecast list item.
-     */
-    public class FlightListAdapterViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
 
-        public  TextView mFlightTextView;
+    public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public FlightListAdapterViewHolder(View view) {
+        final ImageView iconView;
+
+        final TextView dateView;
+        final TextView descriptionView;
+        final TextView highTempView;
+        final TextView lowTempView;
+
+        ForecastAdapterViewHolder(View view) {
             super(view);
-    //        mFlightTextView = (TextView) view.findViewById(R.id.tv_weather_data);
+
+            iconView = (ImageView) view.findViewById(R.id.weather_icon);
+            dateView = (TextView) view.findViewById(R.id.zhida);
+            descriptionView = (TextView) view.findViewById(R.id.flight_duration);
+            highTempView = (TextView) view.findViewById(R.id.flight_date);
+            lowTempView = (TextView) view.findViewById(R.id.airline_description);
+
             view.setOnClickListener(this);
         }
 
-        /**
-         * This gets called by the child views during a click.
-         *
-         * @param v The View that was clicked
-         */
+
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
-            String FlightForDay = mFlightData[adapterPosition];
-            mClickHandler.onClick(FlightForDay);
+
+            String weatherForDay = mFlightData[adapterPosition];
+
+            mClickHandler.onClick(weatherForDay);
         }
+
     }
 
-    /**
-     * This gets called when each new ViewHolder is created. This happens when the RecyclerView
-     * is laid out. Enough ViewHolders will be created to fill the screen and allow for scrolling.
-     *
-     * @param viewGroup The ViewGroup that these ViewHolders are contained within.
-     * @param viewType  If your RecyclerView has more than one type of item (which ours doesn't) you
-     *                  can use this viewType integer to provide a different layout. See
-     *                  {@link android.support.v7.widget.RecyclerView.Adapter#getItemViewType(int)}
-     *                  for more details.
-     * @return A new ForecastAdapterViewHolder that holds the View for each list item
-     */
+
+    @NonNull
     @Override
-    public FlightListAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        Context context = viewGroup.getContext();
+    public ForecastAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
-        int layoutIdForListItem = R.layout.forecast_list_item;
+        View view = LayoutInflater.from(mContext).inflate(R.layout.forecast_list_item,viewGroup,false);
 
-        LayoutInflater inflater = LayoutInflater.from(context);
+        view.setOnClickListener(this);
 
-        boolean shouldAttachToParentImmediately = false;
+        ForecastAdapterViewHolder holder = new ForecastAdapterViewHolder(view);
 
-        View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
+        return holder;
 
-        return new FlightListAdapterViewHolder(view);
     }
 
-
-    /**
-     * OnBindViewHolder is called by the RecyclerView to display the data at the specified
-     * position. In this method, we update the contents of the ViewHolder to display the Flight
-     * details for this particular position, using the "position" argument that is conveniently
-     * passed into us.
-     *
-     * @param forecastAdapterViewHolder The ViewHolder which should be updated to represent the
-     *                                  contents of the item at the given position in the data set.
-     * @param position                  The position of the item within the adapter's data set.
-     */
     @Override
-    public void onBindViewHolder(FlightListAdapterViewHolder forecastAdapterViewHolder, int position) {
-        String FlightForThisDay = mFlightData[position];
+    public void onBindViewHolder(@NonNull ForecastAdapterViewHolder holder, int position) {
 
-        forecastAdapterViewHolder.mFlightTextView.setText(FlightForThisDay);
+        Flight flight  = flights.get(position);
+
+        holder.dateView.setText(flight.getDate().toString());
+
+        holder.descriptionView.setText(flight.getDeparture_City());
+
+        holder.highTempView.setText(flight.getArrive_City());
+
+        holder.lowTempView.setText(flight.getPrice());
+
+
     }
 
-    /**
-     * This method simply returns the number of items to display. It is used behind the scenes
-     * to help layout our Views and for animations.
-     *
-     * @return The number of items available in our forecast
-     */
     @Override
     public int getItemCount() {
         if (null == mFlightData) return 0;
-        return mFlightData.length;
-    }
 
-    /**
-     * This method is used to set the Flight forecast on a ForecastAdapter if we've already
-     * created one. This is handy when we get new data from the web but don't want to create a
-     * new ForecastAdapter to display it.
-     *
-     * @param FlightData The new Flight data to be displayed.
-     */
-    public void setFlightData(String[] FlightData) {
-        mFlightData = FlightData;
-        notifyDataSetChanged();
+        return mFlightData.length;
     }
 }
