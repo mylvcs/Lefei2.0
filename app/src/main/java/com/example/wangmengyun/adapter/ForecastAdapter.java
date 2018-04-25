@@ -143,7 +143,7 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
     public ViewHolder(View view) {
         super(view);
 
-        iconView = (ImageView) view.findViewById(R.id.weather_icon);
+        iconView = (ImageView) view.findViewById(R.id.flight_icon);
         dateView = (TextView) view.findViewById(R.id.zhida);
         descriptionView = (TextView) view.findViewById(R.id.flight_duration);
         highTempView = (TextView) view.findViewById(R.id.flight_date);

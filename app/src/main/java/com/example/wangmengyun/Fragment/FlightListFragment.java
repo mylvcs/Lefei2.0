@@ -85,7 +85,7 @@ public class FlightListFragment extends Fragment{
 
         public void bindItem(Flight flightitem){
 
-            mFlightDescriptionTextView.setText(flightitem.getDeparture_Date());
+            mFlightDescriptionTextView.setText(flightitem.getPrice());
 
             mDepartureTextView.setText(flightitem.getDeparture_City());
 

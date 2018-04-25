@@ -5,7 +5,7 @@ import java.util.UUID;
 
 /**
  * Created by poornima-udacity on 6/26/15.
- * 航班类里有航班号，出发城市，到达城市，出发时间，到达时间，核载人数，出发日期
+ * 航班类里有航班号，出发城市，到达城市，出发时间，到达时间，核载人数，出发日期, airlineCompany, 
  */
 public class Flight {
     public UUID flightNumber;

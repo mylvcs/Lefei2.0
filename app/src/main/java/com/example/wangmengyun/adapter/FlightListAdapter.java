@@ -55,19 +55,21 @@ implements View.OnClickListener {
 
         final ImageView iconView;
 
-        final TextView dateView;
-        final TextView descriptionView;
-        final TextView highTempView;
-        final TextView lowTempView;
+        final TextView zhida;
+        final TextView flight_duration;
+        final TextView price;
+        final TextView airlineCompany;
 
         ForecastAdapterViewHolder(View view) {
             super(view);
 
-            iconView = (ImageView) view.findViewById(R.id.weather_icon);
-            dateView = (TextView) view.findViewById(R.id.zhida);
-            descriptionView = (TextView) view.findViewById(R.id.flight_duration);
-            highTempView = (TextView) view.findViewById(R.id.flight_date);
-            lowTempView = (TextView) view.findViewById(R.id.airline_description);
+            iconView = (ImageView) view.findViewById(R.id.flight_icon);
+            zhida = (TextView) view.findViewById(R.id.zhida);
+
+            flight_duration = (TextView) view.findViewById(R.id.flight_duration);
+
+            price = view.findViewById(R.id.ticket_price);
+            airlineCompany = (TextView) view.findViewById(R.id.airline_description);
 
             view.setOnClickListener(this);
         }
@@ -103,14 +105,12 @@ implements View.OnClickListener {
     public void onBindViewHolder(@NonNull ForecastAdapterViewHolder holder, int position) {
 
         Flight flight  = flights.get(position);
-
-        holder.dateView.setText(flight.getDate().toString());
-
-        holder.descriptionView.setText(flight.getDeparture_City());
-
-        holder.highTempView.setText(flight.getArrive_City());
-
-        holder.lowTempView.setText(flight.getPrice());
+//
+//        holder.flight_duration.setText(flight.getDeparture_City());
+//
+//        holder.zhida.setText(flight.getArrive_Date());
+//
+//        holder.price.setText(flight.getPrice());
 
 
     }

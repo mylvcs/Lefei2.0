@@ -27,7 +27,7 @@
     android:paddingTop="12dp">
 
     <ImageView
-        android:id="@+id/weather_icon"
+        android:id="@+id/flight_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
@@ -38,16 +38,15 @@
     <TextView
         android:id="@+id/flight_duration"
         android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:textSize="28dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintLeft_toRightOf="@+id/weather_icon"
+        app:layout_constraintLeft_toRightOf="@+id/flight_icon"
         tools:text="07:00 - 09:20" />
 
     <TextView
         android:id="@+id/airline_description"
-        android:layout_width="95dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="@+id/flight_duration"
         app:layout_constraintTop_toTopOf="@+id/guideline"
@@ -57,19 +56,18 @@
         android:id="@+id/zhida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="28dp"
-
+        android:layout_marginTop="12dp"
         app:layout_constraintTop_toTopOf="@+id/guideline"
-        tools:layout_editor_absoluteX="259dp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteX="298dp"
         tools:text="直达" />
 
     <TextView
         android:id="@+id/ticket_price"
-        android:layout_width="85dp"
-        android:layout_height="43dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginRight="24dp"
         android:gravity="end"
-        android:textSize="28dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintRight_toRightOf="parent"
         tools:text="￥203" />
