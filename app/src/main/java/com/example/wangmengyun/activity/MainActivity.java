@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(MainActivity.this, FlightActivity.class);
+                Intent in = new Intent(MainActivity.this, FlightListActivity.class);
 
                 startActivity(in);
             }

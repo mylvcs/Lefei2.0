@@ -28,7 +28,7 @@ import com.example.wangmengyun.activity.DaodaActivity;
 import com.example.wangmengyun.activity.DaodaCityActivity;
 import com.example.wangmengyun.activity.FireStoreActivity;
 import com.example.wangmengyun.activity.FirebaseAuthActivity;
-import com.example.wangmengyun.activity.FlightListActivity;
+//import com.example.wangmengyun.activity.FlightListActivity;
 import com.example.wangmengyun.activity.MainActivity;
 
 import com.example.wangmengyun.activity.SearchFlightActivity;
@@ -240,7 +240,7 @@ public class SearchFlightFragment extends Fragment {
 
         }else if (requestCode == REQUEST_ARRIVE){
 
-                String arriveCity = (String) intent.getSerializableExtra(FlightListFragment.EXTRA_ARRIVE);
+                String arriveCity = (String) intent.getSerializableExtra("Arrive_city");
 
                 mFlight.setArrive_City(arriveCity);
 

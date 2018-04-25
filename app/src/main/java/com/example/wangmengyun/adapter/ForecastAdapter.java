@@ -21,7 +21,7 @@ import com.example.wangmengyun.lefei.R;
 import java.util.List;
 
 
-public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapterViewHolder> {
+public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHolder> implements View.OnClickListener {
 
     private static final int VIEW_TYPE_TODAY = 0;
     private static final int VIEW_TYPE_FUTURE_DAY = 1;
@@ -33,6 +33,19 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
     private String[] mFlightData;
 
     final private ForecastAdapterOnClickHandler mClickHandler;
+
+    public OnForecastClickListener mForecastClickListener;
+
+    public interface OnForecastClickListener{
+        void onClick(View view, Flight flight);
+    }
+    @Override
+    public void onClick(View v) {
+        if (mForecastClickListener!= null){
+            mForecastClickListener.onClick(v,(Flight)v.getTag());
+
+        }
+    }
 
     public interface ForecastAdapterOnClickHandler {
         void onClick(String Flightdate);
@@ -47,60 +60,65 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
         mClickHandler = clickHandler;
     }
 
+//   public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+//
+//       final ImageView iconView;
+//
+//       final TextView dateView;
+//       final TextView descriptionView;
+//       final TextView highTempView;
+//       final TextView lowTempView;
+//
+//       ForecastAdapterViewHolder(View view) {
+//           super(view);
+//
+//           iconView = (ImageView) view.findViewById(R.id.weather_icon);
+//           dateView = (TextView) view.findViewById(R.id.zhida);
+//           descriptionView = (TextView) view.findViewById(R.id.flight_duration);
+//           highTempView = (TextView) view.findViewById(R.id.flight_date);
+//           lowTempView = (TextView) view.findViewById(R.id.airline_description);
+//
+//           view.setOnClickListener(this);
+//       }
 
-   public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-       final ImageView iconView;
-
-       final TextView dateView;
-       final TextView descriptionView;
-       final TextView highTempView;
-       final TextView lowTempView;
-
-       ForecastAdapterViewHolder(View view) {
-           super(view);
-
-           iconView = (ImageView) view.findViewById(R.id.weather_icon);
-           dateView = (TextView) view.findViewById(R.id.zhida);
-           descriptionView = (TextView) view.findViewById(R.id.flight_duration);
-           highTempView = (TextView) view.findViewById(R.id.flight_date);
-           lowTempView = (TextView) view.findViewById(R.id.airline_description);
-
-           view.setOnClickListener(this);
-       }
-
-
-       @Override
-       public void onClick(View v) {
-           int adapterPosition = getAdapterPosition();
-
-           String weatherForDay = mFlightData[adapterPosition];
-
-           mClickHandler.onClick(weatherForDay);
-       }
-
-   }
+//
+//       @Override
+//       public void onClick(View v) {
+//           int adapterPosition = getAdapterPosition();
+//
+//           String weatherForDay = mFlightData[adapterPosition];
+//
+//           mClickHandler.onClick(weatherForDay);
+//       }
 
 
     @NonNull
     @Override
-    public ForecastAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        Context context = viewGroup.getContext();
+//        Context context = viewGroup.getContext();
+//
+//        LayoutInflater inflater = LayoutInflater.from(context);
+//        boolean shouldAttachToParentImmediately = false;
+//
+//
+//        View view = inflater.inflate( R.layout.forecast_list_item , viewGroup, shouldAttachToParentImmediately);
+//
+//
+//        return new ForecastAdapterViewHolder(view)
 
-        LayoutInflater inflater = LayoutInflater.from(context);
-        boolean shouldAttachToParentImmediately = false;
+        View view = LayoutInflater.from(mContext).inflate(R.layout.forecast_list_item,parent,false);
 
+        view.setOnClickListener(this);
 
-        View view = inflater.inflate( R.layout.forecast_list_item , viewGroup, shouldAttachToParentImmediately);
+        ViewHolder holder = new ViewHolder(view);
 
+        return holder;
 
-        return new ForecastAdapterViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ForecastAdapterViewHolder holder, int position) {
-
+    public void onBindViewHolder(ViewHolder holder, int position) {
         Flight flight  = flights.get(position);
 
         holder.dateView.setText(flight.getDate().toString());
@@ -111,8 +129,28 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
 
         holder.lowTempView.setText(flight.getPrice());
 
+    }
+
+
+public static class ViewHolder extends RecyclerView.ViewHolder {
+    private ImageView iconView;
+
+    final TextView dateView;
+    final TextView descriptionView;
+    final TextView highTempView;
+    final TextView lowTempView;
+
+    public ViewHolder(View view) {
+        super(view);
+
+        iconView = (ImageView) view.findViewById(R.id.weather_icon);
+        dateView = (TextView) view.findViewById(R.id.zhida);
+        descriptionView = (TextView) view.findViewById(R.id.flight_duration);
+        highTempView = (TextView) view.findViewById(R.id.flight_date);
+        lowTempView = (TextView) view.findViewById(R.id.airline_description);
 
     }
+}
 
     @Override
     public int getItemCount() {

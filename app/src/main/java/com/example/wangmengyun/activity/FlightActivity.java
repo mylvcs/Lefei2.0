@@ -29,7 +29,7 @@ import com.example.wangmengyun.lefei.R;
 import java.net.URL;
 
 public class FlightActivity extends AppCompatActivity implements
-        FlightListAdapter.FlightListAdapterClickHandler,
+        ForecastAdapter.ForecastAdapterOnClickHandler,
         LoaderCallbacks<String[]>,
         SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -72,12 +72,13 @@ public class FlightActivity extends AppCompatActivity implements
          */
         mRecyclerView.setHasFixedSize(true);
 
+        mForecastAdapter = new ForecastAdapter(this, this);
 
-        mFlightListAdapter = new FlightListAdapter(this, this);
+  //      mFlightListAdapter = new FlightListAdapter(this, this);
 
 
         /* Setting the adapter attaches it to the RecyclerView in our layout. */
-        mRecyclerView.setAdapter(mFlightListAdapter);
+        mRecyclerView.setAdapter(mForecastAdapter);
 
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
 

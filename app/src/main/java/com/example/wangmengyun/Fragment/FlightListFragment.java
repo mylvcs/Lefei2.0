@@ -1,252 +1,156 @@
 package com.example.wangmengyun.Fragment;
 
-
-import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.wangmengyun.Bean.Flight;
-import com.example.wangmengyun.Bean.FlightLab;
-import com.example.wangmengyun.activity.FlightActivityFragment;
-
-import com.example.wangmengyun.activity.FlightListActivity;
-
+import com.example.wangmengyun.database.FlightFetchr;
 import com.example.wangmengyun.lefei.R;
 
+import org.w3c.dom.Text;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-import static android.app.Activity.RESULT_OK;
+public class FlightListFragment extends Fragment{
 
-/**
- * Created by wangmengyun on 2018/3/28.
- */
+    private RecyclerView mRecyclerView;
+    private List<Flight> mFlights = new ArrayList<>();
 
-public class FlightListFragment extends Fragment {
-
-
-    private static final String ARG_CITY = "departureCity";
-
-    public static final String EXTRA_DEPARTURE = "NULL";
-    private static final int REQUEST_DEPARTURE = 1;
-    public static final String EXTRA_ARRIVE = "NULL";
-    private RecyclerView mFlightRecyclerView;
-
-    private FlightAdapter mFlightAdapter;
-//        private com.example.wangmengyun.activity.FlightActivityFragment.FlightAdapter mFlightAdapter;
-
-//    Flight[] flight = {
-//            new Flight("Shanghai", "Beijing", "2017/12/21", "2017/12/22"),
-//            new Flight("Shanghai", "Seattle", "2018/03/23", "20180324"),
-//            new Flight("NewYork", "Shanghai", "2018/03/03", "2018/03/04"),
-//
-//    };
-
+    private static final String TAG = "FlightListFragment";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setRetainInstance(true);
+        new FetchFlights().execute();
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        View v = inflater.inflate(R.layout.fragment_flight, container, false);
 
-        View view = inflater.inflate(R.layout.fragment_flight_list, container, false);
+        mRecyclerView = v.findViewById(R.id.flight_recycler_view);
 
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mFlightRecyclerView = (RecyclerView) view.findViewById(R.id.flight_recycler_view);
+        setupAdapter();
 
-        mFlightRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        updateUI();
-
-        return view;
-
-    }
-//
-//        private class FlightHolder extends RecyclerView.ViewHolder {j
-//
-//            public FlightHolder(LayoutInflater inflater, ViewGroup parent) {
-//
-//                super(inflater.inflate(R.layout.list_flight, parent, false));
-//            }
-//        }
-//
-//
-//        private class FlightAdapter extends RecyclerView.Adapter<com.example.wangmengyun.activity.FlightActivityFragment.FlightHolder> {
-//
-//            private List<Flight> mFlights;
-//
-//            private FlightAdapter(List<Flight> flights) {
-//                mFlights = flights;
-//            }
-//
-//            @Override
-//            public com.example.wangmengyun.activity.FlightActivityFragment.FlightHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//                LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-//
-//                return new com.example.wangmengyun.activity.FlightActivityFragment.FlightHolder(layoutInflater, parent);
-//            }
-//
-//            @Override
-//            public void onBindViewHolder(com.example.wangmengyun.activity.FlightActivityFragment.FlightHolder holder, int position) {
-//
-//            }
-//
-//            @Override
-//            public int getItemCount() {
-//                return mFlights.size();
-
-
-    private void updateUI() {
-
-        FlightLab flightLab = FlightLab.get(getActivity());
-        List<Flight> flights = flightLab.getFlight();
-
-        mFlightAdapter = new FlightAdapter(flights);
-        mFlightRecyclerView.setAdapter(mFlightAdapter);
-
+        return v;
 
     }
 
-    private class FlightAdapter extends RecyclerView.Adapter<FlightHolder> {
+    private void setupAdapter() {
 
-        private List<Flight> mFlights;
+        if (isAdded()){
+            mRecyclerView.setAdapter(new FlightAdapter(mFlights));
+        }
+    }
 
-        public FlightAdapter(List<Flight> flights) {
-            mFlights = flights;
+    private class FlightHolder extends RecyclerView.ViewHolder{
+
+        private TextView mFlightDescriptionTextView;
+
+        private TextView mDepartureTextView;
+
+        private TextView mArrivalTextView;
+
+
+        public FlightHolder(View view ) {
+            super(view);
+
+           mFlightDescriptionTextView= view.findViewById(R.id.zhida);
+
+           mDepartureTextView = view.findViewById( R.id.flight_duration);
+
+           mArrivalTextView = view.findViewById(R.id.airline_description);
+
         }
 
+        public void bindItem(Flight flightitem){
 
+            mFlightDescriptionTextView.setText(flightitem.getDeparture_Date());
+
+            mDepartureTextView.setText(flightitem.getDeparture_City());
+
+            mArrivalTextView.setText(flightitem.getArrive_City());
+        }
+    }
+
+    private class FlightAdapter extends RecyclerView.Adapter<FlightHolder>{
+
+        private List<Flight> mFlightItems;
+
+        private Context mContext;
+
+        public FlightAdapter(List<Flight> flightItems){
+
+            mFlightItems = flightItems;
+        }
+
+        @NonNull
         @Override
-        public FlightHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        public FlightHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-            return new FlightHolder(layoutInflater, parent);
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
+            View view = inflater.inflate(R.layout.forecast_list_item, parent, false);
+
+            return new FlightHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(FlightHolder holder, int position) {
+        public void onBindViewHolder(@NonNull FlightHolder holder, int position) {
 
-            Flight flight = mFlights.get(position);
-            holder.bind(flight);
+            Flight flightItem = mFlightItems.get(position);
+
+            holder.bindItem(flightItem);
 
         }
 
         @Override
         public int getItemCount() {
-            return mFlights.size();
+            return mFlightItems.size();
         }
     }
 
-    private class FlightHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        private TextView mDepartCityTextView;
-        private TextView mArriveCityTextView;
-
-        private Flight mFlight;
-
-
-        public FlightHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.list_flight, parent, false));
-
-            mDepartCityTextView = itemView.findViewById(R.id.departure_City);
-
-            mDepartCityTextView.setOnClickListener(this);
-
-            mArriveCityTextView = itemView.findViewById(R.id.arrive_City);
-
-            mArriveCityTextView.setOnClickListener(this);
-
-
-        }
-
-
-        public void bind(Flight flight) {
-            mFlight = flight;
-            mDepartCityTextView.setText(mFlight.getDeparture_City());
-
-            mArriveCityTextView.setText(mFlight.getArrive_City());
-
-        }
+    private class FetchFlights extends AsyncTask<Void, Void, List<Flight>>{
 
         @Override
-        public void onClick(View v) {
-  //          Toast.makeText(getActivity(), mFlight.getDeparture_City()+ "到达",Toast.LENGTH_SHORT).show();
+        protected List<Flight> doInBackground(Void... voids) {
 
-//           FragmentManager fm = getFragmentManager();
-//            FlightListFragment dialog= FlightListFragment.newInstance(mFlight.getDeparture_City());
+//            try {
+//                String result = new FlightFetchr().getUrlString("https://www.bignerdranch.com");
+//
+//                Log.i(TAG,result);
 //
 //
-            Intent intent = new Intent();
-           intent.putExtra( "DepartCity", mFlight.getDeparture_City() );
-            intent.putExtra("ArriveCity", mFlight.getArrive_City());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
-            getActivity().setResult(Activity.RESULT_OK,intent);
-            getActivity().finish();
-
-
-
-      //     sendResult(Activity.RESULT_OK, mFlight.getDeparture_City());
-      //      returnResult();
-
-
-//
-//            Intent intent = SearchFlightActivity.newIntent(getActivity(), mFlight.getDeparture_City());
-//            startActivityForResult(intent, REQUEST_DEPARTCITY);
-
-
+          return   new FlightFetchr().fetchItems();
         }
 
-        private void sendResult(int resultOk, String DepartCity,String ArriveCity) {
-
-            if (getTargetFragment() == null) {
-                return;
-            }
-            Intent in = new Intent();
-            in.putExtra(EXTRA_DEPARTURE, DepartCity);
-            in.putExtra(EXTRA_ARRIVE, ArriveCity);
-
-
-            getTargetFragment().onActivityResult(getTargetRequestCode(), resultOk, in);
+        protected void onPostExecute(List<Flight> items){
+            mFlights = items;
+            setupAdapter();
         }
-
     }
 
-    public static FlightListFragment newInstance(String departure_city) {
-
-        Bundle args = new Bundle();
-        args.putSerializable(ARG_CITY, departure_city);
-
-        FlightListFragment fragment = new FlightListFragment();
-        fragment.setArguments(args);
-
-        return fragment;
-    }
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//
-//        if (requestCode== REQUEST_DEPARTCITY){
-//            //Handle result;
-//        }
-//    }
-
-    public void returnResult(){
-
-        getActivity().setResult(Activity.RESULT_OK,null);
-    }
 }

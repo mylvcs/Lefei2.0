@@ -26,7 +26,7 @@ import com.baidu.location.LocationClientOption;
 import com.example.wangmengyun.Bean.City;
 import com.example.wangmengyun.Bean.LocateState;
 import com.example.wangmengyun.Fragment.ChufaFragment;
-import com.example.wangmengyun.Fragment.FlightListFragment;
+//import com.example.wangmengyun.Fragment.FlightListFragment;
 
 import com.example.wangmengyun.Utils.StringUtils;
 import com.example.wangmengyun.Utils.ToastUtils;

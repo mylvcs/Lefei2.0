@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.HttpURLConnection;
 import java.util.List;
 
 public final class OpenFlightJsonUtils {
@@ -32,24 +33,6 @@ public final class OpenFlightJsonUtils {
         String parsedFlightData[];
 
         JSONArray flightArray  = new JSONArray(JsonStr);
-//
-//        /* Is there an error? */
-//        if (forecastJson.has(OWM_MESSAGE_CODE)) {
-//
-//            int errorCode = forecastJson.getInt(OWM_MESSAGE_CODE);
-//
-//            switch (errorCode) {
-//
-//                case HttpURLConnection.HTTP_OK:
-//                    break;
-//                case HttpURLConnection.HTTP_NOT_FOUND:
-//
-//                    return null;
-//                default:
-//                    return null;
-//            }
-//        }
-
 
 
         parsedFlightData = new String[flightArray.length()];
