@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.wangmengyun.lefei">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -131,6 +132,10 @@
 
         </activity>
 
+        <activity android:name="com.example.wangmengyun.activity.MyFavouriteActivity">
+
+        </activity>
+
         <provider
             android:name="com.example.wangmengyun.data.FlightProvider"
             android:authorities="com.example.wangmengyun.lefei"
@@ -146,5 +151,6 @@
         </service>
 
     </application>
+
 
 </manifest>

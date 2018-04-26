@@ -29,6 +29,7 @@ import com.example.wangmengyun.activity.DaodaCityActivity;
 import com.example.wangmengyun.activity.FireStoreActivity;
 import com.example.wangmengyun.activity.FirebaseAuthActivity;
 //import com.example.wangmengyun.activity.FlightListActivity;
+import com.example.wangmengyun.activity.FlightListActivity;
 import com.example.wangmengyun.activity.MainActivity;
 
 import com.example.wangmengyun.activity.SearchFlightActivity;
@@ -85,7 +86,7 @@ public class SearchFlightFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mFlight = new Flight("Shanghai");
+        mFlight = new Flight();
 
 //            mFlight= (Flight) FlightLab.get(getActivity()).getFlight();
 //
@@ -123,10 +124,10 @@ public class SearchFlightFragment extends Fragment {
         mSearchFlightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
-//                Intent intent = new Intent(getActivity(), FireStoreActivity.class);
-//
-//                startActivity(intent);
+
+                Intent intent = new Intent(getActivity(), FlightListActivity.class);
+
+                startActivity(intent);
 /*
 这里是把出发城市和到达城市写入数据库
 
@@ -224,7 +225,7 @@ public class SearchFlightFragment extends Fragment {
           String departureCity= (String) intent.getSerializableExtra("Departure_city");
         //     String departureCity = (String) intent.getSerializableExtra();
 
-            mFlight.setDeparture_City(departureCity);
+            mFlight.setDeparture(departureCity);
 
             mDepartureButton.setText(departureCity);
 
@@ -242,7 +243,7 @@ public class SearchFlightFragment extends Fragment {
 
                 String arriveCity = (String) intent.getSerializableExtra("Arrive_city");
 
-                mFlight.setArrive_City(arriveCity);
+                mFlight.setArrival(arriveCity);
 
                 mArriveButton.setText(intent.getStringExtra("Arrive_city"));
 

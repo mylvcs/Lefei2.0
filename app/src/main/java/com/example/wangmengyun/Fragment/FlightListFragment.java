@@ -1,6 +1,7 @@
 package com.example.wangmengyun.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.wangmengyun.Bean.Flight;
+import com.example.wangmengyun.activity.BoardingpassActivity;
 import com.example.wangmengyun.database.FlightFetchr;
 import com.example.wangmengyun.lefei.R;
 
@@ -65,31 +67,31 @@ public class FlightListFragment extends Fragment{
 
     private class FlightHolder extends RecyclerView.ViewHolder{
 
-        private TextView mFlightDescriptionTextView;
+        private TextView mAirlineDescription;
 
-        private TextView mDepartureTextView;
+        private TextView parsedFlightData;
 
-        private TextView mArrivalTextView;
+        private TextView mTicketPrice;
 
 
         public FlightHolder(View view ) {
             super(view);
 
-           mFlightDescriptionTextView= view.findViewById(R.id.zhida);
+           mAirlineDescription= view.findViewById(R.id.airline_description);
 
-           mDepartureTextView = view.findViewById( R.id.flight_duration);
+            parsedFlightData =  view.findViewById( R.id.flight_duration);
 
-           mArrivalTextView = view.findViewById(R.id.airline_description);
+           mTicketPrice = view.findViewById(R.id.ticket_price);
 
         }
 
         public void bindItem(Flight flightitem){
 
-            mFlightDescriptionTextView.setText(flightitem.getPrice());
+            mAirlineDescription.setText(flightitem.getAirline());
 
-            mDepartureTextView.setText(flightitem.getDeparture_City());
+            parsedFlightData.setText(flightitem.getParsedFlightData());
 
-            mArrivalTextView.setText(flightitem.getArrive_City());
+            mTicketPrice.setText(flightitem.getPrice());
         }
     }
 
@@ -110,6 +112,17 @@ public class FlightListFragment extends Fragment{
 
             LayoutInflater inflater = LayoutInflater.from(getActivity());
             View view = inflater.inflate(R.layout.forecast_list_item, parent, false);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), BoardingpassActivity.class);
+
+                    startActivity(intent);
+
+                }
+            });
+
 
             return new FlightHolder(view);
         }
@@ -133,16 +146,6 @@ public class FlightListFragment extends Fragment{
 
         @Override
         protected List<Flight> doInBackground(Void... voids) {
-
-//            try {
-//                String result = new FlightFetchr().getUrlString("https://www.bignerdranch.com");
-//
-//                Log.i(TAG,result);
-//
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
 
           return   new FlightFetchr().fetchItems();
         }

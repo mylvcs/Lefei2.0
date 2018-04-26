@@ -4,25 +4,26 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by poornima-udacity on 6/26/15.
- * 航班类里有航班号，出发城市，到达城市，出发时间，到达时间，核载人数，出发日期, airlineCompany, 
+ * 航班类里有航班号，出发城市，到达城市，出发时间，到达时间，出发日期, airlineCompany, 机票价格
+ * 是否直飞，飞机号，所用飞机型号，出发机场，到达机场，飞行时间。
  */
 public class Flight {
     public UUID flightNumber;
-    public String departure_City;
-    public String arrive_City;
-    public String departure_Date;
-    public String arrive_Date;
+    public String departure;
+    public String arrival;
+    public String departure_time;
+    public String arrival_time;
     public Date date;
     public String price;
-   
-//    public Flight(String departure_city, String arrive_city, String departure_date, String arrive_date)
-//    {
-//        this.departure_City = departure_city;
-//        this.arrive_City = arrive_city;
-//        this.departure_Date = departure_date;
-//        this.arrive_Date = arrive_date;
-//    }
+    public String airline;
+    public String stops ;
+    public String plane;
+    public String departure_airport;
+    public String flight_duration;
+    public String arrival_airport;
+    public String plane_code;
+
+    public String parsedFlightData;
 
     public Flight(UUID id) {
         flightNumber = id;
@@ -33,12 +34,6 @@ public class Flight {
         this(UUID.randomUUID());
     }
 
-    public Flight(String DepartureCity){
-        departure_City = DepartureCity;
-        date = new Date();
-        flightNumber = UUID.randomUUID();
-
-    }
 
     public Date getDate() {
 
@@ -65,35 +60,99 @@ public class Flight {
         this.flightNumber = flightNumber;
     }
 
-    public String getDeparture_City() {
-        return departure_City;
+    public String getDeparture() {
+        return departure;
     }
 
-    public void setDeparture_City(String departure_City) {
-        this.departure_City = departure_City;
+    public void setDeparture(String departure) {
+        this.departure = departure;
     }
 
-    public String getArrive_City() {
-        return arrive_City;
+    public String getArrival() {
+        return arrival;
     }
 
-    public void setArrive_City(String arrive_City) {
-        this.arrive_City = arrive_City;
+    public void setArrival(String arrival) {
+        this.arrival = arrival;
     }
 
-    public String getDeparture_Date() {
-        return departure_Date;
+    public String getDeparture_time() {
+        return departure_time;
     }
 
-    public void setDeparture_Date(String departure_Date) {
-        this.departure_Date = departure_Date;
+    public void setDeparture_time(String departure_time) {
+        this.departure_time = departure_time;
     }
 
-    public String getArrive_Date() {
-        return arrive_Date;
+    public String getArrival_time() {
+        return arrival_time;
     }
 
-    public void setArrive_Date(String arrive_Date) {
-        this.arrive_Date = arrive_Date;
+    public void setArrival_time(String arrival_time) {
+        this.arrival_time = arrival_time;
+    }
+
+    public String getAirline() {
+        return airline;
+    }
+
+    public void setAirline(String airline) {
+        this.airline = airline;
+    }
+
+    public String getStops() {
+        return stops;
+    }
+
+    public void setStops(String stops) {
+        this.stops = stops;
+    }
+
+    public String getPlane() {
+        return plane;
+    }
+
+    public void setPlane(String plane) {
+        this.plane = plane;
+    }
+
+    public String getDeparture_airport() {
+        return departure_airport;
+    }
+
+    public void setDeparture_airport(String departure_airport) {
+        this.departure_airport = departure_airport;
+    }
+
+    public String getFlight_duration() {
+        return flight_duration;
+    }
+
+    public void setFlight_duration(String flight_duration) {
+        this.flight_duration = flight_duration;
+    }
+
+    public String getArrival_airport() {
+        return arrival_airport;
+    }
+
+    public void setArrival_airport(String arrival_airport) {
+        this.arrival_airport = arrival_airport;
+    }
+
+    public String getPlane_code() {
+        return plane_code;
+    }
+
+    public void setPlane_code(String plane_code) {
+        this.plane_code = plane_code;
+    }
+
+    public String getParsedFlightData() {
+        return parsedFlightData;
+    }
+
+    public void setParsedFlightData(String parsedFlightData) {
+        this.parsedFlightData = parsedFlightData;
     }
 }

@@ -21,7 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.wangmengyun.Utils.NetworkUtils;
-import com.example.wangmengyun.adapter.FlightListAdapter;
+//import com.example.wangmengyun.adapter.FlightListAdapter;
 import com.example.wangmengyun.adapter.ForecastAdapter;
 import com.example.wangmengyun.data.SunshinePreferences;
 import com.example.wangmengyun.lefei.R;
@@ -38,7 +38,7 @@ public class FlightActivity extends AppCompatActivity implements
     private RecyclerView mRecyclerView;
     private ForecastAdapter mForecastAdapter;
 
-    private FlightListAdapter mFlightListAdapter;
+//    private FlightListAdapter mFlightListAdapter;
     private Context mContext;
 
     private TextView mErrorMessageDisplay;

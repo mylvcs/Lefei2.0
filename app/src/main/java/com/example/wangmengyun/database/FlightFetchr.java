@@ -27,8 +27,6 @@ public class FlightFetchr {
 
     private static final String TAG = "FlickrFetchr";
 
-    private static final String FETCH_RECENTS_METHOD = "flickr.photos.getRecent";
-    private static final String SEARCH_METHOD = "flickr.photos.search";
 
     List<Flight> items = new ArrayList<>();
 
@@ -131,41 +129,51 @@ public class FlightFetchr {
 
     private void parseItems(List<Flight> items, JSONArray jsonArray) throws IOException, JSONException {
 
-        //      Gson gson = new Gson();
-
         for (int i = 0; i < jsonArray.length(); i++) {
+
+            Flight item =new Flight();
+
             JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-//            item = gson.fromJson(jsonObject, new TypeToken<List<String>>() {
-//            }.getType());
-//        }
+            item.setDeparture(jsonObject.getString("departure"));
 
-            Flight item = new Flight();
+            item.setArrival(jsonObject.getString("arrival"));
 
-            item.setDeparture_City(jsonObject.getString("departure"));
+            item.setAirline(jsonObject.getString("airline"));
 
-            item.setArrive_City(jsonObject.getString("arrival"));
+            item.setFlight_duration(jsonObject.getString("flight duration"));
 
-            item.setPrice(jsonObject.getString("ticket price"));
+
+            item.setPrice("$" + jsonObject.getString("ticket price"));
+
+                JSONArray array = jsonObject.getJSONArray("timings");
+
+                    JSONObject obj = array.getJSONObject(0);
+
+                    String departure_airport = obj.getString("departure_airport");
+
+                    String departure_time = obj.getString("departure_time");
+
+                    String arrival_airport = obj.getString("arrival_airport");
+
+                    String arrival_time = obj.getString("arrival_time");
+
+                    item.setDeparture_time(departure_time);
+
+                    item.setArrival_time(arrival_time);
+
+                    item.setDeparture_airport(departure_airport);
+
+                    item.setArrival_airport(arrival_airport);
+
+                    item.setParsedFlightData(departure_time + " - " + arrival_time);
 
             items.add(item);
-//        for(int i=0; i< flightJsonArray.length(); i++){
-//
-//            JSONObject flightJsonObject =  flightJsonArray.getJSONObject(i);
-//
-//            Flight flightitem = new Flight();
-//
-//            flightitem.setDeparture_City(flightJsonObject.getString("departure"));
-//
-//            flightitem.setArrive_City(flightJsonObject.getString("arrival"));
-//
-//            flightitem.setPrice(flightJsonObject.getString("ticket price"));
-
-
-            //           items.add(flightitem);
-
         }
     }
 }
+
+
+
 
 

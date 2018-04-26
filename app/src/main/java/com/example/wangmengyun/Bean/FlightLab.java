@@ -87,8 +87,8 @@ public class FlightLab {
         ContentValues values = new ContentValues();
         values.put(FlightTable.Cols.UUID,flight.getFlightNumber().toString());
 
-        values.put(FlightTable.Cols.DEPARTCITY,flight.getDeparture_City());
-        values.put(FlightTable.Cols.ARRIVECITY,flight.getArrive_City());
+        values.put(FlightTable.Cols.DEPARTCITY,flight.getDeparture());
+        values.put(FlightTable.Cols.ARRIVECITY,flight.getArrival());
         values.put(FlightTable.Cols.PRICE,flight.getPrice());
         return values;
     }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- TODO Remove the following "exclude" elements to make them a part of the auto backup -->
+    <exclude
+        domain="database"
+        path="weather.db" />
+    <exclude
+        domain="database"
+        path="recentCity" />
+    <exclude
+        domain="database"
+        path="flightBase.db" />
+    <exclude
+        domain="database"
+        path="flights.db" />
+    <exclude
+        domain="database"
+        path="City.db" />
+    <!-- Exclude the shared preferences file that contains the GCM registrationId -->
+    <exclude
+        domain="sharedpref"
+        path="loginInfo.xml" />
+</full-backup-content>

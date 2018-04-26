@@ -25,9 +25,9 @@ public class FlightCursorWrapper extends CursorWrapper {
 
         Flight flight = new Flight(UUID.fromString(flightNumber));
 
-        flight.setDeparture_City(Departure_City);
+        flight.setDeparture(Departure_City);
 
-        flight.setArrive_City(Arrive_City);
+        flight.setArrival(Arrive_City);
         flight.setPrice(price);
 
         return flight;

@@ -123,11 +123,16 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
 
         holder.dateView.setText(flight.getDate().toString());
 
-        holder.descriptionView.setText(flight.getDeparture_City());
+        holder.descriptionView.setText(flight.getDeparture());
 
-        holder.highTempView.setText(flight.getArrive_City());
+//        holder.highTempView.setText(flight.getArrival());
+//
+//        holder.lowTempView.setText(flight.getPrice());
 
-        holder.lowTempView.setText(flight.getPrice());
+        holder.durationView.setText(flight.getFlight_duration());
+
+        holder.departure_time.setText(flight.getDeparture_time());
+
 
     }
 
@@ -137,18 +142,22 @@ public static class ViewHolder extends RecyclerView.ViewHolder {
 
     final TextView dateView;
     final TextView descriptionView;
-    final TextView highTempView;
-    final TextView lowTempView;
+
+    public TextView durationView;
+    public TextView departure_time;
+
 
     public ViewHolder(View view) {
         super(view);
 
         iconView = (ImageView) view.findViewById(R.id.flight_icon);
         dateView = (TextView) view.findViewById(R.id.zhida);
-        descriptionView = (TextView) view.findViewById(R.id.flight_duration);
-        highTempView = (TextView) view.findViewById(R.id.flight_date);
-        lowTempView = (TextView) view.findViewById(R.id.airline_description);
 
+        durationView = (TextView) view.findViewById(R.id.flight_date);
+        departure_time = (TextView) view.findViewById(R.id.flight_duration);
+
+
+        descriptionView= view.findViewById(R.id.airline_description);
     }
 }
 
