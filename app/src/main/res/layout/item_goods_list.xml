@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="14dp"
+    android:paddingTop = "14dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/goodslist_image"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/goodslist_name"
+        android:layout_alignTop="@+id/goodslist_image"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_toRightOf="@+id/goodslist_image"
+        android:text = "nothint yet"
+        android:textSize="14sp"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/goodslist_price"
+        android:layout_alignLeft="@+id/goodslist_name"
+        android:layout_below="@+id/goodslist_name"
+
+        android:textSize="14sp"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/goodslist_contents"
+        android:layout_alignLeft="@+id/goodslist_name"
+        android:layout_below="@+id/goodslist_name"
+
+        android:textSize="14sp"
+        />
+
+
+
+</RelativeLayout>
+

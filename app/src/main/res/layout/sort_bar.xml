@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/list_sortby"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:orientation="horizontal">
+
+   <!--按FlightDuration排序-->
+    <RelativeLayout
+        android:id="@+id/list_sortby_flightDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0">
+
+
+        <TextView
+            android:id="@+id/list_sortby_flightDuration_text"
+            android:layout_width= "wrap_content"
+            android:text="飞行时间"
+
+            android:textSize="@dimen/city_text_size"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <!--按价格排序-->
+    <RelativeLayout
+        android:id="@+id/list_sortby_TicketPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0">
+
+
+        <TextView
+            android:id="@+id/list_sortby_TicketPrice_text"
+            android:layout_width= "wrap_content"
+            android:text="机票价格"
+
+            android:textSize="@dimen/city_text_size"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <!--按去程出发时间排序-->
+    <RelativeLayout
+        android:id="@+id/list_sortby_departureTime"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0">
+
+
+        <TextView
+            android:id="@+id/list_sortby_departureTime_text"
+            android:layout_width= "wrap_content"
+            android:text="出发时间"
+
+            android:textSize="@dimen/city_text_size"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</LinearLayout>

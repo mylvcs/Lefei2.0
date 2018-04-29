@@ -135,6 +135,12 @@
         <activity android:name="com.example.wangmengyun.activity.MyFavouriteActivity">
 
         </activity>
+        <activity android:name="com.example.wangmengyun.imageupload.ImageUploadActivity">
+
+        </activity>
+        <activity android:name="com.example.wangmengyun.activity.HttpMongo">
+
+        </activity>
 
         <provider
             android:name="com.example.wangmengyun.data.FlightProvider"

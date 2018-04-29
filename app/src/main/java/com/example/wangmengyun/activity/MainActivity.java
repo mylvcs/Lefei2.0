@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.wangmengyun.Bean.Flight;
 import com.example.wangmengyun.MongoLab.CodePerspective;
+import com.example.wangmengyun.imageupload.ImageUploadActivity;
 import com.example.wangmengyun.lefei.R;
 import com.example.wangmengyun.view.FlightView;
 
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMyInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(MainActivity.this, AsynctaskActivity.class);
+                Intent in = new Intent(MainActivity.this, HttpMongo.class);
 
                 startActivity(in);
             }
@@ -129,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(MainActivity.this, BoardingpassActivity.class);
+                Intent in = new Intent(MainActivity.this, HttpMongo.class);
 
                 startActivity(in);
             }
