@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMyInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(MainActivity.this, HttpMongo.class);
+                Intent in = new Intent(MainActivity.this, LoginActivity.class);
 
                 startActivity(in);
             }
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(MainActivity.this, HttpMongo.class);
+                Intent in = new Intent(MainActivity.this, MyFavouriteActivity.class);
 
                 startActivity(in);
             }

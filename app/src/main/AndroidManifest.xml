@@ -142,6 +142,7 @@
 
         </activity>
 
+
         <provider
             android:name="com.example.wangmengyun.data.FlightProvider"
             android:authorities="com.example.wangmengyun.lefei"

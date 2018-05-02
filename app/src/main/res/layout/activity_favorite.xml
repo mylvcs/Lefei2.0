@@ -11,10 +11,68 @@
     android:paddingTop="@dimen/activity_vertical_margin"
   >
 
-    <ListView
-        android:id="@+id/pagination_list"
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="49dp"
+        android:id="@+id/common_title"
+
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/title_back"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+
+            android:src = "@drawable/go_back_selector"
+            />
+
+        <TextView
+            android:id="@+id/common_layout_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+
+            android:layout_gravity="center"
+            android:text = "我的收藏"/>
+
+
+        <android.support.v7.widget.RecyclerView
+
+            android:id="@+id/product_list"
+            android:visibility="visible"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent" />
+
+
+        <LinearLayout
+            android:id="@+id/favorite_empty"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/favor_emtpy_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/favorite_index_btn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-    </ListView>
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:text="去首页看看"
+        />
 
 </RelativeLayout>
