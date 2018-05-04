@@ -14,6 +14,7 @@ package com.example.wangmengyun.MongoLab;
         import android.view.View;
         import android.widget.EditText;
 
+        import com.example.wangmengyun.activity.MainActivity;
         import com.example.wangmengyun.lefei.R;
 
 public class CodePerspective extends Activity {
@@ -45,7 +46,7 @@ public class CodePerspective extends Activity {
         SaveAsyncTask tsk = new SaveAsyncTask();
         tsk.execute(flight);
 
-        Intent i = new Intent(this, ViewContactsActivity.class);
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
 
 

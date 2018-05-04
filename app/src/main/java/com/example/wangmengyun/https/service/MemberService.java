@@ -21,17 +21,15 @@ public interface MemberService {
 
     //用户注册
     @POST("member")
-    Observable<HttpResult<UserBean>> register(
-            @Field("name") String name,
+    Observable<HttpResult<MemberEntity>> register(
+            @Field("username") String username,
             @Field("password") String password,
             @Field("email") String email);
 
-    //TODO
-    //登录 P103
     @FormUrlEncoded
     @POST("member/login")
     Observable<HttpResult<MemberEntity>> login(
-            @Field("name") String username,
+            @Field("username") String username,
             @Field("password") String password
 
     );

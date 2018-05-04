@@ -12,7 +12,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.os.AsyncTask;
 
 import com.example.wangmengyun.Bean.UserBean;
-import com.mongodb.QueryBuilder;
 
 
 public class SaveAsyncTask extends AsyncTask<UserBean, Void, Boolean> {

@@ -125,9 +125,7 @@
         <activity android:name="com.example.wangmengyun.MongoLab.CodePerspective">
 
         </activity>
-        <activity android:name="com.example.wangmengyun.MongoLab.ViewContactsActivity">
 
-        </activity>
         <activity android:name="com.example.wangmengyun.activity.DetailActivity" >
 
         </activity>
@@ -142,6 +140,13 @@
 
         </activity>
 
+        <activity android:name="com.example.wangmengyun.activity.ZhuceActivity">
+
+        </activity>
+
+        <activity android:name="com.example.wangmengyun.activity.FindPswActivity">
+
+        </activity>
 
         <provider
             android:name="com.example.wangmengyun.data.FlightProvider"
@@ -156,6 +161,15 @@
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
             </intent-filter>
         </service>
+
+
+        <meta-data
+            android:name="Mob-AppKey"
+            android:value="1f76acccc639f" />
+        <meta-data
+            android:name="Mob-AppSecret"
+            android:value="590f3f1283c1a357a32b8b8dfadd9c6f" />
+
 
     </application>
 

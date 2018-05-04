@@ -50,7 +50,7 @@ public class MyFavouriteActivity extends  AppCompatActivity {
     private List<FavoriteGoodsEntity> data = new ArrayList<>();
 
     private ListView listView;
-    private static final String BASE_URL = "http://39.108.51.161:8080/MobileShop/";
+    private static final String BASE_URL = "http://192.0.0.1/members";
 
     //    private static final String BASE_URL = "https://api.github.com";
     @Override

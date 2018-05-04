@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.wangmengyun.Bean.HttpResult;
 import com.example.wangmengyun.database.Category;
 import com.example.wangmengyun.https.service.CategoryService;
+import com.example.wangmengyun.https.service.FlightService;
 import com.example.wangmengyun.https.service.GoodsService;
 import com.example.wangmengyun.https.service.MemberService;
 
@@ -30,13 +31,14 @@ public class HttpMethods {
 
     public static CategoryService categoryService;
 
-    protected static final String BASE_URL = "http://39.108.51.161:8080/MobileShop";
+    protected static final String BASE_URL = "http://39.108.51.161:3000/flights";
 
     private static final String TAG = "HttpMethods";
     private static final int DEFAULT_TIMEOUT = 5;
 
     private Retrofit retrofit;
     private static HttpMethods mInstance;
+    public static FlightService flightService;
 
     protected static MemberService memberService;
 
@@ -55,6 +57,8 @@ public class HttpMethods {
             goodsService = retrofit.create(GoodsService.class);
 
             categoryService= retrofit.create(CategoryService.class);
+
+            flightService = retrofit.create(FlightService.class);
 
         }
     }

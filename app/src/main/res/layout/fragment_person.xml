@@ -1,0 +1,194 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<android.support.constraint.ConstraintLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android" -->
+    <!---->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+    <!---->
+    <!--<FrameLayout-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="49dp"-->
+        <!--android:id="@+id/person_title"-->
+        <!--android:fadingEdge="none">-->
+
+
+    <!--</FrameLayout>-->
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/common_layout_title"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:padding = "10dp"-->
+        <!--android:text="wode "-->
+        <!--/>-->
+
+    <!--<ScrollView-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/person_title"-->
+        <!--&gt;-->
+
+    <!--</ScrollView>-->
+    <!---->
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/personal_header"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="@dimen/personal_user_head_height">-->
+
+    <!--</RelativeLayout>-->
+
+    <!--&lt;!&ndash;已登录&ndash;&gt;-->
+    <!--<RelativeLayout-->
+        <!--android:id="@id/personal_for_login"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:visibility="gone">-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:layout_certerVertical ="true">-->
+
+      <!--<ImageView-->
+          <!--android:id="@+id/user_img_view"-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:padding= "3dp"-->
+
+          <!--/>-->
+
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/name_balance_textview"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignTop="@id/user_img_view"-->
+            <!--android:layout_marginLeft = "24dp"-->
+            <!--android:layout_toRightOf="@+id/user_img_view">-->
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/layout_name"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/user_name"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity ="center_vertical"-->
+            <!--android:padding= "3dp"-->
+            <!--android:maxWidth="110dp"-->
+            <!--android:textSize="15dp"-->
+            <!--android:singleLine="true"-->
+
+            <!--/>-->
+
+        <!--</LinearLayout>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/user_level"-->
+                <!--android:layout_width="110dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity ="center_vertical"-->
+                <!--android:padding= "3dp"-->
+                <!--android:maxWidth="110dp"-->
+                <!--android:textSize="15sp"-->
+                <!--android:singleLine="true"-->
+                <!--android:layout_below="@id/layout_name"-->
+                <!--android:textColor="@color/white"-->
+                <!--/>-->
+
+    <!--</RelativeLayout>-->
+    <!--</RelativeLayout>-->
+    <!--</RelativeLayout>-->
+    <!--&lt;!&ndash;未登录&ndash;&gt;-->
+    <!--<RelativeLayout-->
+        <!--android:id="@id/personal_for_not_login"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--&gt;-->
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/personal_click_to_login"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_certerinParent ="true">-->
+
+
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/personal_for_welcome"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity ="center_vertical"-->
+                        <!--android:text= "lefei"-->
+                        <!--android:textSize="15dp"-->
+                        <!--android:textColor="@color/white"-->
+
+                        <!--/>-->
+
+            <!--<Button-->
+                <!--android:layout_width="112dp"-->
+                <!--android:layout_height="38dp"-->
+                <!--android:layout_marginTop="7dp"-->
+                <!--android:id="@+id/personal_login"-->
+                <!--android:text="登录/注册"-->
+                <!--android:textSize = "15sp"/>-->
+
+                <!--</LinearLayout>-->
+
+    <!--</RelativeLayout>-->
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<LinearLayout-->
+            <!--android:id="@id/my_order_layout"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="12dp"-->
+            <!--android:orientation="vertical">-->
+
+
+        <!--</LinearLayout>-->
+
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/person_my_order"-->
+            <!--android:layout_width="fill_parent"-->
+
+            <!--android:paddingLeft="23dp"-->
+            <!--android:layout_height="fill_parent">-->
+
+
+            <!--<ImageView-->
+                <!--android:id="@+id/my_order_image"-->
+                <!--android:layout_width="25dp"-->
+                <!--android:layout_height="25dp"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:padding = "5dp"-->
+                <!--android:textColor = "@color/black"-->
+              <!--/>-->
+
+
+            <!--<TextView-->
+                <!--android:id="@id/my_order_text"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text = "我的订单"-->
+
+                <!--android:layout_toRightOf="@+id/my_order_image"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--/>-->
+        <!--</RelativeLayout>-->
+
+
+    <!--</LinearLayout>-->
+<!--</android.support.constraint.ConstraintLayout>-->
