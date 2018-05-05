@@ -21,7 +21,6 @@ import com.example.wangmengyun.adapter.GoodsListAdapter;
 import com.example.wangmengyun.https.Entity.GoodsEntity;
 import com.example.wangmengyun.https.ProgressDialogSubscriber;
 import com.example.wangmengyun.https.presenter.GoodsPresenter;
-import com.example.wangmengyun.lefei.R;
 
 import java.util.List;
 

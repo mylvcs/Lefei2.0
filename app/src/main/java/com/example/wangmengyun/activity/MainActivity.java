@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.example.wangmengyun.Bean.Flight;
 import com.example.wangmengyun.MongoLab.CodePerspective;
 import com.example.wangmengyun.imageupload.ImageUploadActivity;
-import com.example.wangmengyun.lefei.R;
 import com.example.wangmengyun.view.FlightView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {

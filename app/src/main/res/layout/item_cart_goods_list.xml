@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="15dp"
+    android:paddingTop = "15dp">
+
+    <!--商品图片-->
+    <!--这里先只是放个样子-->
+
+<ImageView
+    android:id="@+id/cart_image"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+    <!--商品名称-->
+    <TextView
+        android:id="@+id/cart_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@id/cart_image"
+        android:text = "花生"
+        android:textSize="15sp"
+
+
+        />
+
+    <TextView
+        android:id="@+id/cart_price"
+        android:layout_toRightOf="@+id/cart_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text= "2000rmb"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom = "@+id/cart_image"
+        android:layout_alignLeft="@+id/cart_price"
+        android:paddingLeft="2dp"
+
+        >
+
+        <ImageButton
+            android:id="@+id/cart_reduce"
+
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shopping_cart_edit_reduce_selector"/>
+
+        <!--数量 -->
+        <TextView
+            android:id="@+id/cart_list_number"
+            android:layout_width="44dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:text = "1"
+            android:textColor="@color/cart_product_name"
+            android:background="@drawable/shopping_cart_edit_view_selector"
+           />
+
+
+        <ImageButton
+            android:id="@+id/cart_add"
+
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/cart_list_number"
+            android:background="@drawable/shopping_cart_edit_add_selector"/>
+
+    </RelativeLayout>
+
+     <!--分割线-->
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/cart_image"
+        android:background="@color/cart_item_background_gap_color"/>
+
+
+    </RelativeLayout>
