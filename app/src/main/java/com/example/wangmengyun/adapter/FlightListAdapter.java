@@ -21,46 +21,48 @@ import com.example.wangmengyun.lefei.R;
 import java.util.List;
 
 
-public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.ForecastAdapterViewHolder>
+public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.ViewHolder>
 implements View.OnClickListener {
 
-    private static final int VIEW_TYPE_TODAY = 0;
-    private static final int VIEW_TYPE_FUTURE_DAY = 1;
+    private  Context mContext;
 
-    private final Context mContext;
-
-    private List<Flight> flights;
+    private List<Flight> ListData;
 
     private String[] mFlightData;
 
-    final private FlightListAdapterClickHandler mClickHandler;
+    // final private FlightListAdapterClickHandler mClickHandler;
 
-    @Override
-    public void onClick(View v) {
+    // @Override
+    // public void onClick(View v) {
 
+    // }
+
+    public interface OnFlightItemClickListener {
+        void onClick(View view, Flight flight);
     }
 
-    public interface FlightListAdapterClickHandler {
-        void onClick(String Flightdate);
+    public void setOnFlightItemClickListener(OnFlightItemClickListener listener){
+        this.mFlightItemListener = listener;
     }
 
+    public OnFlightItemClickListener mFlightItemListener;
 
-    public FlightListAdapter(@NonNull Context context, FlightListAdapterClickHandler clickHandler) {
+    public FlightListAdapter(@NonNull Context context, List<Flight> data) {
         mContext = context;
-        mClickHandler = clickHandler;
+        ListData = data;
     }
 
 
-    public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         final ImageView iconView;
 
-        final TextView zhida;
-        final TextView flight_duration;
-        final TextView price;
-        final TextView airlineCompany;
+        private TextView zhida;
+        private TextView flight_duration;
+        private TextView price;
+        private TextView airlineCompany;
 
-        ForecastAdapterViewHolder(View view) {
+        public ViewHolder(View view) {
             super(view);
 
             iconView = (ImageView) view.findViewById(R.id.flight_icon);
@@ -77,11 +79,14 @@ implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            int adapterPosition = getAdapterPosition();
+            if(mFlightItemListener!= null){
+                mFlightItemListener.onClick(v, v.getTag());
+            }
+            // int adapterPosition = getAdapterPosition();
 
-            String weatherForDay = mFlightData[adapterPosition];
+// String weatherForDay = mFlightData[adapterPosition];
 
-            mClickHandler.onClick(weatherForDay);
+            // mClickHandler.onClick(weatherForDay);
         }
 
     }
@@ -89,28 +94,28 @@ implements View.OnClickListener {
 
     @NonNull
     @Override
-    public ForecastAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
         View view = LayoutInflater.from(mContext).inflate(R.layout.forecast_list_item,viewGroup,false);
 
         view.setOnClickListener(this);
 
-        ForecastAdapterViewHolder holder = new ForecastAdapterViewHolder(view);
+        ViewHolder holder = new ViewHolder(view);
 
         return holder;
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ForecastAdapterViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
         Flight flight  = flights.get(position);
-//
-//        holder.flight_duration.setText(flight.getDeparture_City());
-//
-//        holder.zhida.setText(flight.getArrive_Date());
-//
-//        holder.price.setText(flight.getPrice());
+
+       holder.flight_duration.setText(flight.getDeparture_City());
+
+       holder.zhida.setText(flight.getArrive_Date());
+
+       holder.price.setText(flight.getPrice());
 
 
     }
@@ -119,6 +124,6 @@ implements View.OnClickListener {
     public int getItemCount() {
         if (null == mFlightData) return 0;
 
-        return mFlightData.length;
+        return ListData.size();
     }
 }
